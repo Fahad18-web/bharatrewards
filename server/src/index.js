@@ -12,6 +12,7 @@ import questionRoutes from './routes/questions.js';
 import redeemRoutes from './routes/redeem.js';
 import adminRoutes from './routes/admin.js';
 import settingsRoutes from './routes/settings.js';
+import communityRoutes from './routes/community.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -77,6 +78,7 @@ app.use('/api/questions', questionRoutes);
 app.use('/api/redeem', redeemRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/community', communityRoutes);
 
 // ============================================
 // ERROR HANDLING
@@ -124,6 +126,7 @@ app.listen(PORT, () => {
 ║   • /api/redeem     - Redemption requests                 ║
 ║   • /api/admin      - Admin dashboard                     ║
 ║   • /api/settings   - App settings                        ║
+║   • /api/community  - Community hub                       ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
   `);

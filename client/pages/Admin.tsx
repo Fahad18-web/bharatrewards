@@ -11,11 +11,19 @@ import {
   addCustomQuestion as addCustomQuestionApi,
   deleteCustomQuestion as deleteCustomQuestionApi,
   adminDeleteUser,
-  adminToggleUserBan
+  adminToggleUserBan,
+  getAdminAnnouncements as fetchAnnouncements,
+  createAnnouncement as createAnnouncementApi,
+  updateAnnouncement as updateAnnouncementApi,
+  deleteAnnouncement as deleteAnnouncementApi,
+  toggleAnnouncementStatus as toggleAnnouncementStatusApi,
+  getAdminFeedback as fetchFeedback,
+  updateFeedback as updateFeedbackApi,
+  deleteFeedback as deleteFeedbackApi
 } from '../services/apiService';
-import { User, RedeemRequest, UserRole, AppSettings, Question } from '../types';
+import { User, RedeemRequest, UserRole, AppSettings, Question, Announcement, Feedback } from '../types';
 
-type Tab = 'DASHBOARD' | 'USERS' | 'QUESTIONS' | 'SETTINGS';
+type Tab = 'DASHBOARD' | 'USERS' | 'QUESTIONS' | 'SETTINGS' | 'COMMUNITY';
 
 const DEFAULT_SETTINGS: AppSettings = {
   minRedeemPoints: 14000,
@@ -30,6 +38,8 @@ export const Admin: React.FC = () => {
   const [redeems, setRedeems] = useState<RedeemRequest[]>([]);
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
   const [customQuestions, setCustomQuestions] = useState<Question[]>([]);
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
   const [initializing, setInitializing] = useState(true);
   const [isWorking, setIsWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +49,16 @@ export const Admin: React.FC = () => {
   const [qText, setQText] = useState('');
   const [qAnswer, setQAnswer] = useState('');
   const [qOptions, setQOptions] = useState('');
+
+  // Announcement Form States
+  const [annTitle, setAnnTitle] = useState('');
+  const [annContent, setAnnContent] = useState('');
+  const [annType, setAnnType] = useState<'INFO' | 'WARNING' | 'SUCCESS' | 'EVENT'>('INFO');
+  const [annPinned, setAnnPinned] = useState(false);
+  const [annExpires, setAnnExpires] = useState('');
+
+  // Feedback filter
+  const [feedbackFilter, setFeedbackFilter] = useState<string>('ALL');
 
   const navigate = useNavigate();
 
@@ -59,11 +79,13 @@ export const Admin: React.FC = () => {
         }
         
         // Fetch in parallel but handle individual errors
-        const [usersResult, redeemResult, settingsResult, questionsResult] = await Promise.allSettled([
+        const [usersResult, redeemResult, settingsResult, questionsResult, announcementsResult, feedbackResult] = await Promise.allSettled([
           fetchUsers(),
           fetchRedeemRequests(),
           fetchSettings(),
-          fetchCustomQuestions()
+          fetchCustomQuestions(),
+          fetchAnnouncements(),
+          fetchFeedback()
         ]);
 
         // Process users
@@ -96,6 +118,22 @@ export const Admin: React.FC = () => {
         } else {
           console.error('Failed to fetch questions:', questionsResult.reason);
           setCustomQuestions([]);
+        }
+
+        // Process announcements
+        if (announcementsResult.status === 'fulfilled') {
+          setAnnouncements(announcementsResult.value || []);
+        } else {
+          console.error('Failed to fetch announcements:', announcementsResult.reason);
+          setAnnouncements([]);
+        }
+
+        // Process feedback
+        if (feedbackResult.status === 'fulfilled') {
+          setFeedbackList(feedbackResult.value || []);
+        } else {
+          console.error('Failed to fetch feedback:', feedbackResult.reason);
+          setFeedbackList([]);
         }
 
         setError(null);
@@ -185,6 +223,73 @@ export const Admin: React.FC = () => {
     });
   };
 
+  const handleCreateAnnouncement = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!annTitle.trim() || !annContent.trim()) {
+      alert('Please fill in title and content');
+      return;
+    }
+    runAction(async () => {
+      await createAnnouncementApi({
+        title: annTitle.trim(),
+        content: annContent.trim(),
+        type: annType,
+        isPinned: annPinned,
+        expiresAt: annExpires ? new Date(annExpires).toISOString() : null
+      });
+      setAnnTitle('');
+      setAnnContent('');
+      setAnnType('INFO');
+      setAnnPinned(false);
+      setAnnExpires('');
+      alert('Announcement created successfully!');
+    });
+  };
+
+  const handleToggleAnnouncement = (id: string) => {
+    runAction(async () => {
+      await toggleAnnouncementStatusApi(id);
+    });
+  };
+
+  const handleDeleteAnnouncement = (id: string) => {
+    if (!confirm('Delete this announcement permanently?')) return;
+    runAction(async () => {
+      await deleteAnnouncementApi(id);
+    });
+  };
+
+  const handleTogglePinAnnouncement = (ann: Announcement) => {
+    runAction(async () => {
+      await updateAnnouncementApi(ann.id, { isPinned: !ann.isPinned });
+    });
+  };
+
+  const handleUpdateFeedbackStatus = (id: string, status: string) => {
+    runAction(async () => {
+      await updateFeedbackApi(id, { status });
+    });
+  };
+
+  const handleRespondToFeedback = (fb: Feedback) => {
+    const response = prompt('Enter your response to this feedback:', fb.adminResponse || '');
+    if (response === null) return;
+    runAction(async () => {
+      await updateFeedbackApi(fb.id, { adminResponse: response });
+    });
+  };
+
+  const handleDeleteFeedback = (id: string) => {
+    if (!confirm('Delete this feedback permanently?')) return;
+    runAction(async () => {
+      await deleteFeedbackApi(id);
+    });
+  };
+
+  const filteredFeedback = feedbackFilter === 'ALL' 
+    ? feedbackList 
+    : feedbackList.filter(fb => fb.status === feedbackFilter);
+
   if (!admin || initializing) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4">
@@ -202,8 +307,8 @@ export const Admin: React.FC = () => {
             <p className="text-gray-500 mt-1">Full control over users, finance & content.</p>
          </div>
          
-         <div className="flex bg-white/50 p-1 rounded-2xl backdrop-blur-md shadow-sm border border-white/60">
-           {(['DASHBOARD', 'USERS', 'QUESTIONS', 'SETTINGS'] as Tab[]).map((tab) => (
+         <div className="flex bg-white/50 p-1 rounded-2xl backdrop-blur-md shadow-sm border border-white/60 flex-wrap">
+           {(['DASHBOARD', 'USERS', 'QUESTIONS', 'COMMUNITY', 'SETTINGS'] as Tab[]).map((tab) => (
              <button
                key={tab}
                onClick={() => setActiveTab(tab)}
@@ -581,6 +686,280 @@ export const Admin: React.FC = () => {
                </table>
              </div>
            </div>
+        </div>
+      )}
+
+      {/* ---------------- COMMUNITY HUB TAB ---------------- */}
+      {activeTab === 'COMMUNITY' && (
+        <div className="space-y-8 animate-fade-in-up">
+          {/* Create Announcement Form */}
+          <div className="glass-card p-10 rounded-[2.5rem]">
+            <div className="flex items-center mb-8">
+              <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl mr-4 border border-purple-200">📢</div>
+              <div>
+                <h3 className="text-2xl font-black text-gray-800">Create Announcement</h3>
+                <p className="text-gray-500 text-sm">Broadcast important messages to all users.</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleCreateAnnouncement} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Title</label>
+                  <input
+                    type="text"
+                    className="glass-input w-full p-4 rounded-xl font-medium"
+                    placeholder="Announcement title..."
+                    value={annTitle}
+                    onChange={e => setAnnTitle(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Type</label>
+                  <select
+                    className="glass-input w-full p-4 rounded-xl font-bold"
+                    value={annType}
+                    onChange={e => setAnnType(e.target.value as any)}
+                  >
+                    <option value="INFO">ℹ️ Info</option>
+                    <option value="SUCCESS">✅ Success</option>
+                    <option value="WARNING">⚠️ Warning</option>
+                    <option value="EVENT">🎉 Event</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Content</label>
+                <textarea
+                  className="glass-input w-full p-4 rounded-xl font-medium h-32"
+                  placeholder="Write your announcement message here..."
+                  value={annContent}
+                  onChange={e => setAnnContent(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Expires At (Optional)</label>
+                  <input
+                    type="datetime-local"
+                    className="glass-input w-full p-4 rounded-xl font-medium"
+                    value={annExpires}
+                    onChange={e => setAnnExpires(e.target.value)}
+                  />
+                  <p className="text-xs text-gray-400">Leave empty for no expiration.</p>
+                </div>
+                <div className="flex items-center space-x-4 pt-6">
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={annPinned}
+                      onChange={e => setAnnPinned(e.target.checked)}
+                      className="w-5 h-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                    />
+                    <span className="text-sm font-bold text-gray-700">📌 Pin to top</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-purple-500/30 transition-all">
+                Publish Announcement
+              </button>
+            </form>
+          </div>
+
+          {/* Announcements List */}
+          <div className="glass-card rounded-[2.5rem] overflow-hidden shadow-xl border border-white/60">
+            <div className="p-8 border-b border-gray-100 bg-white/40 backdrop-blur-md flex justify-between items-center">
+              <div>
+                <h3 className="font-bold text-xl text-gray-800">All Announcements</h3>
+                <p className="text-gray-500 text-sm">Manage active and inactive announcements.</p>
+              </div>
+              <span className="text-xs font-black uppercase tracking-widest text-gray-400 bg-white/70 px-3 py-1 rounded-full">{announcements.length} total</span>
+            </div>
+            <div className="max-h-[600px] overflow-y-auto">
+              {announcements.length === 0 ? (
+                <div className="p-16 text-center text-gray-400 font-medium">
+                  <div className="text-5xl mb-4">📭</div>
+                  <p>No announcements yet. Create your first one above!</p>
+                </div>
+              ) : (
+                <div className="divide-y divide-gray-100">
+                  {announcements.map(ann => (
+                    <div key={ann.id} className={`p-6 hover:bg-white/60 transition-colors ${!ann.isActive ? 'opacity-50' : ''}`}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2 flex-wrap">
+                            {ann.isPinned && (
+                              <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-black uppercase rounded-md">📌 Pinned</span>
+                            )}
+                            <span className={`px-2 py-1 text-[10px] font-black uppercase rounded-md ${
+                              ann.type === 'INFO' ? 'bg-blue-100 text-blue-700' :
+                              ann.type === 'SUCCESS' ? 'bg-green-100 text-green-700' :
+                              ann.type === 'WARNING' ? 'bg-orange-100 text-orange-700' :
+                              'bg-purple-100 text-purple-700'
+                            }`}>
+                              {ann.type === 'INFO' ? 'ℹ️' : ann.type === 'SUCCESS' ? '✅' : ann.type === 'WARNING' ? '⚠️' : '🎉'} {ann.type}
+                            </span>
+                            <span className={`px-2 py-1 text-[10px] font-black uppercase rounded-md ${
+                              ann.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
+                            }`}>
+                              {ann.isActive ? 'Active' : 'Inactive'}
+                            </span>
+                          </div>
+                          <h4 className="font-bold text-lg text-gray-800 mb-1">{ann.title}</h4>
+                          <p className="text-gray-600 text-sm mb-3">{ann.content}</p>
+                          <div className="flex items-center gap-4 text-xs text-gray-400">
+                            <span>Created: {new Date(ann.createdAt).toLocaleDateString()}</span>
+                            {ann.expiresAt && (
+                              <span>Expires: {new Date(ann.expiresAt).toLocaleDateString()}</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <button
+                            onClick={() => handleTogglePinAnnouncement(ann)}
+                            className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all ${
+                              ann.isPinned
+                                ? 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100'
+                                : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                            }`}
+                            title={ann.isPinned ? 'Unpin' : 'Pin'}
+                          >
+                            📌
+                          </button>
+                          <button
+                            onClick={() => handleToggleAnnouncement(ann.id)}
+                            className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all ${
+                              ann.isActive
+                                ? 'bg-white text-orange-600 border-orange-200 hover:bg-orange-50'
+                                : 'bg-white text-green-600 border-green-200 hover:bg-green-50'
+                            }`}
+                            title={ann.isActive ? 'Deactivate' : 'Activate'}
+                          >
+                            {ann.isActive ? '⏸️' : '▶️'}
+                          </button>
+                          <button
+                            onClick={() => handleDeleteAnnouncement(ann.id)}
+                            className="px-3 py-2 rounded-lg text-xs font-bold border bg-white text-red-500 border-red-200 hover:bg-red-50 transition-all"
+                            title="Delete"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* User Feedback Section */}
+          <div className="glass-card rounded-[2.5rem] overflow-hidden shadow-xl border border-white/60">
+            <div className="p-8 border-b border-gray-100 bg-white/40 backdrop-blur-md">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                  <h3 className="font-bold text-xl text-gray-800">💡 User Feedback</h3>
+                  <p className="text-gray-500 text-sm">Review and respond to user suggestions and requests.</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-gray-500">Filter:</span>
+                  <select
+                    className="glass-input px-4 py-2 rounded-lg text-sm font-bold"
+                    value={feedbackFilter}
+                    onChange={e => setFeedbackFilter(e.target.value)}
+                  >
+                    <option value="ALL">All ({feedbackList.length})</option>
+                    <option value="PENDING">Pending ({feedbackList.filter(f => f.status === 'PENDING').length})</option>
+                    <option value="REVIEWED">Reviewed ({feedbackList.filter(f => f.status === 'REVIEWED').length})</option>
+                    <option value="IMPLEMENTED">Implemented ({feedbackList.filter(f => f.status === 'IMPLEMENTED').length})</option>
+                    <option value="DECLINED">Declined ({feedbackList.filter(f => f.status === 'DECLINED').length})</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            {filteredFeedback.length === 0 ? (
+              <div className="p-16 text-center text-gray-400">
+                <div className="text-5xl mb-4">📭</div>
+                <p>No feedback to display.</p>
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
+                {filteredFeedback.map(fb => (
+                  <div key={fb.id} className="p-6 hover:bg-white/50 transition-colors">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2 flex-wrap">
+                          <span className={`px-2 py-1 text-[10px] font-black uppercase rounded-md ${
+                            fb.type === 'SUGGESTION' ? 'bg-blue-100 text-blue-700' :
+                            fb.type === 'FEATURE_REQUEST' ? 'bg-purple-100 text-purple-700' :
+                            fb.type === 'BUG_REPORT' ? 'bg-red-100 text-red-700' :
+                            'bg-gray-100 text-gray-700'
+                          }`}>
+                            {fb.type === 'SUGGESTION' ? '💡' : fb.type === 'FEATURE_REQUEST' ? '🚀' : fb.type === 'BUG_REPORT' ? '🐛' : '💬'} {fb.type.replace('_', ' ')}
+                          </span>
+                          <span className={`px-2 py-1 text-[10px] font-black uppercase rounded-md ${
+                            fb.status === 'PENDING' ? 'bg-yellow-100 text-yellow-700' :
+                            fb.status === 'REVIEWED' ? 'bg-blue-100 text-blue-700' :
+                            fb.status === 'IMPLEMENTED' ? 'bg-green-100 text-green-700' :
+                            'bg-red-100 text-red-700'
+                          }`}>
+                            {fb.status}
+                          </span>
+                        </div>
+                        <h4 className="font-bold text-gray-800 mb-1">{fb.title}</h4>
+                        <p className="text-gray-600 text-sm mb-3">{fb.content}</p>
+                        
+                        {fb.adminResponse && (
+                          <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <div className="text-xs font-bold text-blue-600 mb-1">💬 Your Response:</div>
+                            <p className="text-blue-800 text-sm">{fb.adminResponse}</p>
+                          </div>
+                        )}
+                        
+                        <div className="mt-3 flex items-center gap-4 text-xs text-gray-400">
+                          <span>From: <strong className="text-gray-600">{fb.userName}</strong> ({fb.userEmail})</span>
+                          <span>•</span>
+                          <span>{new Date(fb.createdAt).toLocaleDateString()}</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <select
+                          className="px-3 py-2 rounded-lg text-xs font-bold border border-gray-200 bg-white"
+                          value={fb.status}
+                          onChange={e => handleUpdateFeedbackStatus(fb.id, e.target.value)}
+                        >
+                          <option value="PENDING">⏳ Pending</option>
+                          <option value="REVIEWED">👀 Reviewed</option>
+                          <option value="IMPLEMENTED">✅ Implemented</option>
+                          <option value="DECLINED">❌ Declined</option>
+                        </select>
+                        <button
+                          onClick={() => handleRespondToFeedback(fb)}
+                          className="px-3 py-2 rounded-lg text-xs font-bold border bg-white text-blue-600 border-blue-200 hover:bg-blue-50 transition-all"
+                          title="Respond"
+                        >
+                          💬 Respond
+                        </button>
+                        <button
+                          onClick={() => handleDeleteFeedback(fb.id)}
+                          className="px-3 py-2 rounded-lg text-xs font-bold border bg-white text-red-500 border-red-200 hover:bg-red-50 transition-all"
+                          title="Delete"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

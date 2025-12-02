@@ -52,6 +52,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           Dashboard
         </Link>
         <Link
+          to="/community"
+          className="text-gray-700 hover:text-purple-600 font-bold text-sm md:text-base transition-colors duration-200"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Community
+        </Link>
+        <Link
           to="/profile"
           className="text-gray-700 hover:text-india-blue font-bold text-sm md:text-base transition-colors duration-200"
           onClick={() => setIsMenuOpen(false)}
@@ -142,6 +149,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Dashboard
+                    </Link>
+                    <Link
+                      to="/community"
+                      className="w-full rounded-2xl px-4 py-3 bg-purple-500 text-white border border-purple-400 text-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      🌟 Community
                     </Link>
                     <Link
                       to="/profile"

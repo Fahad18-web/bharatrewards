@@ -8,6 +8,7 @@ import { Game } from './pages/Game';
 import { Wallet } from './pages/Wallet';
 import { Admin } from './pages/Admin';
 import { Profile } from './pages/Profile';
+import { Community } from './pages/Community';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path="/game/:category" element={<Game />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/community" element={<Community />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

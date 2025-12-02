@@ -1,7 +1,7 @@
 // API Service for Solve2Win Frontend
 // Replaces localStorage with Supabase backend API calls
 
-import { User, UserRole, RedeemRequest, AppSettings, Question } from '../types';
+import { User, UserRole, RedeemRequest, AppSettings, Question, Announcement, Feedback } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
@@ -426,4 +426,119 @@ export const initApiService = async (): Promise<User | null> => {
     return await refreshCurrentUser();
   }
   return null;
+};
+
+// ============================================
+// COMMUNITY HUB API
+// ============================================
+
+export const getAnnouncements = async (): Promise<Announcement[]> => {
+  try {
+    const { announcements } = await apiRequest<{ announcements: Announcement[] }>('/community/announcements');
+    return announcements || [];
+  } catch (error) {
+    console.error('Get announcements error:', error);
+    return [];
+  }
+};
+
+export const getAdminAnnouncements = async (): Promise<Announcement[]> => {
+  try {
+    const { announcements } = await apiRequest<{ announcements: Announcement[] }>('/community/admin/announcements');
+    return announcements || [];
+  } catch (error) {
+    console.error('Get admin announcements error:', error);
+    return [];
+  }
+};
+
+export const createAnnouncement = async (
+  data: { title: string; content: string; type: string; isPinned?: boolean; expiresAt?: string | null }
+): Promise<Announcement> => {
+  const { announcement } = await apiRequest<{ announcement: Announcement }>('/community/admin/announcements', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+  return announcement;
+};
+
+export const updateAnnouncement = async (
+  id: string,
+  data: Partial<{ title: string; content: string; type: string; isActive: boolean; isPinned: boolean; expiresAt: string | null }>
+): Promise<Announcement> => {
+  const { announcement } = await apiRequest<{ announcement: Announcement }>(`/community/admin/announcements/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+  return announcement;
+};
+
+export const deleteAnnouncement = async (id: string): Promise<void> => {
+  await apiRequest(`/community/admin/announcements/${id}`, {
+    method: 'DELETE'
+  });
+};
+
+export const toggleAnnouncementStatus = async (id: string): Promise<Announcement> => {
+  const { announcement } = await apiRequest<{ announcement: Announcement }>(`/community/admin/announcements/${id}/toggle`, {
+    method: 'POST'
+  });
+  return announcement;
+};
+
+// ============================================
+// FEEDBACK API
+// ============================================
+
+export const getUserFeedback = async (): Promise<Feedback[]> => {
+  try {
+    const { feedback } = await apiRequest<{ feedback: Feedback[] }>('/community/feedback');
+    return feedback || [];
+  } catch (error) {
+    console.error('Get user feedback error:', error);
+    return [];
+  }
+};
+
+export const submitFeedback = async (
+  data: { type: string; title: string; content: string }
+): Promise<Feedback> => {
+  const { feedback } = await apiRequest<{ feedback: Feedback }>('/community/feedback', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+  return feedback;
+};
+
+export const getAdminFeedback = async (filters?: { status?: string; type?: string }): Promise<Feedback[]> => {
+  try {
+    let endpoint = '/community/admin/feedback';
+    const params = new URLSearchParams();
+    if (filters?.status) params.append('status', filters.status);
+    if (filters?.type) params.append('type', filters.type);
+    if (params.toString()) endpoint += `?${params.toString()}`;
+    
+    const { feedback } = await apiRequest<{ feedback: Feedback[] }>(endpoint);
+    return feedback || [];
+  } catch (error) {
+    console.error('Get admin feedback error:', error);
+    return [];
+  }
+};
+
+export const updateFeedback = async (
+  id: string,
+  data: { status?: string; adminResponse?: string }
+): Promise<Feedback> => {
+  const { feedback } = await apiRequest<{ feedback: Feedback }>(`/community/admin/feedback/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+  return feedback;
+};
+
+export const deleteFeedback = async (id: string): Promise<void> => {
+  await apiRequest(`/community/admin/feedback/${id}`, {
+    method: 'DELETE'
+  });
 };

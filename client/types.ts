@@ -48,3 +48,29 @@ export interface AppSettings {
   pointsPerQuestion: number;
   currencyRate: number; // INR value per 10,000 points
 }
+
+export interface Announcement {
+  id: string;
+  title: string;
+  content: string;
+  type: 'INFO' | 'WARNING' | 'SUCCESS' | 'EVENT';
+  isActive: boolean;
+  isPinned: boolean;
+  createdAt: string;
+  expiresAt?: string | null;
+  createdBy: string;
+}
+
+export interface Feedback {
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string;
+  type: 'SUGGESTION' | 'FEATURE_REQUEST' | 'BUG_REPORT' | 'OTHER';
+  title: string;
+  content: string;
+  status: 'PENDING' | 'REVIEWED' | 'IMPLEMENTED' | 'DECLINED';
+  adminResponse?: string | null;
+  createdAt: string;
+  updatedAt?: string | null;
+}
