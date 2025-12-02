@@ -1,145 +1,422 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { AdUnit } from '../components/AdUnit';
+import { Link } from "react-router-dom";
 
-export const Landing: React.FC = () => {
+export default function Landing() {
+  const gameCategories = [
+    {
+      icon: "🧮",
+      title: "Math Challenge",
+      description: "Solve equations quickly and earn points. Test your mental math skills!",
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: "⌨️",
+      title: "Speed Typing",
+      description: "Type fast and accurately to win. Improve your WPM and earn rewards!",
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      icon: "🧠",
+      title: "Quiz Master",
+      description: "Answer trivia questions on various topics. Knowledge pays off!",
+      color: "from-purple-500 to-violet-600",
+    },
+    {
+      icon: "🧩",
+      title: "Puzzle Pro",
+      description: "Solve brain-teasing puzzles. Challenge your logical thinking!",
+      color: "from-orange-500 to-amber-600",
+    },
+    {
+      icon: "🔐",
+      title: "Captcha Pro",
+      description: "Solve captcha challenges quickly. Fast recognition skills rewarded!",
+      color: "from-pink-500 to-rose-600",
+    },
+  ];
+
+  const features = [
+    { icon: "💰", title: "Real Cash Rewards", desc: "Convert points to real money" },
+    { icon: "🎮", title: "5 Game Modes", desc: "Multiple ways to earn" },
+    { icon: "⚡", title: "Instant Play", desc: "No downloads required" },
+    { icon: "🔒", title: "Secure Platform", desc: "Your data is protected" },
+    { icon: "📱", title: "Mobile Friendly", desc: "Play anywhere, anytime" },
+    { icon: "🏆", title: "Leaderboards", desc: "Compete with others" },
+    { icon: "💳", title: "Easy Withdrawals", desc: "Quick UPI transfers" },
+    { icon: "🎯", title: "Daily Bonuses", desc: "Login rewards everyday" },
+  ];
+
+  const reviews = [
+    {
+      name: "Rahul S.",
+      location: "Mumbai",
+      rating: 5,
+      text: "Amazing app! I've earned ₹5000+ just by playing games during my free time. The math challenges are my favorite!",
+    },
+    {
+      name: "Priya M.",
+      location: "Bangalore",
+      rating: 5,
+      text: "Finally a legit earning app! Withdrawals are super fast and the games are actually fun. Love the typing challenges!",
+    },
+    {
+      name: "Amit K.",
+      location: "Delhi",
+      rating: 5,
+      text: "Best way to utilize free time. I play quiz games daily and earn consistently. Highly recommended!",
+    },
+  ];
+
   return (
-    <div className="space-y-20 animate-fade-in-up pb-10">
-      {/* Hero Section */}
-      <div className="text-center py-14 sm:py-16 md:py-24 px-4 relative">
-        {/* Glow effect behind text */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[700px] h-[90vw] max-h-[700px] bg-gradient-to-r from-orange-300/20 via-white/10 to-green-300/20 rounded-full blur-[90px] pointer-events-none -z-10"></div>
-        
-        <div className="inline-block px-4 py-1.5 rounded-full bg-white/60 border border-white/50 backdrop-blur-md shadow-sm mb-6">
-          <span className="bg-gradient-to-r from-india-saffron to-orange-600 bg-clip-text text-transparent font-bold tracking-wide text-sm uppercase">
-            🚀 The #1 Play-to-Earn Platform in India
-          </span>
-        </div>
-
-        <h1 className="text-4xl sm:text-5xl md:text-8xl font-black text-gray-900 mb-6 sm:mb-8 leading-tight tracking-tight drop-shadow-sm">
-          Turn Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-india-saffron via-orange-500 to-india-saffron relative">
-            Knowledge
-            <svg className="absolute w-full h-3 -bottom-1 left-0 text-orange-300 opacity-50" viewBox="0 0 100 10" preserveAspectRatio="none">
-               <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
-            </svg>
-          </span><br/>
-          Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-india-green via-emerald-600 to-india-green relative">
-            Real Rewards
-          </span>
-        </h1>
-        
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-10 sm:mb-12 max-w-3xl mx-auto font-medium leading-relaxed opacity-90 px-2">
-          The ultimate platform offering Math, Quiz, Puzzle, and Typing challenges. 
-          Solve questions, earn points, and redeem cash directly to your wallet.
-        </p>
-
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-2xl mx-auto">
-          <Link to="/auth" className="group relative w-full sm:w-auto overflow-hidden rounded-full shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/40 transition-all transform hover:-translate-y-1">
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-india-saffron to-orange-600 group-hover:scale-105 transition-transform duration-300"></div>
-            <div className="relative px-12 py-5 text-white text-lg font-bold flex items-center justify-center">
-              Start Earning Free
-              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+    <div className="min-h-screen bg-gradient-to-br from-india-green via-white to-india-saffron">
+      {/* Navigation */}
+      <nav className="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl">🏆</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-india-saffron via-india-blue to-india-green bg-clip-text text-transparent">
+                Solve2Win
+              </span>
             </div>
-          </Link>
-          <a href="#rules" className="w-full sm:w-auto px-12 py-5 rounded-full text-lg font-bold text-gray-700 bg-white/50 hover:bg-white border border-white/60 shadow-lg backdrop-blur-md transition-all">
-            How it Works
-          </a>
-        </div>
-      </div>
-
-      <AdUnit />
-
-      {/* Services/Categories */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {[
-          { title: "Math Master", icon: "➗", desc: "Solve arithmetic problems fast.", color: "from-blue-400 to-blue-600", shadow: "shadow-blue-500/20" },
-          { title: "Typing Speed", icon: "⌨️", desc: "Type accuracy challenges.", color: "from-green-400 to-green-600", shadow: "shadow-green-500/20" },
-          { title: "India Quiz", icon: "🇮🇳", desc: "Test your GK about Bharat.", color: "from-orange-400 to-orange-600", shadow: "shadow-orange-500/20" },
-          { title: "Brain Puzzles", icon: "🧩", desc: "Logic riddles & teasers.", color: "from-purple-400 to-purple-600", shadow: "shadow-purple-500/20" }
-        ].map((item, idx) => (
-          <div key={idx} className={`glass-card p-8 rounded-[2.5rem] text-center hover:bg-white/90 transition-all duration-300 group`}>
-            <div className={`w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br ${item.color} flex items-center justify-center text-5xl shadow-xl ${item.shadow} group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 text-white`}>
-              {item.icon}
+            <div className="flex items-center space-x-4">
+              <Link
+                to="/auth"
+                className="text-gray-600 hover:text-india-blue transition-colors font-medium"
+              >
+                Login
+              </Link>
+              <Link
+                to="/auth"
+                className="bg-gradient-to-r from-india-saffron to-india-green text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all"
+              >
+                Get Started
+              </Link>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-india-saffron transition-colors">{item.title}</h3>
-            <p className="text-gray-500 font-medium leading-relaxed">{item.desc}</p>
           </div>
-        ))}
-      </div>
-
-      {/* Rules & Info Section */}
-      <div id="rules" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-        <div className="glass-card p-12 rounded-[2.5rem] border-l-[12px] border-india-blue relative overflow-hidden bg-gradient-to-br from-white/70 to-blue-50/50">
-           <div className="absolute top-0 right-0 p-8 opacity-[0.03] text-9xl text-india-blue font-black pointer-events-none transform rotate-12">?</div>
-           <h2 className="text-3xl font-black mb-10 text-gray-800 flex items-center">
-             <span className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 text-india-blue shadow-inner">ℹ️</span>
-             Platform Rules
-           </h2>
-           <ul className="space-y-6 text-gray-700 text-lg font-medium">
-             {[
-               "10 Points for every correct answer.",
-               "0 Points for wrong/skipped answers.",
-               "15-second timer per question.",
-               "Minimum Redeem: 14,000 Points (₹50).",
-               "Strict anti-cheat: No copy-paste."
-             ].map((rule, i) => (
-               <li key={i} className="flex items-center group">
-                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm font-black mr-5 shadow-sm group-hover:bg-green-500 group-hover:text-white transition-colors">✓</span>
-                 {rule}
-               </li>
-             ))}
-           </ul>
         </div>
+      </nav>
 
-        {/* Discussion / CTA */}
-        <div className="flex flex-col gap-8">
-          <div className="glass-card p-8 sm:p-10 rounded-[2.5rem] flex-1 flex flex-col justify-center text-center bg-gradient-to-br from-white/60 to-orange-50/60 border-t-8 border-orange-400">
-             <h3 className="text-3xl font-bold mb-3 text-gray-800">Community Hub</h3>
-             <p className="text-gray-500 mb-8 font-medium">Got suggestions? Want to request a feature?</p>
-             <button className="w-full py-4 rounded-2xl bg-white border border-gray-200 text-gray-800 font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-               <span>💬</span> Join Discussion
-             </button>
-           </div>
-           
-          <div className="glass-card p-8 sm:p-10 rounded-[2.5rem] flex-1 flex flex-col justify-center text-center bg-gradient-to-br from-white/60 to-green-50/60 border-t-8 border-green-500">
-             <h3 className="text-3xl font-bold mb-3 text-gray-800">Payout Proofs</h3>
-             <p className="text-gray-500 mb-8 font-medium">See real payments made to our top users.</p>
-             <button className="w-full py-4 rounded-2xl bg-white border border-gray-200 text-green-700 font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-               <span>💸</span> View Proofs
-             </button>
-           </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="inline-flex items-center bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm">
+            <span className="text-green-500 mr-2">●</span>
+            <span className="text-sm font-medium text-gray-700">
+              Trusted by 50,000+ Indians
+            </span>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Play Games.{" "}
+            <span className="bg-gradient-to-r from-india-saffron to-india-green bg-clip-text text-transparent">
+              Earn Real Cash.
+            </span>
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            India's #1 skill-based gaming platform. Solve puzzles, play quizzes, 
+            type fast, and convert your skills into real money!
+          </p>
 
-      {/* Reviews Section */}
-      <div className="py-10">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-16 text-gray-800">Loved by <span className="text-india-saffron">Indians</span></h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { name: "Rahul Kumar", role: "Student, Delhi", text: "Paid my recharge bills just by solving math problems! Super fast withdrawal.", color: "bg-orange-100 text-orange-600" },
-            { name: "Priya Sharma", role: "Homemaker, Mumbai", text: "Great way to use free time. The interface is beautiful and easy to use.", color: "bg-green-100 text-green-600" },
-            { name: "Amit Verma", role: "Freelancer, Bangalore", text: "100% Legit platform. Redeemed ₹35 yesterday instantly to my wallet.", color: "bg-blue-100 text-blue-600" }
-          ].map((review, i) => (
-            <div key={i} className="glass-card p-10 rounded-[2.5rem] hover:bg-white/95 transition-all hover:-translate-y-2">
-              <div className="flex items-center mb-8">
-                <div className={`w-16 h-16 rounded-full ${review.color} flex items-center justify-center font-bold text-2xl shadow-inner border-2 border-white`}>
-                  {review.name[0]}
-                </div>
-                <div className="ml-5">
-                  <p className="font-bold text-gray-900 text-xl">{review.name}</p>
-                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">{review.role}</p>
-                </div>
-              </div>
-              <div className="relative">
-                 <span className="absolute -top-4 -left-3 text-6xl text-gray-200 font-serif leading-none select-none">“</span>
-                 <p className="text-gray-600 font-medium italic relative z-10 leading-relaxed pl-6">
-                  {review.text}
-                 </p>
-              </div>
+          {/* Stats Bar */}
+          <div className="flex flex-wrap justify-center gap-8 mb-10">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg">
+              <div className="text-3xl font-bold text-india-saffron">50K+</div>
+              <div className="text-sm text-gray-600">Active Players</div>
             </div>
-          ))}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg">
+              <div className="text-3xl font-bold text-india-green">₹10L+</div>
+              <div className="text-sm text-gray-600">Paid to Users</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg">
+              <div className="text-3xl font-bold text-india-blue">5</div>
+              <div className="text-sm text-gray-600">Game Modes</div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/auth"
+              className="bg-gradient-to-r from-india-saffron to-india-green text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-xl transform hover:scale-105 transition-all"
+            >
+              🎮 Start Playing Now
+            </Link>
+            <Link
+              to="/community"
+              className="bg-white text-gray-700 px-8 py-4 rounded-full text-lg font-bold hover:shadow-xl border-2 border-gray-200 transition-all"
+            >
+              💬 Join Community
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Game Categories */}
+      <section className="py-16 px-4 bg-white/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Choose Your Game Mode
+            </h2>
+            <p className="text-gray-600 max-w-xl mx-auto">
+              5 exciting ways to earn. Pick your favorite and start winning!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {gameCategories.map((game, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all cursor-pointer group"
+              >
+                <div
+                  className={`w-16 h-16 bg-gradient-to-br ${game.color} rounded-xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform`}
+                >
+                  {game.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {game.title}
+                </h3>
+                <p className="text-gray-600">{game.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-gray-600">Start earning in just 3 simple steps</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-india-saffron to-orange-400 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg">
+                1️⃣
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Sign Up Free</h3>
+              <p className="text-gray-600">
+                Create your account in seconds. No payment required to start!
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-india-blue to-blue-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg">
+                2️⃣
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Play & Win</h3>
+              <p className="text-gray-600">
+                Choose any game mode and earn points for every correct answer!
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-india-green to-green-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg">
+                3️⃣
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Withdraw Cash</h3>
+              <p className="text-gray-600">
+                Convert 1000 points = ₹1. Instant UPI transfers to your bank!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rules & Community Cards */}
+      <section className="py-12 px-4 bg-gradient-to-r from-india-saffron/10 to-india-green/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Rules Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <div className="flex items-center mb-4">
+                <span className="text-3xl mr-3">📋</span>
+                <h3 className="text-xl font-bold text-gray-900">Game Rules</h3>
+              </div>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Win points for each correct answer
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Bonus points for speed and streaks
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Minimum ₹10 withdrawal
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Daily login bonuses available
+                </li>
+              </ul>
+            </div>
+
+            {/* Community Card */}
+            <div className="bg-gradient-to-br from-india-blue to-blue-700 rounded-2xl p-6 shadow-lg text-white">
+              <div className="flex items-center mb-4">
+                <span className="text-3xl mr-3">💬</span>
+                <h3 className="text-xl font-bold">Community Hub</h3>
+              </div>
+              <p className="mb-4 opacity-90">
+                Join our community! Share feedback, request features, and stay 
+                updated with the latest announcements.
+              </p>
+              <Link
+                to="/community"
+                className="inline-flex items-center bg-white text-india-blue px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
+              >
+                Visit Community →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Solve2Win?
+            </h2>
+            <p className="text-gray-600">
+              The most trusted gaming platform in India
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="text-center p-4 rounded-xl hover:bg-gray-50 transition-colors"
+              >
+                <div className="text-4xl mb-3">{feature.icon}</div>
+                <h3 className="font-bold text-gray-900 mb-1">{feature.title}</h3>
+                <p className="text-sm text-gray-600">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="py-16 px-4 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              What Players Say
+            </h2>
+            <p className="text-gray-600">
+              Join thousands of happy earners
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {reviews.map((review, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 shadow-lg"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-india-saffron to-india-green rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div className="ml-3">
+                    <div className="font-bold text-gray-900">{review.name}</div>
+                    <div className="text-sm text-gray-500">{review.location}</div>
+                  </div>
+                </div>
+                <div className="flex mb-3">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <span key={i} className="text-yellow-400">⭐</span>
+                  ))}
+                </div>
+                <p className="text-gray-600">{review.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 px-4 bg-gradient-to-r from-india-saffron via-india-blue to-india-green">
+        <div className="max-w-4xl mx-auto text-center text-white">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Ready to Start Earning?
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join 50,000+ players who are already earning. Your skills deserve rewards!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/auth"
+              className="bg-white text-india-blue px-10 py-4 rounded-full text-lg font-bold hover:shadow-xl transform hover:scale-105 transition-all"
+            >
+              🚀 Create Free Account
+            </Link>
+            <Link
+              to="/community"
+              className="border-2 border-white text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-white/10 transition-all"
+            >
+              💬 Join Community
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-2xl">🏆</span>
+                <span className="text-xl font-bold">Solve2Win</span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                India's trusted skill-based gaming platform. Play smart, earn real!
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Games</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li>Math Challenge</li>
+                <li>Speed Typing</li>
+                <li>Quiz Master</li>
+                <li>Puzzle Pro</li>
+                <li>Captcha Pro</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/auth" className="hover:text-white">Login</Link></li>
+                <li><Link to="/auth" className="hover:text-white">Sign Up</Link></li>
+                <li><Link to="/community" className="hover:text-white">Community</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/community" className="hover:text-white">Report Issues</Link></li>
+                <li><Link to="/community" className="hover:text-white">Feature Requests</Link></li>
+                <li><Link to="/community" className="hover:text-white">Feedback</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+            <p>© 2024 Solve2Win. Made with ❤️ in India 🇮🇳</p>
+            <p className="mt-2">Play responsibly. Must be 18+ to participate.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
+}
