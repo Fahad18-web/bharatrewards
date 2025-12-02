@@ -1,0 +1,21 @@
+{
+  "name": "bharatrewards",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Solve2Win - Play, Learn & Earn rewards app",
+  "scripts": {
+    "dev": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "build": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "preview": "cd client && npm run preview",
+    "client:install": "cd client && npm install",
+    "server:install": "cd server && npm install",
+    "setup": "npm run client:install && npm run server:install",
+    "start": "cd server && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
