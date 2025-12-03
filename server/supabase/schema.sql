@@ -124,12 +124,16 @@ CREATE INDEX IF NOT EXISTS idx_activity_action ON user_activity_log(action);
 
 -- Function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER 
+LANGUAGE plpgsql
+SECURITY INVOKER
+SET search_path = public
+AS $$
 BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$;
 
 -- Apply update trigger to tables
 DROP TRIGGER IF EXISTS update_users_updated_at ON users;
@@ -140,7 +144,11 @@ CREATE TRIGGER update_users_updated_at
 
 -- Function & trigger to cap total admins to 3
 CREATE OR REPLACE FUNCTION enforce_admin_limit()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER 
+LANGUAGE plpgsql
+SECURITY INVOKER
+SET search_path = public
+AS $$
 DECLARE
     current_admins INTEGER;
 BEGIN
@@ -158,7 +166,7 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$;
 
 DROP TRIGGER IF EXISTS enforce_admin_limit_trigger ON users;
 CREATE TRIGGER enforce_admin_limit_trigger
@@ -244,12 +252,47 @@ CREATE POLICY "Admins can manage settings" ON app_settings
         EXISTS (SELECT 1 FROM users WHERE id::text = auth.uid()::text AND role = 'ADMIN')
     );
 
+-- Policies for game_sessions
+DROP POLICY IF EXISTS "Users can view own sessions" ON game_sessions;
+DROP POLICY IF EXISTS "Users can create own sessions" ON game_sessions;
+DROP POLICY IF EXISTS "Users can update own sessions" ON game_sessions;
+DROP POLICY IF EXISTS "Admins can view all sessions" ON game_sessions;
+CREATE POLICY "Users can view own sessions" ON game_sessions
+    FOR SELECT USING (user_id::text = auth.uid()::text);
+
+CREATE POLICY "Users can create own sessions" ON game_sessions
+    FOR INSERT WITH CHECK (user_id::text = auth.uid()::text);
+
+CREATE POLICY "Users can update own sessions" ON game_sessions
+    FOR UPDATE USING (user_id::text = auth.uid()::text);
+
+CREATE POLICY "Admins can view all sessions" ON game_sessions
+    FOR SELECT USING (
+        EXISTS (SELECT 1 FROM users WHERE id::text = auth.uid()::text AND role = 'ADMIN')
+    );
+
+-- Policies for user_activity_log
+DROP POLICY IF EXISTS "Users can view own activity" ON user_activity_log;
+DROP POLICY IF EXISTS "Admins can view all activity" ON user_activity_log;
+DROP POLICY IF EXISTS "System can insert activity" ON user_activity_log;
+CREATE POLICY "Users can view own activity" ON user_activity_log
+    FOR SELECT USING (user_id::text = auth.uid()::text);
+
+CREATE POLICY "Admins can view all activity" ON user_activity_log
+    FOR SELECT USING (
+        EXISTS (SELECT 1 FROM users WHERE id::text = auth.uid()::text AND role = 'ADMIN')
+    );
+
+CREATE POLICY "System can insert activity" ON user_activity_log
+    FOR INSERT WITH CHECK (true);
+
 -- ============================================
 -- VIEWS FOR COMMON QUERIES
 -- ============================================
 
 -- View for dashboard statistics
-CREATE OR REPLACE VIEW admin_dashboard_stats AS
+CREATE OR REPLACE VIEW admin_dashboard_stats 
+WITH (security_invoker = true) AS
 SELECT 
     (SELECT COUNT(*) FROM users WHERE role = 'USER') as total_users,
     (SELECT COUNT(*) FROM redeem_requests WHERE status = 'PENDING') as pending_requests,
@@ -258,7 +301,8 @@ SELECT
     (SELECT COALESCE(SUM(points), 0) FROM users) as total_points_distributed;
 
 -- View for user leaderboard
-CREATE OR REPLACE VIEW user_leaderboard AS
+CREATE OR REPLACE VIEW user_leaderboard 
+WITH (security_invoker = true) AS
 SELECT 
     id,
     name,
