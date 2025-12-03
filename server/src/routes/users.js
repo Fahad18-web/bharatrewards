@@ -12,7 +12,7 @@ router.get('/', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const { data: users, error } = await supabase
       .from('users')
-      .select('id, email, name, role, points, wallet_balance, solved_count, created_at, is_banned, ban_reason, banned_at')
+      .select('id, email, name, role, points, wallet_balance, solved_count, avatar, created_at, is_banned, ban_reason, banned_at')
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -29,6 +29,7 @@ router.get('/', authMiddleware, adminMiddleware, async (req, res) => {
       points: user.points,
       walletBalance: user.wallet_balance,
       solvedCount: user.solved_count,
+      avatar: user.avatar,
       createdAt: user.created_at,
       isBanned: user.is_banned,
       banReason: user.ban_reason,
@@ -57,7 +58,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 
     const { data: user, error } = await supabase
       .from('users')
-      .select('id, email, name, role, points, wallet_balance, solved_count, created_at, is_banned, ban_reason, banned_at')
+      .select('id, email, name, role, points, wallet_balance, solved_count, avatar, created_at, is_banned, ban_reason, banned_at')
       .eq('id', id)
       .single();
 
@@ -73,6 +74,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
       points: user.points,
       walletBalance: user.wallet_balance,
       solvedCount: user.solved_count,
+      avatar: user.avatar,
       createdAt: user.created_at,
       isBanned: user.is_banned,
       banReason: user.ban_reason,
@@ -93,7 +95,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { name, email, avatar } = req.body;
 
     // Users can only update their own profile
     if (req.user.role !== 'ADMIN' && req.user.id !== id) {
@@ -103,6 +105,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
     const updateData = {};
     if (name) updateData.name = name;
     if (email) updateData.email = email.toLowerCase();
+    if (avatar !== undefined) updateData.avatar = avatar;
 
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({ error: 'No fields to update' });
@@ -112,7 +115,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
       .from('users')
       .update(updateData)
       .eq('id', id)
-      .select('id, email, name, role, points, wallet_balance, solved_count, is_banned, ban_reason, banned_at')
+      .select('id, email, name, role, points, wallet_balance, solved_count, avatar, is_banned, ban_reason, banned_at')
       .single();
 
     if (error) {
@@ -128,6 +131,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
       points: user.points,
       walletBalance: user.wallet_balance,
       solvedCount: user.solved_count,
+      avatar: user.avatar,
       isBanned: user.is_banned,
       banReason: user.ban_reason,
       bannedAt: user.banned_at

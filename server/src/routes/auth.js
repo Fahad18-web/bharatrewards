@@ -86,6 +86,7 @@ router.post('/register', async (req, res) => {
       points: newUser.points,
       walletBalance: newUser.wallet_balance,
       solvedCount: newUser.solved_count,
+      avatar: newUser.avatar,
       isBanned: newUser.is_banned,
       bannedAt: newUser.banned_at,
       banReason: newUser.ban_reason
@@ -143,6 +144,7 @@ router.post('/login', async (req, res) => {
       points: user.points,
       walletBalance: user.wallet_balance,
       solvedCount: user.solved_count,
+      avatar: user.avatar,
       isBanned: user.is_banned,
       bannedAt: user.banned_at,
       banReason: user.ban_reason
@@ -187,6 +189,7 @@ router.get('/me', authMiddleware, async (req, res) => {
       points: user.points,
       walletBalance: user.wallet_balance,
       solvedCount: user.solved_count,
+      avatar: user.avatar,
       isBanned: user.is_banned,
       bannedAt: user.banned_at,
       banReason: user.ban_reason

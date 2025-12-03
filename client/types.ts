@@ -12,6 +12,7 @@ export interface User {
   points: number;
   walletBalance: number; 
   solvedCount: number;
+  avatar?: string;
   createdAt?: string;
   isBanned?: boolean;
   bannedAt?: string | null;

@@ -10,6 +10,40 @@ interface StatusMessage {
   message: string;
 }
 
+// Avatar options - emoji-based avatars
+const AVATARS = [
+  { id: 'default', emoji: '👤', label: 'Default' },
+  { id: 'man', emoji: '👨', label: 'Man' },
+  { id: 'woman', emoji: '👩', label: 'Woman' },
+  { id: 'boy', emoji: '👦', label: 'Boy' },
+  { id: 'girl', emoji: '👧', label: 'Girl' },
+  { id: 'ninja', emoji: '🥷', label: 'Ninja' },
+  { id: 'astronaut', emoji: '🧑‍🚀', label: 'Astronaut' },
+  { id: 'scientist', emoji: '🧑‍🔬', label: 'Scientist' },
+  { id: 'technologist', emoji: '🧑‍💻', label: 'Technologist' },
+  { id: 'artist', emoji: '🧑‍🎨', label: 'Artist' },
+  { id: 'student', emoji: '🧑‍🎓', label: 'Student' },
+  { id: 'teacher', emoji: '🧑‍🏫', label: 'Teacher' },
+  { id: 'superhero', emoji: '🦸', label: 'Superhero' },
+  { id: 'wizard', emoji: '🧙', label: 'Wizard' },
+  { id: 'genie', emoji: '🧞', label: 'Genie' },
+  { id: 'robot', emoji: '🤖', label: 'Robot' },
+  { id: 'alien', emoji: '👽', label: 'Alien' },
+  { id: 'ghost', emoji: '👻', label: 'Ghost' },
+  { id: 'lion', emoji: '🦁', label: 'Lion' },
+  { id: 'tiger', emoji: '🐯', label: 'Tiger' },
+  { id: 'fox', emoji: '🦊', label: 'Fox' },
+  { id: 'wolf', emoji: '🐺', label: 'Wolf' },
+  { id: 'panda', emoji: '🐼', label: 'Panda' },
+  { id: 'koala', emoji: '🐨', label: 'Koala' },
+  { id: 'unicorn', emoji: '🦄', label: 'Unicorn' },
+  { id: 'dragon', emoji: '🐉', label: 'Dragon' },
+  { id: 'eagle', emoji: '🦅', label: 'Eagle' },
+  { id: 'owl', emoji: '🦉', label: 'Owl' },
+  { id: 'butterfly', emoji: '🦋', label: 'Butterfly' },
+  { id: 'rocket', emoji: '🚀', label: 'Rocket' },
+];
+
 export const Profile: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
@@ -17,10 +51,12 @@ export const Profile: React.FC = () => {
 
   const [profileForm, setProfileForm] = useState({
     name: '',
-    email: ''
+    email: '',
+    avatar: ''
   });
   const [profileStatus, setProfileStatus] = useState<StatusMessage | null>(null);
   const [savingProfile, setSavingProfile] = useState(false);
+  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
 
   const [passwordForm, setPasswordForm] = useState({
     currentPassword: '',
@@ -39,14 +75,14 @@ export const Profile: React.FC = () => {
       }
 
       setUser(cachedUser);
-      setProfileForm({ name: cachedUser.name, email: cachedUser.email });
+      setProfileForm({ name: cachedUser.name, email: cachedUser.email, avatar: cachedUser.avatar || '' });
       setLoading(false);
 
       try {
         const latest = await refreshCurrentUser();
         if (latest) {
           setUser(latest);
-          setProfileForm({ name: latest.name, email: latest.email });
+          setProfileForm({ name: latest.name, email: latest.email, avatar: latest.avatar || '' });
         }
       } catch (error) {
         console.warn('Failed to refresh profile', error);
@@ -66,6 +102,16 @@ export const Profile: React.FC = () => {
       .join('');
   }, [user]);
 
+  const currentAvatar = useMemo(() => {
+    const avatarId = profileForm.avatar || user?.avatar;
+    return AVATARS.find(a => a.id === avatarId) || null;
+  }, [profileForm.avatar, user?.avatar]);
+
+  const handleAvatarSelect = (avatarId: string) => {
+    setProfileForm(prev => ({ ...prev, avatar: avatarId }));
+    setShowAvatarPicker(false);
+  };
+
   const handleProfileSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!user) return;
@@ -76,9 +122,14 @@ export const Profile: React.FC = () => {
     try {
       const trimmedName = profileForm.name.trim();
       const trimmedEmail = profileForm.email.trim().toLowerCase();
-      const updatedUser = await saveUserApi({ ...user, name: trimmedName, email: trimmedEmail });
+      const updatedUser = await saveUserApi({ 
+        ...user, 
+        name: trimmedName, 
+        email: trimmedEmail,
+        avatar: profileForm.avatar || undefined
+      });
       setUser(updatedUser);
-      setProfileForm({ name: updatedUser.name, email: updatedUser.email });
+      setProfileForm({ name: updatedUser.name, email: updatedUser.email, avatar: updatedUser.avatar || '' });
       setProfileStatus({ type: 'success', message: 'Profile updated successfully.' });
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to update profile.';
@@ -116,7 +167,11 @@ export const Profile: React.FC = () => {
     }
   };
 
-  const hasProfileChanges = user && (user.name !== profileForm.name || user.email !== profileForm.email);
+  const hasProfileChanges = user && (
+    user.name !== profileForm.name || 
+    user.email !== profileForm.email ||
+    (user.avatar || '') !== profileForm.avatar
+  );
 
   if (loading || !user) {
     return (
@@ -133,12 +188,35 @@ export const Profile: React.FC = () => {
   return (
     <div className="space-y-12 pb-12">
       <section className="glass-card p-10 rounded-[3rem] flex flex-col lg:flex-row gap-10 items-center">
-        <div className="relative w-36 h-36 rounded-[2rem] bg-gradient-to-br from-india-blue to-blue-900 text-white flex items-center justify-center text-5xl font-black shadow-2xl border-4 border-white/30">
-          {initials}
+        {/* Avatar Section */}
+        <div className="relative">
+          <div 
+            onClick={() => setShowAvatarPicker(true)}
+            className="relative w-36 h-36 rounded-[2rem] bg-gradient-to-br from-india-blue to-blue-900 text-white flex items-center justify-center text-5xl font-black shadow-2xl border-4 border-white/30 cursor-pointer hover:scale-105 transition-transform group"
+          >
+            {currentAvatar ? (
+              <span className="text-6xl">{currentAvatar.emoji}</span>
+            ) : (
+              initials
+            )}
+            <div className="absolute inset-0 bg-black/40 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span className="text-white text-sm font-bold">Change</span>
+            </div>
+          </div>
           <div className="absolute -bottom-3 right-6 bg-white text-green-500 rounded-full px-4 py-1 text-xs font-black uppercase tracking-wide shadow-lg">
             {user.role === 'ADMIN' ? 'Admin' : 'Player'}
           </div>
+          <button
+            onClick={() => setShowAvatarPicker(true)}
+            className="absolute -bottom-3 -left-2 bg-india-saffron text-white rounded-full p-2 shadow-lg hover:bg-orange-600 transition-colors"
+            title="Change Avatar"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </button>
         </div>
+
         <div className="flex-1 text-center lg:text-left">
           <p className="text-sm font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Account Overview</p>
           <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-4">{user.name}</h1>
@@ -161,6 +239,68 @@ export const Profile: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* Avatar Picker Modal */}
+      {showAvatarPicker && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowAvatarPicker(false)}>
+          <div 
+            className="glass-card rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-black text-gray-800">Choose Your Avatar</h2>
+              <button 
+                onClick={() => setShowAvatarPicker(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-3">
+              {AVATARS.map((avatar) => (
+                <button
+                  key={avatar.id}
+                  onClick={() => handleAvatarSelect(avatar.id)}
+                  className={`relative aspect-square rounded-2xl flex items-center justify-center text-3xl sm:text-4xl transition-all hover:scale-110 ${
+                    profileForm.avatar === avatar.id
+                      ? 'bg-india-blue/20 ring-4 ring-india-blue shadow-lg'
+                      : 'bg-white/50 hover:bg-white/80 border border-gray-100'
+                  }`}
+                  title={avatar.label}
+                >
+                  {avatar.emoji}
+                  {profileForm.avatar === avatar.id && (
+                    <div className="absolute -top-1 -right-1 bg-india-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                      ✓
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setProfileForm(prev => ({ ...prev, avatar: '' }));
+                  setShowAvatarPicker(false);
+                }}
+                className="px-6 py-3 rounded-xl text-gray-600 font-bold hover:bg-gray-100 transition-colors"
+              >
+                Remove Avatar
+              </button>
+              <button
+                onClick={() => setShowAvatarPicker(false)}
+                className="px-6 py-3 rounded-xl bg-india-blue text-white font-bold hover:bg-blue-800 transition-colors"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <form onSubmit={handleProfileSubmit} className="glass-card p-10 rounded-[2.5rem] space-y-8">

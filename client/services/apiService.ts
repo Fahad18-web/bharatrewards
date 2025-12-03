@@ -142,6 +142,7 @@ export const saveUser = async (user: User): Promise<User> => {
       body: JSON.stringify({
         name: user.name,
         email: user.email,
+        avatar: user.avatar,
       }),
     });
     

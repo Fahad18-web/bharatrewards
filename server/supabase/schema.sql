@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     points INTEGER DEFAULT 0,
     wallet_balance DECIMAL(10, 2) DEFAULT 0.00,
     solved_count INTEGER DEFAULT 0,
+    avatar VARCHAR(50),
     is_banned BOOLEAN DEFAULT FALSE,
     banned_at TIMESTAMP WITH TIME ZONE,
     ban_reason TEXT,
