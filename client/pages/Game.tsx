@@ -4,6 +4,7 @@ import { getCurrentUser, saveUser, getSettings } from '../services/storageServic
 import { fetchGameQuestions, updateUserPoints } from '../services/apiService';
 import { Question, User } from '../types';
 import { AdUnit } from '../components/AdUnit';
+import { InterstitialAd } from '../components/InterstitialAd';
 
 const TIMER_SECONDS = 15;
 const PREFETCH_THRESHOLD = 3; 
@@ -24,6 +25,12 @@ export const Game: React.FC = () => {
 
   // Loading States
   const [initialLoading, setInitialLoading] = useState(true);
+  
+  // Interstitial Ad State
+  const [showInterstitial, setShowInterstitial] = useState(false);
+  const [lastAnswerCorrect, setLastAnswerCorrect] = useState(false);
+  const [lastPointsEarned, setLastPointsEarned] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   
   // Refs for state access inside intervals/async
   const isFetchingRef = useRef(false);
@@ -98,7 +105,7 @@ export const Game: React.FC = () => {
       }
     }, [normalizedCategory, startGame]);
 
-  const handleNext = useCallback((awardedPoints: number = 0) => {
+  const handleNext = useCallback((awardedPoints: number = 0, showAd: boolean = true) => {
     if (user) {
       // Update local state immediately for responsive UI
       const updatedUser = { ...user };
@@ -118,6 +125,21 @@ export const Game: React.FC = () => {
       }
     }
 
+    // Store result for interstitial display
+    setLastAnswerCorrect(awardedPoints > 0);
+    setLastPointsEarned(awardedPoints);
+
+    // Show interstitial ad after answering (not on timeout from ad screen)
+    if (showAd) {
+      setIsPaused(true);
+      setShowInterstitial(true);
+    } else {
+      // Direct progression without ad
+      progressToNextQuestion();
+    }
+  }, [user]);
+
+  const progressToNextQuestion = useCallback(() => {
     const nextIndex = currentIndexRef.current + 1;
     
     // Check if we need to prefetch more questions
@@ -129,11 +151,17 @@ export const Game: React.FC = () => {
     setCurrentIndex(nextIndex);
     setTimeLeft(TIMER_SECONDS);
     setUserAnswer('');
-  }, [user, fetchBatch]);
+    setIsPaused(false);
+  }, [fetchBatch]);
+
+  const handleAdClose = useCallback(() => {
+    setShowInterstitial(false);
+    progressToNextQuestion();
+  }, [progressToNextQuestion]);
 
   // Timer Logic
   useEffect(() => {
-    if (initialLoading) return;
+    if (initialLoading || isPaused) return;
     
     // If we ran out of questions (user caught up to fetcher), wait
     if (!questions[currentIndex]) return;
@@ -141,7 +169,7 @@ export const Game: React.FC = () => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          handleNext(0); // Timeout
+          handleNext(0, true); // Timeout - still show ad
           return TIMER_SECONDS;
         }
         return prev - 1;
@@ -149,7 +177,7 @@ export const Game: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [initialLoading, currentIndex, questions, handleNext]);
+  }, [initialLoading, isPaused, currentIndex, questions, handleNext]);
 
   const submitAnswer = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -167,9 +195,9 @@ export const Game: React.FC = () => {
     }
 
     if (isCorrect) {
-      handleNext(pointsPerQ);
+      handleNext(pointsPerQ, true);
     } else {
-      handleNext(0);
+      handleNext(0, true);
     }
   };
 
@@ -354,8 +382,8 @@ export const Game: React.FC = () => {
                     setUserAnswer(opt);
                     // Minimal delay to show selection click effect before moving on
                     setTimeout(() => {
-                        if (opt.toLowerCase() === currentQ.correctAnswer.toLowerCase()) handleNext(pointsPerQ);
-                        else handleNext(0);
+                        if (opt.toLowerCase() === currentQ.correctAnswer.toLowerCase()) handleNext(pointsPerQ, true);
+                        else handleNext(0, true);
                     }, 100);
                   }}
                   className="group relative bg-white/80 hover:bg-white border-2 border-white/50 hover:border-india-saffron p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
@@ -424,6 +452,16 @@ export const Game: React.FC = () => {
       <div className="mt-12">
         <AdUnit />
       </div>
+
+      {/* Interstitial Ad between questions */}
+      {showInterstitial && (
+        <InterstitialAd
+          onClose={handleAdClose}
+          autoCloseSeconds={5}
+          isCorrect={lastAnswerCorrect}
+          pointsEarned={lastPointsEarned}
+        />
+      )}
     </div>
   );
 };

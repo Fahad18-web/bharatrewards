@@ -9,6 +9,10 @@ import { Wallet } from './pages/Wallet';
 import { Admin } from './pages/Admin';
 import { Profile } from './pages/Profile';
 import { Community } from './pages/Community';
+import { Contact } from './pages/Contact';
+import { FAQ } from './pages/FAQ';
+import { Terms } from './pages/Terms';
+import { Privacy } from './pages/Privacy';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +27,10 @@ const App: React.FC = () => {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
