@@ -9,6 +9,35 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 const TOKEN_KEY = 'bharatrewards_token';
 const USER_KEY = 'bharatrewards_user';
 
+// Simple in-memory cache for API responses
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+  ttl: number;
+}
+
+const apiCache = new Map<string, CacheEntry<unknown>>();
+
+const getCachedData = <T>(key: string): T | null => {
+  const entry = apiCache.get(key) as CacheEntry<T> | undefined;
+  if (!entry) return null;
+  
+  if (Date.now() - entry.timestamp > entry.ttl) {
+    apiCache.delete(key);
+    return null;
+  }
+  
+  return entry.data;
+};
+
+const setCachedData = <T>(key: string, data: T, ttlMs: number = 60000): void => {
+  apiCache.set(key, { data, timestamp: Date.now(), ttl: ttlMs });
+};
+
+export const clearApiCache = (): void => {
+  apiCache.clear();
+};
+
 const getToken = (): string | null => {
   return localStorage.getItem(TOKEN_KEY);
 };
@@ -20,17 +49,26 @@ const setToken = (token: string): void => {
 const removeToken = (): void => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
+  clearApiCache();
 };
 
 const setUserCache = (user: User): void => {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 };
 
-// API helper function
+// API helper function with optional caching
 const apiRequest = async <T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  cacheKey?: string,
+  cacheTtl?: number
 ): Promise<T> => {
+  // Check cache for GET requests
+  if (cacheKey && (!options.method || options.method === 'GET')) {
+    const cached = getCachedData<T>(cacheKey);
+    if (cached) return cached;
+  }
+
   const token = getToken();
 
   const config: RequestInit = {
@@ -47,6 +85,11 @@ const apiRequest = async <T>(
 
   if (!response.ok) {
     throw new Error(data.error || 'API request failed');
+  }
+
+  // Cache the response if cacheKey provided
+  if (cacheKey && (!options.method || options.method === 'GET')) {
+    setCachedData(cacheKey, data, cacheTtl);
   }
 
   return data;
@@ -194,7 +237,12 @@ export const updateUserPoints = async (
 
 export const getSettings = async (): Promise<AppSettings> => {
   try {
-    const { settings } = await apiRequest<{ settings: AppSettings }>('/settings');
+    const { settings } = await apiRequest<{ settings: AppSettings }>(
+      '/settings',
+      {},
+      'settings',
+      300000 // Cache for 5 minutes
+    );
     return settings;
   } catch (error) {
     console.error('Get settings error:', error);
@@ -212,6 +260,8 @@ export const saveSettings = async (settings: AppSettings): Promise<void> => {
     method: 'PUT',
     body: JSON.stringify(settings),
   });
+  // Clear settings cache after update
+  apiCache.delete('settings');
 };
 
 // ============================================
@@ -435,7 +485,12 @@ export const initApiService = async (): Promise<User | null> => {
 
 export const getAnnouncements = async (): Promise<Announcement[]> => {
   try {
-    const { announcements } = await apiRequest<{ announcements: Announcement[] }>('/community/announcements');
+    const { announcements } = await apiRequest<{ announcements: Announcement[] }>(
+      '/community/announcements',
+      {},
+      'announcements',
+      120000 // Cache for 2 minutes
+    );
     return announcements || [];
   } catch (error) {
     console.error('Get announcements error:', error);
