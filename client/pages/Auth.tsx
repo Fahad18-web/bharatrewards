@@ -121,7 +121,7 @@ export const Auth: React.FC = () => {
                 <span className="text-3xl">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
              </div>
              <h2 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight">
-               {isLogin ? 'Welcome Back' : 'Join BharatRewards'}
+               {isLogin ? 'Welcome Back' : 'Join Solve2Win'}
              </h2>
              <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm font-medium">
                {isAdminMode ? 'Admin Portal Access' : 'Play, Learn & Earn'}
