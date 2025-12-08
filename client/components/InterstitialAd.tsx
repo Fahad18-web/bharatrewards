@@ -60,15 +60,15 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
         </div>
 
         {/* Ad Container */}
-        <div className="glass-card rounded-3xl overflow-hidden border border-white/30 shadow-2xl">
+        <div className="glass-card dark:glass-card rounded-3xl overflow-hidden border border-white/30 dark:border-white/10 shadow-2xl">
           {/* Ad Header */}
-          <div className="bg-gray-100 px-4 py-2 flex items-center justify-between border-b border-gray-200">
+          <div className="bg-gray-100 dark:bg-slate-800 px-4 py-2 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Advertisement</span>
+              <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Advertisement</span>
             </div>
             <div className="flex items-center gap-3">
               {!canSkip && (
-                <span className="text-sm font-bold text-gray-500">
+                <span className="text-sm font-bold text-gray-500 dark:text-gray-400">
                   Skip in {countdown}s
                 </span>
               )}
@@ -84,7 +84,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
           </div>
 
           {/* Ad Content Placeholder */}
-          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 min-h-[300px] flex flex-col items-center justify-center">
+          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 min-h-[300px] flex flex-col items-center justify-center">
             {/* 
               ================================================================
               GOOGLE ADSENSE / ADMOB INTEGRATION POINT
@@ -110,18 +110,18 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
               <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-india-saffron/20 to-india-green/20 flex items-center justify-center">
                 <span className="text-5xl">📺</span>
               </div>
-              <p className="text-gray-600 font-bold text-lg mb-2">Ad Space</p>
-              <p className="text-gray-400 text-sm max-w-xs mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 font-bold text-lg mb-2">Ad Space</p>
+              <p className="text-gray-400 dark:text-gray-500 text-sm max-w-xs mx-auto">
                 Your advertisement will appear here. Integrate Google AdSense or AdMob for real ads.
               </p>
               
               {/* Sample Ad Banner Placeholder */}
-              <div className="mt-6 p-6 border-2 border-dashed border-gray-300 rounded-xl bg-white/50">
+              <div className="mt-6 p-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-slate-700/50">
                 <div className="flex items-center justify-center gap-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded-xl animate-pulse"></div>
+                  <div className="w-16 h-16 bg-gray-200 dark:bg-slate-600 rounded-xl animate-pulse"></div>
                   <div className="text-left">
-                    <div className="h-4 w-32 bg-gray-200 rounded animate-pulse mb-2"></div>
-                    <div className="h-3 w-48 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 w-32 bg-gray-200 dark:bg-slate-600 rounded animate-pulse mb-2"></div>
+                    <div className="h-3 w-48 bg-gray-200 dark:bg-slate-600 rounded animate-pulse"></div>
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
           </div>
 
           {/* Progress Bar */}
-          <div className="h-1 bg-gray-200">
+          <div className="h-1 bg-gray-200 dark:bg-slate-700">
             <div 
               className="h-full bg-gradient-to-r from-india-saffron to-india-green transition-all duration-1000"
               style={{ width: `${((autoCloseSeconds - countdown) / autoCloseSeconds) * 100}%` }}

@@ -128,12 +128,12 @@ export const FAQ: React.FC = () => {
     <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-          Frequently Asked <span className="text-india-saffron">Questions</span>
+        <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
+          Frequently Asked <span className="text-india-saffron dark:text-orange-400">Questions</span>
         </h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
           Find answers to common questions about Solve2Win. Can't find what you're looking for? 
-          <Link to="/contact" className="text-india-blue font-medium hover:underline ml-1">Contact us</Link>
+          <Link to="/contact" className="text-india-blue dark:text-blue-400 font-medium hover:underline ml-1">Contact us</Link>
         </p>
       </div>
 
@@ -145,8 +145,8 @@ export const FAQ: React.FC = () => {
             onClick={() => setActiveCategory(category)}
             className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
               activeCategory === category
-                ? 'bg-india-blue text-white shadow-lg'
-                : 'bg-white/70 text-gray-600 hover:bg-white border border-gray-100'
+                ? 'bg-india-blue text-white shadow-lg dark:bg-blue-600'
+                : 'bg-white/70 dark:bg-slate-800/70 text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-slate-700 border border-gray-100 dark:border-slate-700'
             }`}
           >
             {category === 'all' ? 'All Questions' : category}
@@ -163,11 +163,11 @@ export const FAQ: React.FC = () => {
           return (
             <div
               key={globalIndex}
-              className="glass-card rounded-2xl border border-white/50 overflow-hidden"
+              className="glass-card dark:glass-card rounded-2xl border border-white/50 dark:border-white/10 overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(isOpen ? null : globalIndex)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/50 transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/50 dark:hover:bg-white/5 transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <span className="text-2xl">
@@ -177,10 +177,10 @@ export const FAQ: React.FC = () => {
                     {faq.category === 'Account & Security' && '🔐'}
                     {faq.category === 'Technical Issues' && '🔧'}
                   </span>
-                  <span className="font-bold text-gray-900">{faq.question}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">{faq.question}</span>
                 </div>
                 <svg
-                  className={`w-5 h-5 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -191,7 +191,7 @@ export const FAQ: React.FC = () => {
               
               {isOpen && (
                 <div className="px-6 pb-5">
-                  <div className="pl-12 text-gray-600 leading-relaxed">
+                  <div className="pl-12 text-gray-600 dark:text-gray-300 leading-relaxed">
                     {faq.answer}
                   </div>
                 </div>
@@ -202,17 +202,17 @@ export const FAQ: React.FC = () => {
       </div>
 
       {/* Still Have Questions */}
-      <div className="glass-card rounded-3xl p-8 text-center border border-white/50">
-        <div className="w-16 h-16 bg-india-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="glass-card dark:glass-card rounded-3xl p-8 text-center border border-white/50 dark:border-white/10">
+        <div className="w-16 h-16 bg-india-blue/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
           <span className="text-3xl">💬</span>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">Still have questions?</h3>
-        <p className="text-gray-600 mb-6 max-w-md mx-auto">
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Still have questions?</h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto">
           Can't find the answer you're looking for? Our support team is here to help.
         </p>
         <Link
           to="/contact"
-          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-india-blue to-blue-800 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-india-blue to-blue-800 dark:from-blue-600 dark:to-blue-800 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
         >
           Contact Support
         </Link>

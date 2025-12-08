@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './index.html',
     './App.tsx',
@@ -25,7 +26,8 @@ const config: Config = {
         'spin-slow': 'spin 8s linear infinite',
         float: 'float 8s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        shimmer: 'shimmer 2.5s linear infinite'
+        shimmer: 'shimmer 2.5s linear infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards'
       },
       keyframes: {
         float: {
@@ -35,6 +37,10 @@ const config: Config = {
         shimmer: {
           '0%': { backgroundPosition: '-1000px 0' },
           '100%': { backgroundPosition: '1000px 0' }
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
         }
       }
     }

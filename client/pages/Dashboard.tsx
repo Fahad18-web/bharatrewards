@@ -40,15 +40,15 @@ export const Dashboard: React.FC = () => {
       {/* Header & Wallet Summary */}
       <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-6">
         <div>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-2 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800 dark:text-white mb-2 tracking-tight">
             Hello, {user.name.split(' ')[0]} <span className="inline-block animate-bounce">👋</span>
           </h1>
-          <p className="text-gray-500 font-medium text-lg">Ready to multiply your rewards today?</p>
+          <p className="text-gray-500 dark:text-gray-400 font-medium text-lg">Ready to multiply your rewards today?</p>
         </div>
         
         <button 
           onClick={() => navigate('/wallet')}
-          className="group relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white px-8 py-5 rounded-[2rem] shadow-2xl hover:shadow-gray-900/40 transition-all transform hover:-translate-y-1 w-full md:w-auto text-left flex items-center justify-between border border-gray-700"
+          className="group relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 dark:from-slate-800 dark:to-slate-900 text-white px-8 py-5 rounded-[2rem] shadow-2xl hover:shadow-gray-900/40 dark:hover:shadow-slate-900/40 transition-all transform hover:-translate-y-1 w-full md:w-auto text-left flex items-center justify-between border border-gray-700 dark:border-slate-700"
         >
            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-india-saffron via-white to-india-green"></div>
            <div className="mr-8">
@@ -65,7 +65,7 @@ export const Dashboard: React.FC = () => {
 
       {/* Categories Grid */}
       <div>
-        <h2 className="text-2xl font-black text-gray-800 mb-8 flex items-center">
+        <h2 className="text-2xl font-black text-gray-800 dark:text-white mb-8 flex items-center">
           <span className="w-3 h-8 bg-india-saffron rounded-full mr-4 shadow-sm"></span>
           Choose Your Challenge
         </h2>
@@ -74,7 +74,7 @@ export const Dashboard: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => navigate(`/game/${cat.id}`)}
-              className="group relative overflow-hidden glass-card p-0 rounded-[2rem] text-left hover:scale-[1.03] transition-all duration-300 border-0 shadow-lg hover:shadow-2xl"
+              className="group relative overflow-hidden glass-card dark:glass-card p-0 rounded-[2rem] text-left hover:scale-[1.03] transition-all duration-300 border-0 shadow-lg hover:shadow-2xl"
             >
               <div className={`h-40 bg-gradient-to-br ${cat.color} p-6 relative overflow-hidden`}>
                 <div className="absolute -bottom-6 -right-6 text-9xl opacity-20 transform rotate-12 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 filter blur-sm">{cat.icon}</div>
@@ -83,12 +83,12 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
               
-              <div className="p-8 bg-white/80 backdrop-blur-xl">
+              <div className="p-8">
                 <div className="flex justify-between items-start mb-2">
-                   <h3 className="text-2xl font-bold text-gray-800 group-hover:text-india-blue transition-colors">{cat.name}</h3>
+                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-india-blue dark:group-hover:text-blue-400 transition-colors">{cat.name}</h3>
                 </div>
-                <p className="text-gray-500 text-sm font-medium mb-6">{cat.desc}</p>
-                <div className="flex items-center text-sm font-black uppercase tracking-wide text-gray-800 group-hover:text-india-saffron transition-colors">
+                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-6">{cat.desc}</p>
+                <div className="flex items-center text-sm font-black uppercase tracking-wide text-gray-800 dark:text-gray-200 group-hover:text-india-saffron dark:group-hover:text-india-saffron transition-colors">
                   Play Now <span className="ml-2 transform group-hover:translate-x-2 transition-transform">→</span>
                 </div>
               </div>
@@ -98,24 +98,24 @@ export const Dashboard: React.FC = () => {
       </div>
       
       {/* Stats Section */}
-      <div className="glass-card p-10 rounded-[2.5rem] bg-gradient-to-r from-white/70 to-gray-50/50">
-        <h3 className="text-xl font-bold text-gray-700 mb-8 flex items-center">
-           <span className="text-2xl mr-3 bg-gray-100 p-2 rounded-xl">📊</span> Your Performance
+      <div className="glass-card dark:glass-card p-10 rounded-[2.5rem] bg-gradient-to-r from-white/70 to-gray-50/50 dark:from-slate-800/70 dark:to-slate-900/50">
+        <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200 mb-8 flex items-center">
+           <span className="text-2xl mr-3 bg-gray-100 dark:bg-slate-700 p-2 rounded-xl">📊</span> Your Performance
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-md hover:shadow-lg transition-all">
-             <div className="text-4xl font-black text-gray-800 mb-2">{user.solvedCount}</div>
-             <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Questions Solved</p>
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all">
+             <div className="text-4xl font-black text-gray-800 dark:text-white mb-2">{user.solvedCount}</div>
+             <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Questions Solved</p>
           </div>
-           <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-md hover:shadow-lg transition-all">
-             <div className="text-4xl font-black text-green-600 mb-2">₹ {Math.floor(user.points / 10000 * settings.currencyRate)}</div>
-             <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Estimated Value</p>
+           <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all">
+             <div className="text-4xl font-black text-green-600 dark:text-green-400 mb-2">₹ {Math.floor(user.points / 10000 * settings.currencyRate)}</div>
+             <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Estimated Value</p>
           </div>
-           <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-md hover:shadow-lg transition-all">
-             <div className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-green-100 text-green-700 font-bold text-sm mb-3">
+           <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all">
+             <div className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-bold text-sm mb-3">
                Active
              </div>
-             <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Account Status</p>
+             <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Account Status</p>
           </div>
         </div>
       </div>

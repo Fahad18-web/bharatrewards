@@ -8,19 +8,21 @@ export const Privacy: React.FC = () => {
     <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+        <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
           Privacy <span className="text-india-blue">Policy</span>
         </h1>
-        <p className="text-gray-500">Last updated: {lastUpdated}</p>
+                <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">
+          Last Updated: {new Date().toLocaleDateString()}
+        </p>
       </div>
 
       {/* Quick Summary */}
-      <div className="glass-card rounded-2xl p-6 border border-india-blue/20 bg-india-blue/5">
+      <div className="glass-card dark:glass-card rounded-2xl p-6 border border-india-blue/20 bg-india-blue/5 dark:bg-india-blue/10 dark:border-india-blue/30">
         <div className="flex items-start gap-4">
           <span className="text-3xl">🛡️</span>
           <div>
-            <h3 className="font-bold text-gray-900 mb-2">Our Commitment to Your Privacy</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Our Commitment to Your Privacy</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
               At Solve2Win, we take your privacy seriously. We collect only the information necessary to provide 
               our services, never sell your personal data, and use industry-standard security measures to protect 
               your information.
@@ -30,15 +32,15 @@ export const Privacy: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="glass-card rounded-3xl p-8 md:p-12 border border-white/50 space-y-8">
+      <div className="glass-card dark:glass-card rounded-3xl p-8 md:p-12 border border-white/50 dark:border-white/10 space-y-8">
         
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">📋</span> 1. Information We Collect
           </h2>
-          <div className="text-gray-600 leading-relaxed space-y-4">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Personal Information</h4>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Personal Information</h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Name and email address (during registration)</li>
                 <li>UPI ID (for withdrawal processing)</li>
@@ -46,7 +48,7 @@ export const Privacy: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Usage Information</h4>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Usage Information</h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Game performance data (scores, points, questions answered)</li>
                 <li>Login activity and session information</li>
@@ -55,7 +57,7 @@ export const Privacy: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Transaction Information</h4>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Transaction Information</h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Withdrawal requests and history</li>
                 <li>Points earned and redeemed</li>
@@ -65,10 +67,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🎯</span> 2. How We Use Your Information
           </h2>
-          <div className="text-gray-600 leading-relaxed">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed">
             <p className="mb-3">We use the collected information to:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Create and manage your user account</li>
@@ -85,10 +87,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🔒</span> 3. Data Security
           </h2>
-          <div className="text-gray-600 leading-relaxed space-y-3">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
             <p>We implement robust security measures to protect your data:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Passwords are securely hashed and never stored in plain text</li>
@@ -105,10 +107,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🤝</span> 4. Information Sharing
           </h2>
-          <div className="text-gray-600 leading-relaxed space-y-3">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
             <p><strong>We do NOT sell your personal information.</strong></p>
             <p>We may share information only in the following circumstances:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
@@ -121,10 +123,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🍪</span> 5. Cookies & Local Storage
           </h2>
-          <div className="text-gray-600 leading-relaxed space-y-3">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
             <p>We use cookies and local storage to:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Keep you logged in to your account</li>
@@ -140,10 +142,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">⏱️</span> 6. Data Retention
           </h2>
-          <div className="text-gray-600 leading-relaxed">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed">
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Account information is retained as long as your account is active</li>
               <li>Transaction records are kept for 7 years for legal compliance</li>
@@ -154,10 +156,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">✅</span> 7. Your Rights
           </h2>
-          <div className="text-gray-600 leading-relaxed space-y-3">
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
             <p>You have the right to:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li><strong>Access:</strong> Request a copy of your personal data</li>
@@ -173,10 +175,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">👶</span> 8. Children's Privacy
           </h2>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
             Solve2Win is intended for users aged 18 and above. We do not knowingly collect personal 
             information from children under 18. If you believe a child has provided us with personal 
             information, please contact us immediately, and we will take steps to remove such information.
@@ -184,10 +186,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🌐</span> 9. Third-Party Links
           </h2>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
             Our platform may contain links to third-party websites. We are not responsible for the 
             privacy practices of these external sites. We encourage you to read the privacy policies 
             of any third-party sites you visit.
@@ -195,10 +197,10 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">🔄</span> 10. Changes to This Policy
           </h2>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
             We may update this Privacy Policy from time to time. Changes will be posted on this page 
             with an updated revision date. Significant changes will be communicated via email or 
             prominent notice on our platform. Continued use of the service after changes constitutes 
@@ -207,15 +209,15 @@ export const Privacy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-2xl">📞</span> 11. Contact Us
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
             If you have any questions, concerns, or requests regarding this Privacy Policy or your 
             personal data, please contact us:
           </p>
-          <div className="p-4 bg-gray-50 rounded-xl">
-            <p className="text-gray-700">
+          <div className="p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl">
+            <p className="text-gray-700 dark:text-gray-300">
               <strong>Email:</strong> support@solve2win.com<br />
               <strong>Website:</strong> <Link to="/" className="text-india-blue hover:underline">www.solve2win.com</Link><br />
               <strong>Contact Form:</strong> <Link to="/contact" className="text-india-blue hover:underline">Contact Page</Link>
@@ -229,19 +231,19 @@ export const Privacy: React.FC = () => {
       <div className="flex flex-wrap justify-center gap-4">
         <Link
           to="/terms"
-          className="px-6 py-3 rounded-xl glass-card border border-white/50 font-bold text-gray-700 hover:shadow-lg transition-all"
+          className="px-6 py-3 rounded-xl glass-card dark:glass-card border border-white/50 dark:border-white/10 font-bold text-gray-700 dark:text-white hover:shadow-lg transition-all"
         >
           📋 Terms & Conditions
         </Link>
         <Link
           to="/faq"
-          className="px-6 py-3 rounded-xl glass-card border border-white/50 font-bold text-gray-700 hover:shadow-lg transition-all"
+          className="px-6 py-3 rounded-xl glass-card dark:glass-card border border-white/50 dark:border-white/10 font-bold text-gray-700 dark:text-white hover:shadow-lg transition-all"
         >
           ❓ FAQ
         </Link>
         <Link
           to="/contact"
-          className="px-6 py-3 rounded-xl glass-card border border-white/50 font-bold text-gray-700 hover:shadow-lg transition-all"
+          className="px-6 py-3 rounded-xl glass-card dark:glass-card border border-white/50 dark:border-white/10 font-bold text-gray-700 dark:text-white hover:shadow-lg transition-all"
         >
           💬 Contact Us
         </Link>

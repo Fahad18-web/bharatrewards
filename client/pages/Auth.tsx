@@ -115,33 +115,33 @@ export const Auth: React.FC = () => {
         <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-india-saffron to-orange-400 rounded-full blur-3xl opacity-40 animate-pulse-slow"></div>
         <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-r from-india-green to-emerald-400 rounded-full blur-3xl opacity-40 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
 
-        <div className="glass-card p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative z-10 border border-white/80">
+        <div className="glass-card dark:glass-card p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative z-10 border border-white/80 dark:border-white/10">
           <div className="text-center mb-6">
-             <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-white to-gray-50 rounded-2xl flex items-center justify-center shadow-lg mb-4 border border-white/60">
+             <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-white to-gray-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-4 border border-white/60 dark:border-white/10">
                 <span className="text-3xl animate-bounce">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
              </div>
-             <h2 className="text-3xl font-black text-gray-800 tracking-tight">
+             <h2 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight">
                {isLogin ? 'Welcome Back' : 'Join BharatRewards'}
              </h2>
-             <p className="text-gray-500 mt-2 text-sm font-medium">
+             <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm font-medium">
                {isAdminMode ? 'Admin Portal Access' : 'Play, Learn & Earn'}
              </p>
           </div>
 
           {/* Role Toggle */}
-          <div className="flex bg-gray-100/80 p-1.5 rounded-xl mb-6 relative">
-            <div className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out ${isAdminMode ? 'left-[calc(50%+3px)]' : 'left-1.5'}`}></div>
+          <div className="flex bg-gray-100/80 dark:bg-slate-800/50 p-1.5 rounded-xl mb-6 relative">
+            <div className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white dark:bg-slate-700 rounded-lg shadow-sm transition-all duration-300 ease-out ${isAdminMode ? 'left-[calc(50%+3px)]' : 'left-1.5'}`}></div>
             <button 
               type="button"
               onClick={() => setIsAdminMode(false)}
-              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${!isAdminMode ? 'text-gray-800' : 'text-gray-500'}`}
+              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${!isAdminMode ? 'text-gray-800 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}
             >
               User
             </button>
             <button 
               type="button"
               onClick={() => setIsAdminMode(true)}
-              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${isAdminMode ? 'text-india-blue' : 'text-gray-500'}`}
+              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${isAdminMode ? 'text-india-blue dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
             >
               Admin
             </button>
@@ -157,12 +157,12 @@ export const Auth: React.FC = () => {
             <form onSubmit={isLogin ? handleLogin : handleSignupStart} className="space-y-4">
                {!isLogin && (
                 <div>
-                  <label className="block text-gray-600 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Full Name</label>
+                  <label className="block text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Full Name</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="glass-input w-full px-5 py-4 rounded-2xl text-gray-700 font-medium placeholder-gray-400 focus:outline-none transition-all"
+                    className="glass-input dark:glass-input w-full px-5 py-4 rounded-2xl text-gray-700 dark:text-white font-medium placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-all"
                     placeholder="e.g. Rahul Kumar"
                     required
                   />
@@ -170,31 +170,31 @@ export const Auth: React.FC = () => {
               )}
               
               <div>
-                <label className="block text-gray-600 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Email Address</label>
+                <label className="block text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Email Address</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="glass-input w-full px-5 py-4 rounded-2xl text-gray-700 font-medium placeholder-gray-400 focus:outline-none transition-all"
+                  className="glass-input dark:glass-input w-full px-5 py-4 rounded-2xl text-gray-700 dark:text-white font-medium placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-all"
                   placeholder={isAdminMode ? "admin@example.com" : "name@example.com"}
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-gray-600 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Password</label>
+                <label className="block text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="glass-input w-full px-5 py-4 rounded-2xl text-gray-700 font-medium placeholder-gray-400 focus:outline-none transition-all pr-14"
+                    className="glass-input dark:glass-input w-full px-5 py-4 rounded-2xl text-gray-700 dark:text-white font-medium placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-all pr-14"
                     placeholder={showPassword ? 'Enter password' : '••••••••'}
                     required
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-3 flex items-center justify-center px-2 text-gray-500 hover:text-gray-800"
+                    className="absolute inset-y-0 right-3 flex items-center justify-center px-2 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => setShowPassword((prev) => !prev)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
@@ -217,10 +217,10 @@ export const Auth: React.FC = () => {
           ) : (
             <form onSubmit={handleVerifyAndSignup} className="space-y-6 animate-fade-in-up">
                {displayedOtp && (
-                 <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-2xl p-4 text-center mb-6 shadow-inner">
-                   <p className="text-xs text-yellow-800 font-bold uppercase tracking-widest mb-1">Your Verification Code</p>
-                   <p className="text-4xl font-mono font-black text-gray-800 tracking-[0.5em] pl-4">{displayedOtp}</p>
-                   <p className="text-[10px] text-gray-500 mt-2">Enter this code below to verify email</p>
+                 <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200 dark:border-yellow-700/30 rounded-2xl p-4 text-center mb-6 shadow-inner">
+                   <p className="text-xs text-yellow-800 dark:text-yellow-500 font-bold uppercase tracking-widest mb-1">Your Verification Code</p>
+                   <p className="text-4xl font-mono font-black text-gray-800 dark:text-white tracking-[0.5em] pl-4">{displayedOtp}</p>
+                   <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-2">Enter this code below to verify email</p>
                  </div>
                )}
 
@@ -229,7 +229,7 @@ export const Auth: React.FC = () => {
                   type="text"
                   value={otpInput}
                   onChange={(e) => setOtpInput(e.target.value)}
-                  className="glass-input w-full px-4 py-4 rounded-2xl text-center text-3xl font-mono tracking-[1em] focus:outline-none transition-all"
+                  className="glass-input dark:glass-input w-full px-4 py-4 rounded-2xl text-center text-3xl font-mono tracking-[1em] focus:outline-none transition-all text-gray-800 dark:text-white"
                   maxLength={4}
                   placeholder="0000"
                   autoFocus
@@ -248,7 +248,7 @@ export const Auth: React.FC = () => {
                 setIsLogin(!isLogin);
                 resetForm();
               }} 
-              className="text-gray-500 hover:text-india-blue text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-india-saffron"
+              className="text-gray-500 dark:text-gray-400 hover:text-india-blue dark:hover:text-blue-400 text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-india-saffron"
             >
               {isLogin ? "New here? Create an account" : "Already have an account? Login"}
             </button>

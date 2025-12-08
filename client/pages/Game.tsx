@@ -265,48 +265,48 @@ export const Game: React.FC = () => {
       />
       <div className="max-w-4xl mx-auto py-6">
       {/* Top Bar */}
-      <div className="flex justify-between items-center mb-10 glass px-8 py-5 rounded-[2rem]">
+      <div className="flex justify-between items-center mb-10 glass dark:glass-dark px-8 py-5 rounded-[2rem]">
         <div className="flex items-center">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-india-saffron to-orange-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg mr-5 border border-white/20">
             {normalizedCategory === 'MATH' ? '➗' : normalizedCategory === 'QUIZ' ? '💡' : normalizedCategory === 'PUZZLE' ? '🧩' : normalizedCategory === 'CAPTCHA' ? '🔐' : '⌨️'}
           </div>
           <div>
-            <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Category</h2>
-            <p className="font-bold text-2xl text-gray-800 leading-none">{normalizedCategory === 'MATH' ? 'Math' : normalizedCategory === 'QUIZ' ? 'Quiz' : normalizedCategory === 'PUZZLE' ? 'Puzzle' : normalizedCategory === 'CAPTCHA' ? 'Captcha' : 'Typing'}</p>
+            <h2 className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-1">Category</h2>
+            <p className="font-bold text-2xl text-gray-800 dark:text-white leading-none">{normalizedCategory === 'MATH' ? 'Math' : normalizedCategory === 'QUIZ' ? 'Quiz' : normalizedCategory === 'PUZZLE' ? 'Puzzle' : normalizedCategory === 'CAPTCHA' ? 'Captcha' : 'Typing'}</p>
           </div>
         </div>
         
         <div className="flex items-center space-x-8">
            <div className="text-right hidden sm:block">
-             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Session Score</span>
-             <span className="font-black text-3xl text-india-green">+{score}</span>
+             <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest block mb-1">Session Score</span>
+             <span className="font-black text-3xl text-india-green dark:text-green-400">+{score}</span>
            </div>
            
            <div className="relative w-16 h-16 flex items-center justify-center">
              <svg className="absolute w-full h-full transform -rotate-90">
-                <circle cx="32" cy="32" r="28" stroke="#f3f4f6" strokeWidth="6" fill="transparent" />
+                <circle cx="32" cy="32" r="28" stroke="#f3f4f6" className="dark:stroke-slate-700" strokeWidth="6" fill="transparent" />
                 <circle cx="32" cy="32" r="28" stroke={timeLeft < 5 ? '#ef4444' : '#000080'} strokeWidth="6" fill="transparent" strokeDasharray="175.93" strokeDashoffset={175.93 * (progressPercent / 100)} className="transition-all duration-1000 linear" strokeLinecap="round" />
              </svg>
-             <span className={`font-black text-xl ${timeLeft < 5 ? 'text-red-500' : 'text-gray-800'}`}>{timeLeft}</span>
+             <span className={`font-black text-xl ${timeLeft < 5 ? 'text-red-500' : 'text-gray-800 dark:text-white'}`}>{timeLeft}</span>
            </div>
         </div>
       </div>
 
       {/* Question Card */}
-      <div className="glass-card p-10 md:p-14 rounded-[3rem] shadow-2xl min-h-[450px] flex flex-col relative overflow-hidden bg-white/60 animate-fade-in-up">
+      <div className="glass-card dark:glass-card p-10 md:p-14 rounded-[3rem] shadow-2xl min-h-[450px] flex flex-col relative overflow-hidden animate-fade-in-up">
         {/* Background decorative number */}
-        <div className="absolute -top-10 -right-4 text-[12rem] font-black text-gray-900 opacity-[0.03] select-none pointer-events-none transition-all">
+        <div className="absolute -top-10 -right-4 text-[12rem] font-black text-gray-900 dark:text-white opacity-[0.03] select-none pointer-events-none transition-all">
           {currentIndex + 1}
         </div>
 
         <div className="mb-10 select-none no-select flex-grow" onCopy={(e) => e.preventDefault()}>
-          <div className="inline-block px-4 py-1.5 bg-gray-100/80 backdrop-blur rounded-full text-xs font-black text-gray-500 mb-6 uppercase tracking-wider border border-gray-200">
+          <div className="inline-block px-4 py-1.5 bg-gray-100/80 dark:bg-slate-700/80 backdrop-blur rounded-full text-xs font-black text-gray-500 dark:text-gray-300 mb-6 uppercase tracking-wider border border-gray-200 dark:border-slate-600">
             Question {currentIndex + 1}
           </div>
           
           {currentQ.type === 'CAPTCHA' ? (
             <div className="flex flex-col items-center">
-              <p className="text-sm text-gray-500 mb-4 font-medium">Type the characters you see below:</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 font-medium">Type the characters you see below:</p>
               <div 
                 className={`
                   relative px-8 py-6 rounded-2xl select-none
@@ -372,7 +372,7 @@ export const Game: React.FC = () => {
               <p className="text-xs text-gray-400 mt-3">Case-sensitive • No spaces</p>
             </div>
           ) : (
-            <h3 className="text-3xl md:text-5xl font-black text-gray-800 leading-tight">
+            <h3 className="text-3xl md:text-5xl font-black text-gray-800 dark:text-white leading-tight">
               {currentQ.questionText}
             </h3>
           )}
@@ -392,13 +392,13 @@ export const Game: React.FC = () => {
                         else handleNext(0, true);
                     }, 100);
                   }}
-                  className="group relative bg-white/80 hover:bg-white border-2 border-white/50 hover:border-india-saffron p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
+                  className="group relative bg-white/80 dark:bg-slate-700/80 hover:bg-white dark:hover:bg-slate-600 border-2 border-white/50 dark:border-slate-600 hover:border-india-saffron dark:hover:border-india-saffron p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
                 >
                   <div className="flex items-center">
-                     <div className="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-india-saffron group-hover:text-white flex items-center justify-center font-bold text-base text-gray-500 transition-colors mr-4 shadow-inner">
+                     <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 group-hover:bg-india-saffron group-hover:text-white flex items-center justify-center font-bold text-base text-gray-500 dark:text-gray-400 transition-colors mr-4 shadow-inner">
                        {String.fromCharCode(65 + idx)}
                      </div>
-                     <span className="font-bold text-gray-700 group-hover:text-gray-900 text-lg md:text-xl">{opt}</span>
+                     <span className="font-bold text-gray-700 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white text-lg md:text-xl">{opt}</span>
                   </div>
                 </button>
               ))}
@@ -407,12 +407,12 @@ export const Game: React.FC = () => {
             <form onSubmit={submitAnswer} className="relative">
               {currentQ.type === 'TYPING' ? (
                 <div>
-                   <div className="mb-3 text-xs text-gray-500 font-bold uppercase tracking-wider">Type the text above exactly:</div>
+                   <div className="mb-3 text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Type the text above exactly:</div>
                    <textarea
                       rows={4}
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
-                      className="w-full p-6 text-xl border-2 border-gray-200 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 outline-none transition-all resize-none shadow-inner bg-gray-50/50 focus:bg-white"
+                      className="w-full p-6 text-xl border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all resize-none shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
                       placeholder="Start typing here..."
                       onPaste={(e) => { e.preventDefault(); alert("Cheating not allowed! Type it out."); }}
                       autoFocus
@@ -420,12 +420,12 @@ export const Game: React.FC = () => {
                 </div>
               ) : currentQ.type === 'CAPTCHA' ? (
                 <div>
-                   <div className="mb-3 text-xs text-gray-500 font-bold uppercase tracking-wider">Enter the characters shown above:</div>
+                   <div className="mb-3 text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Enter the characters shown above:</div>
                    <input
                       type="text"
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value.toUpperCase())}
-                      className="w-full p-6 text-3xl font-mono font-bold tracking-[0.2em] text-center border-2 border-gray-200 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 outline-none transition-all shadow-inner bg-gray-50/50 focus:bg-white uppercase"
+                      className="w-full p-6 text-3xl font-mono font-bold tracking-[0.2em] text-center border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 uppercase text-gray-800 dark:text-white"
                       placeholder="TYPE HERE..."
                       onPaste={(e) => { e.preventDefault(); alert("No pasting allowed!"); }}
                       autoComplete="off"
@@ -438,7 +438,7 @@ export const Game: React.FC = () => {
                     type="text"
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
-                    className="w-full p-6 text-2xl font-bold border-2 border-gray-200 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 outline-none transition-all shadow-inner bg-gray-50/50 focus:bg-white"
+                    className="w-full p-6 text-2xl font-bold border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
                     placeholder="Type your answer..."
                     autoFocus
                 />

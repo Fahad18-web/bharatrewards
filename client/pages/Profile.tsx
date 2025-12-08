@@ -178,10 +178,10 @@ export const Profile: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in-up">
         <div className="relative w-24 h-24 mb-6">
-          <div className="absolute inset-0 border-8 border-gray-100 rounded-full"></div>
+          <div className="absolute inset-0 border-8 border-gray-100 dark:border-white/10 rounded-full"></div>
           <div className="absolute inset-0 border-8 border-t-india-saffron border-b-india-green border-l-transparent border-r-transparent rounded-full animate-spin"></div>
         </div>
-        <p className="text-gray-500 font-medium">Loading your profile...</p>
+        <p className="text-gray-500 dark:text-gray-400 font-medium">Loading your profile...</p>
       </div>
     );
   }
@@ -209,7 +209,7 @@ export const Profile: React.FC = () => {
               <span className="text-white text-sm font-bold">Change</span>
             </div>
           </div>
-          <div className="absolute -bottom-3 right-6 bg-white text-green-500 rounded-full px-4 py-1 text-xs font-black uppercase tracking-wide shadow-lg">
+          <div className="absolute -bottom-3 right-6 bg-white dark:bg-slate-700 text-green-500 dark:text-green-400 rounded-full px-4 py-1 text-xs font-black uppercase tracking-wide shadow-lg">
             {user.role === 'ADMIN' ? 'Admin' : 'Player'}
           </div>
           <button
@@ -224,22 +224,22 @@ export const Profile: React.FC = () => {
         </div>
 
         <div className="flex-1 text-center lg:text-left">
-          <p className="text-sm font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Account Overview</p>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-4">{user.name}</h1>
-          <p className="text-gray-500 text-lg font-medium">{user.email}</p>
+          <p className="text-sm font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.3em] mb-2">Account Overview</p>
+          <h1 className="text-4xl md:text-5xl font-black text-gray-800 dark:text-white mb-4">{user.name}</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">{user.email}</p>
           {user.role !== 'ADMIN' && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
-              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-inner">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Points</p>
-                <p className="text-3xl font-black text-india-green">{user.points.toLocaleString()}</p>
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
+                <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Points</p>
+                <p className="text-3xl font-black text-india-green dark:text-green-400">{user.points.toLocaleString()}</p>
               </div>
-              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-inner">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Questions Solved</p>
-                <p className="text-3xl font-black text-indigo-600">{user.solvedCount}</p>
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
+                <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Questions Solved</p>
+                <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400">{user.solvedCount}</p>
               </div>
-              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-inner">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Wallet Balance</p>
-                <p className="text-3xl font-black text-gray-800">₹ {(user.walletBalance ?? 0).toLocaleString()}</p>
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
+                <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Wallet Balance</p>
+                <p className="text-3xl font-black text-gray-800 dark:text-white">₹ {(user.walletBalance ?? 0).toLocaleString()}</p>
               </div>
             </div>
           )}
@@ -250,14 +250,14 @@ export const Profile: React.FC = () => {
       {showAvatarPicker && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowAvatarPicker(false)}>
           <div 
-            className="glass-card rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+            className="glass-card dark:glass-card rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-black text-gray-800">Choose Your Avatar</h2>
+              <h2 className="text-2xl font-black text-gray-800 dark:text-white">Choose Your Avatar</h2>
               <button 
                 onClick={() => setShowAvatarPicker(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -272,8 +272,8 @@ export const Profile: React.FC = () => {
                   onClick={() => handleAvatarSelect(avatar.id)}
                   className={`relative aspect-square rounded-2xl flex items-center justify-center text-3xl sm:text-4xl transition-all hover:scale-110 ${
                     profileForm.avatar === avatar.id
-                      ? 'bg-india-blue/20 ring-4 ring-india-blue shadow-lg'
-                      : 'bg-white/50 hover:bg-white/80 border border-gray-100'
+                      ? 'bg-india-blue/20 dark:bg-india-blue/40 ring-4 ring-india-blue shadow-lg'
+                      : 'bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border border-gray-100 dark:border-white/10'
                   }`}
                   title={avatar.label}
                 >
@@ -293,7 +293,7 @@ export const Profile: React.FC = () => {
                   setProfileForm(prev => ({ ...prev, avatar: '' }));
                   setShowAvatarPicker(false);
                 }}
-                className="px-6 py-3 rounded-xl text-gray-600 font-bold hover:bg-gray-100 transition-colors"
+                className="px-6 py-3 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
               >
                 Remove Avatar
               </button>
@@ -309,11 +309,11 @@ export const Profile: React.FC = () => {
       )}
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <form onSubmit={handleProfileSubmit} className="glass-card p-10 rounded-[2.5rem] space-y-8">
+        <form onSubmit={handleProfileSubmit} className="glass-card dark:glass-card p-10 rounded-[2.5rem] space-y-8">
           <div>
-            <p className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-1">Profile</p>
-            <h2 className="text-2xl font-black text-gray-800">Personal Information</h2>
-            <p className="text-gray-500 text-sm mt-1">Update how your name and email appear across the platform.</p>
+            <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.3em] mb-1">Profile</p>
+            <h2 className="text-2xl font-black text-gray-800 dark:text-white">Personal Information</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Update how your name and email appear across the platform.</p>
           </div>
 
           {profileStatus && (
@@ -328,24 +328,24 @@ export const Profile: React.FC = () => {
 
           <div className="space-y-5">
             <label className="block">
-              <span className="text-sm font-bold text-gray-600 mb-2 block">Full Name</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 block">Full Name</span>
               <input
                 type="text"
                 value={profileForm.name}
                 onChange={(event) => setProfileForm((prev) => ({ ...prev, name: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-india-blue focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
                 placeholder="Your name"
                 required
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-bold text-gray-600 mb-2 block">Email Address</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 block">Email Address</span>
               <input
                 type="email"
                 value={profileForm.email}
                 onChange={(event) => setProfileForm((prev) => ({ ...prev, email: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-india-blue focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
                 placeholder="name@email.com"
                 required
               />
@@ -357,7 +357,7 @@ export const Profile: React.FC = () => {
             disabled={savingProfile || !hasProfileChanges}
             className={`w-full py-4 rounded-2xl text-white font-bold text-lg transition-all shadow-lg border ${
               savingProfile || !hasProfileChanges
-                ? 'bg-gray-300 border-gray-200 cursor-not-allowed'
+                ? 'bg-gray-300 dark:bg-slate-700 border-gray-200 dark:border-slate-600 cursor-not-allowed text-gray-500 dark:text-gray-400'
                 : 'bg-gradient-to-r from-india-blue to-blue-900 border-blue-800 hover:shadow-blue-500/40 hover:-translate-y-0.5'
             }`}
           >
@@ -365,11 +365,11 @@ export const Profile: React.FC = () => {
           </button>
         </form>
 
-        <form onSubmit={handlePasswordSubmit} className="glass-card p-10 rounded-[2.5rem] space-y-8">
+        <form onSubmit={handlePasswordSubmit} className="glass-card dark:glass-card p-10 rounded-[2.5rem] space-y-8">
           <div>
-            <p className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-1">Security</p>
-            <h2 className="text-2xl font-black text-gray-800">Password</h2>
-            <p className="text-gray-500 text-sm mt-1">Keep your account secure by using a unique password.</p>
+            <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.3em] mb-1">Security</p>
+            <h2 className="text-2xl font-black text-gray-800 dark:text-white">Password</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Keep your account secure by using a unique password.</p>
           </div>
 
           {passwordStatus && (
@@ -384,36 +384,36 @@ export const Profile: React.FC = () => {
 
           <div className="space-y-5">
             <label className="block">
-              <span className="text-sm font-bold text-gray-600 mb-2 block">Current Password</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 block">Current Password</span>
               <input
                 type="password"
                 value={passwordForm.currentPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, currentPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-india-blue focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
                 placeholder="••••••"
                 required
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-bold text-gray-600 mb-2 block">New Password</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 block">New Password</span>
               <input
                 type="password"
                 value={passwordForm.newPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, newPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-india-blue focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
                 placeholder="At least 4 characters"
                 required
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-bold text-gray-600 mb-2 block">Confirm Password</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 block">Confirm Password</span>
               <input
                 type="password"
                 value={passwordForm.confirmPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, confirmPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:border-india-blue focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
                 placeholder="Repeat new password"
                 required
               />
@@ -425,7 +425,7 @@ export const Profile: React.FC = () => {
             disabled={savingPassword}
             className={`w-full py-4 rounded-2xl text-white font-bold text-lg transition-all shadow-lg border ${
               savingPassword
-                ? 'bg-gray-300 border-gray-200 cursor-not-allowed'
+                ? 'bg-gray-300 dark:bg-slate-700 border-gray-200 dark:border-slate-600 cursor-not-allowed text-gray-500 dark:text-gray-400'
                 : 'bg-gradient-to-r from-emerald-500 to-emerald-600 border-emerald-600 hover:shadow-emerald-500/30 hover:-translate-y-0.5'
             }`}
           >

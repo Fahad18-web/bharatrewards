@@ -143,20 +143,20 @@ export const Community: React.FC = () => {
       />
       <div className="space-y-8 pb-10">
       {/* Header */}
-      <div className="text-center pb-8 border-b border-gray-200/50">
-        <h1 className="text-4xl font-black text-gray-800 mb-2">🌟 Community Hub</h1>
-        <p className="text-gray-500">Stay updated & share your ideas with us!</p>
+      <div className="text-center pb-8 border-b border-gray-200/50 dark:border-white/10">
+        <h1 className="text-4xl font-black text-gray-800 dark:text-white mb-2">🌟 Community Hub</h1>
+        <p className="text-gray-500 dark:text-gray-400">Stay updated & share your ideas with us!</p>
       </div>
 
       {/* Section Tabs */}
       <div className="flex justify-center">
-        <div className="flex bg-white/50 p-1 rounded-2xl backdrop-blur-md shadow-sm border border-white/60">
+        <div className="flex bg-white/50 dark:bg-slate-800/50 p-1 rounded-2xl backdrop-blur-md shadow-sm border border-white/60 dark:border-white/10">
           <button
             onClick={() => setActiveSection('announcements')}
             className={`px-8 py-3 rounded-xl text-sm font-bold transition-all ${
               activeSection === 'announcements'
                 ? 'bg-purple-500 text-white shadow-lg'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-white/50'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10'
             }`}
           >
             📢 Announcements
@@ -166,7 +166,7 @@ export const Community: React.FC = () => {
             className={`px-8 py-3 rounded-xl text-sm font-bold transition-all ${
               activeSection === 'feedback'
                 ? 'bg-purple-500 text-white shadow-lg'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-white/50'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10'
             }`}
           >
             💡 Feedback & Ideas
@@ -178,17 +178,17 @@ export const Community: React.FC = () => {
       {activeSection === 'announcements' && (
         <div className="space-y-6 animate-fade-in-up">
           {announcements.length === 0 ? (
-            <div className="glass-card p-16 rounded-[2rem] text-center">
+            <div className="glass-card dark:glass-card p-16 rounded-[2rem] text-center">
               <div className="text-6xl mb-4">📭</div>
-              <h3 className="text-xl font-bold text-gray-700 mb-2">No Announcements Yet</h3>
-              <p className="text-gray-500">Check back later for updates from the team!</p>
+              <h3 className="text-xl font-bold text-gray-700 dark:text-white mb-2">No Announcements Yet</h3>
+              <p className="text-gray-500 dark:text-gray-400">Check back later for updates from the team!</p>
             </div>
           ) : (
             <div className="space-y-4">
               {announcements.map((ann) => (
                 <div
                   key={ann.id}
-                  className={`glass-card p-6 rounded-2xl border-l-4 ${
+                  className={`glass-card dark:glass-card p-6 rounded-2xl border-l-4 ${
                     ann.type === 'INFO' ? 'border-l-blue-500' :
                     ann.type === 'SUCCESS' ? 'border-l-green-500' :
                     ann.type === 'WARNING' ? 'border-l-orange-500' :
@@ -208,9 +208,9 @@ export const Community: React.FC = () => {
                           {ann.type}
                         </span>
                       </div>
-                      <h3 className="font-bold text-lg text-gray-800 mb-2">{ann.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{ann.content}</p>
-                      <div className="mt-4 text-xs text-gray-400">
+                      <h3 className="font-bold text-lg text-gray-800 dark:text-white mb-2">{ann.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{ann.content}</p>
+                      <div className="mt-4 text-xs text-gray-400 dark:text-gray-500">
                         Posted on {new Date(ann.createdAt).toLocaleDateString('en-IN', {
                           day: 'numeric',
                           month: 'long',
@@ -231,13 +231,13 @@ export const Community: React.FC = () => {
         <div className="space-y-8 animate-fade-in-up">
           {/* Submit Feedback CTA */}
           {!showForm ? (
-            <div className="glass-card p-8 rounded-[2rem] bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100">
+            <div className="glass-card dark:glass-card p-8 rounded-[2rem] bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-100 dark:border-purple-900/30">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-3xl">💡</div>
+                  <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-2xl flex items-center justify-center text-3xl">💡</div>
                   <div>
-                    <h3 className="font-bold text-xl text-gray-800">Got an idea?</h3>
-                    <p className="text-gray-500">We'd love to hear your suggestions and feature requests!</p>
+                    <h3 className="font-bold text-xl text-gray-800 dark:text-white">Got an idea?</h3>
+                    <p className="text-gray-500 dark:text-gray-400">We'd love to hear your suggestions and feature requests!</p>
                   </div>
                 </div>
                 <button
@@ -249,18 +249,18 @@ export const Community: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="glass-card p-8 rounded-[2rem]">
+            <div className="glass-card dark:glass-card p-8 rounded-[2rem]">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl">📝</div>
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center text-2xl">📝</div>
                   <div>
-                    <h3 className="font-bold text-xl text-gray-800">Submit Feedback</h3>
-                    <p className="text-gray-500 text-sm">Help us improve the platform!</p>
+                    <h3 className="font-bold text-xl text-gray-800 dark:text-white">Submit Feedback</h3>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">Help us improve the platform!</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowForm(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-gray-600"
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
                 >
                   ✕
                 </button>
@@ -268,7 +268,7 @@ export const Community: React.FC = () => {
 
               <form onSubmit={handleSubmitFeedback} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Type</label>
+                  <label className="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">Type</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {(['SUGGESTION', 'FEATURE_REQUEST', 'BUG_REPORT', 'OTHER'] as FeedbackType[]).map((type) => (
                       <button
@@ -277,8 +277,8 @@ export const Community: React.FC = () => {
                         onClick={() => setFeedbackType(type)}
                         className={`p-4 rounded-xl border-2 transition-all text-center ${
                           feedbackType === type
-                            ? 'border-purple-500 bg-purple-50 text-purple-700'
-                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                            ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                            : 'border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 text-gray-600 dark:text-gray-400'
                         }`}
                       >
                         <div className="text-2xl mb-1">{getFeedbackTypeIcon(type)}</div>
@@ -289,10 +289,10 @@ export const Community: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Title</label>
+                  <label className="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">Title</label>
                   <input
                     type="text"
-                    className="glass-input w-full p-4 rounded-xl font-medium"
+                    className="glass-input dark:glass-input w-full p-4 rounded-xl font-medium text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                     placeholder="Brief summary of your idea..."
                     value={feedbackTitle}
                     onChange={(e) => setFeedbackTitle(e.target.value)}
@@ -302,9 +302,9 @@ export const Community: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Details</label>
+                  <label className="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">Details</label>
                   <textarea
-                    className="glass-input w-full p-4 rounded-xl font-medium h-40 resize-none"
+                    className="glass-input dark:glass-input w-full p-4 rounded-xl font-medium h-40 resize-none text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                     placeholder="Describe your suggestion, feature request, or issue in detail..."
                     value={feedbackContent}
                     onChange={(e) => setFeedbackContent(e.target.value)}
@@ -333,43 +333,43 @@ export const Community: React.FC = () => {
           )}
 
           {/* My Feedback History */}
-          <div className="glass-card rounded-[2rem] overflow-hidden">
-            <div className="p-6 border-b border-gray-100 bg-white/50 backdrop-blur-md">
-              <h3 className="font-bold text-lg text-gray-800">Your Submissions</h3>
-              <p className="text-gray-500 text-sm">Track the status of your feedback</p>
+          <div className="glass-card dark:glass-card rounded-[2rem] overflow-hidden">
+            <div className="p-6 border-b border-gray-100 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md">
+              <h3 className="font-bold text-lg text-gray-800 dark:text-white">Your Submissions</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">Track the status of your feedback</p>
             </div>
 
             {myFeedback.length === 0 ? (
               <div className="p-12 text-center">
                 <div className="text-5xl mb-4">📬</div>
-                <p className="text-gray-500">You haven't submitted any feedback yet.</p>
+                <p className="text-gray-500 dark:text-gray-400">You haven't submitted any feedback yet.</p>
               </div>
             ) : (
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-gray-100 dark:divide-white/10">
                 {myFeedback.map((fb) => (
-                  <div key={fb.id} className="p-6 hover:bg-white/50 transition-colors">
+                  <div key={fb.id} className="p-6 hover:bg-white/50 dark:hover:bg-white/5 transition-colors">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-xl">
+                      <div className="w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center text-xl">
                         {getFeedbackTypeIcon(fb.type)}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2 flex-wrap">
-                          <span className="px-2 py-1 bg-gray-100 text-gray-600 text-[10px] font-black uppercase rounded-md">
+                          <span className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 text-[10px] font-black uppercase rounded-md">
                             {fb.type.replace('_', ' ')}
                           </span>
                           {getStatusBadge(fb.status)}
                         </div>
-                        <h4 className="font-bold text-gray-800 mb-1">{fb.title}</h4>
-                        <p className="text-gray-600 text-sm mb-3">{fb.content}</p>
+                        <h4 className="font-bold text-gray-800 dark:text-white mb-1">{fb.title}</h4>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">{fb.content}</p>
                         
                         {fb.adminResponse && (
-                          <div className="mt-3 p-4 bg-blue-50 rounded-xl border border-blue-100">
-                            <div className="text-xs font-bold text-blue-600 mb-1">💬 Admin Response:</div>
-                            <p className="text-blue-800 text-sm">{fb.adminResponse}</p>
+                          <div className="mt-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                            <div className="text-xs font-bold text-blue-600 dark:text-blue-400 mb-1">💬 Admin Response:</div>
+                            <p className="text-blue-800 dark:text-blue-200 text-sm">{fb.adminResponse}</p>
                           </div>
                         )}
                         
-                        <div className="mt-3 text-xs text-gray-400">
+                        <div className="mt-3 text-xs text-gray-400 dark:text-gray-500">
                           Submitted on {new Date(fb.createdAt).toLocaleDateString('en-IN', {
                             day: 'numeric',
                             month: 'long',
