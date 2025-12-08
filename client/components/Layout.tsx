@@ -27,11 +27,18 @@ BackgroundElements.displayName = 'BackgroundElements';
 // Memoized Logo component
 const Logo = memo(() => (
   <Link to="/" className="flex items-center space-x-3 group relative z-10">
-    <img 
-      src="/logo.png" 
-      alt="Solve2Win Logo" 
-      className="h-16 w-auto transition-transform group-hover:scale-105 drop-shadow-md"
-    />
+    <div className="relative w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-105">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-india-saffron via-white to-india-green opacity-80 blur-[4px] group-hover:blur-[8px] transition-all"></div>
+      <div className="relative w-full h-full rounded-full bg-white/90 dark:bg-slate-800/90 border-2 border-white dark:border-slate-700 flex items-center justify-center shadow-lg backdrop-blur-sm">
+        <div className="w-3 h-3 rounded-full bg-india-blue dark:bg-blue-400 shadow-[0_0_10px_rgba(0,0,128,0.5)]"></div>
+      </div>
+    </div>
+    <div className="flex flex-col">
+      <span className="font-extrabold text-2xl tracking-tight leading-none text-gray-900 dark:text-white drop-shadow-sm">
+        Solve2<span className="text-india-saffron">Win</span>
+      </span>
+      <span className="text-[0.6rem] tracking-[0.2em] uppercase font-bold text-india-green dark:text-green-400 leading-none ml-0.5 mt-0.5">Play • Earn • Grow</span>
+    </div>
   </Link>
 ));
 Logo.displayName = 'Logo';
