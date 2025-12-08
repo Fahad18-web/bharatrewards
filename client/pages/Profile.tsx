@@ -4,6 +4,7 @@ import { getCurrentUser } from '../services/storageService';
 import { changePassword, refreshCurrentUser, saveUser as saveUserApi } from '../services/apiService';
 import { User } from '../types';
 import { AdUnit } from '../components/AdUnit';
+import SEO from '../components/SEO';
 
 interface StatusMessage {
   type: 'success' | 'error';
@@ -186,7 +187,12 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <div className="space-y-12 pb-12">
+    <>
+      <SEO 
+        title="Profile" 
+        description="View and edit your profile, change password, and manage your account settings."
+      />
+      <div className="space-y-12 pb-12">
       <section className="glass-card p-10 rounded-[3rem] flex flex-col lg:flex-row gap-10 items-center">
         {/* Avatar Section */}
         <div className="relative">
@@ -430,5 +436,6 @@ export const Profile: React.FC = () => {
 
       <AdUnit />
     </div>
+    </>
   );
 };

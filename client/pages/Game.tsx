@@ -5,6 +5,7 @@ import { fetchGameQuestions, updateUserPoints } from '../services/apiService';
 import { Question, User } from '../types';
 import { AdUnit } from '../components/AdUnit';
 import { InterstitialAd } from '../components/InterstitialAd';
+import SEO from '../components/SEO';
 
 const TIMER_SECONDS = 15;
 const PREFETCH_THRESHOLD = 3; 
@@ -257,7 +258,12 @@ export const Game: React.FC = () => {
   const progressPercent = ((TIMER_SECONDS - timeLeft) / TIMER_SECONDS) * 100;
 
   return (
-    <div className="max-w-4xl mx-auto py-6">
+    <>
+      <SEO 
+        title={`${normalizedCategory === 'MATH' ? 'Math' : normalizedCategory === 'QUIZ' ? 'Quiz' : normalizedCategory === 'PUZZLE' ? 'Puzzle' : normalizedCategory === 'CAPTCHA' ? 'Captcha' : 'Typing'} Challenge`}
+        description={`Play ${normalizedCategory} games on Solve2Win and earn rewards.`}
+      />
+      <div className="max-w-4xl mx-auto py-6">
       {/* Top Bar */}
       <div className="flex justify-between items-center mb-10 glass px-8 py-5 rounded-[2rem]">
         <div className="flex items-center">
@@ -463,5 +469,6 @@ export const Game: React.FC = () => {
         />
       )}
     </div>
+    </>
   );
 };

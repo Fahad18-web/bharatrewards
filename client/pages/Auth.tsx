@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, registerUser, loginUserAsync, registerUserAsync, isApiMode } from '../services/storageService';
 import { UserRole } from '../types';
+import SEO from '../components/SEO';
 
 export const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -103,7 +104,12 @@ export const Auth: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center p-4">
+    <>
+      <SEO 
+        title={isLogin ? "Login" : "Register"} 
+        description="Login or Register to Solve2Win to start earning rewards."
+      />
+      <div className="min-h-[70vh] flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto relative">
         {/* Decorative Elements */}
         <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-india-saffron to-orange-400 rounded-full blur-3xl opacity-40 animate-pulse-slow"></div>
@@ -250,5 +256,6 @@ export const Auth: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

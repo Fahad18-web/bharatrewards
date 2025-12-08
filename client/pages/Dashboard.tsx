@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, getSettings } from '../services/storageService';
 import { User, AppSettings } from '../types';
 import { AdUnit } from '../components/AdUnit';
+import SEO from '../components/SEO';
 
 export const Dashboard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -30,7 +31,12 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-12 pb-10">
+    <>
+      <SEO 
+        title="Dashboard" 
+        description="Choose a game category to start playing and earning rewards."
+      />
+      <div className="space-y-12 pb-10">
       {/* Header & Wallet Summary */}
       <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-6">
         <div>
@@ -114,5 +120,6 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

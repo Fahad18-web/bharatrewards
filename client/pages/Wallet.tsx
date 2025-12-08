@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCurrentUser, addRedeemRequest, getSettings } from '../services/storageService';
 import { User, RedeemRequest, AppSettings } from '../types';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export const Wallet: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -51,7 +52,12 @@ export const Wallet: React.FC = () => {
   const progress = Math.min((user.points / MIN_REDEEM_POINTS) * 100, 100);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-12 pb-10">
+    <>
+      <SEO 
+        title="Wallet" 
+        description="Manage your earnings, redeem points for real cash, and view transaction history."
+      />
+      <div className="max-w-5xl mx-auto space-y-12 pb-10">
       <div className="text-center md:text-left">
          <h1 className="text-4xl font-black text-gray-800 tracking-tight">Your Wallet</h1>
          <p className="text-gray-500 font-medium mt-2">Manage your earnings and payouts securely.</p>
@@ -180,5 +186,6 @@ export const Wallet: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

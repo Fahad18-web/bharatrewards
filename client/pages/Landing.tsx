@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 export const Landing: React.FC = () => {
   const gameCategories = [
@@ -73,7 +74,13 @@ export const Landing: React.FC = () => {
   ];
 
   return (
-    <div className="-mt-10 md:-mt-12 -mx-4 sm:-mx-6 lg:-mx-8">
+    <>
+      <SEO 
+        title="Home" 
+        description="Join Solve2Win to play educational games, solve puzzles, and earn real rewards. The best platform to learn and earn simultaneously."
+        keywords="play to earn, educational games, math puzzle, typing game, rewards, crypto, wallet"
+      />
+      <div className="-mt-10 md:-mt-12 -mx-4 sm:-mx-6 lg:-mx-8">
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -359,5 +366,6 @@ export const Landing: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

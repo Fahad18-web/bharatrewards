@@ -7,6 +7,7 @@ import {
   submitFeedback
 } from '../services/apiService';
 import { User, Announcement, Feedback } from '../types';
+import SEO from '../components/SEO';
 
 type FeedbackType = 'SUGGESTION' | 'FEATURE_REQUEST' | 'BUG_REPORT' | 'OTHER';
 
@@ -135,7 +136,12 @@ export const Community: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 pb-10">
+    <>
+      <SEO 
+        title="Community" 
+        description="Stay updated with latest announcements and share your feedback with the Solve2Win community."
+      />
+      <div className="space-y-8 pb-10">
       {/* Header */}
       <div className="text-center pb-8 border-b border-gray-200/50">
         <h1 className="text-4xl font-black text-gray-800 mb-2">🌟 Community Hub</h1>
@@ -380,5 +386,6 @@ export const Community: React.FC = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
