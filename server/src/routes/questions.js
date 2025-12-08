@@ -146,7 +146,7 @@ router.post('/session/start', authMiddleware, async (req, res) => {
   try {
     const { category } = req.body;
 
-    if (!category || !['MATH', 'QUIZ', 'PUZZLE', 'TYPING'].includes(category)) {
+    if (!category || !['MATH', 'QUIZ', 'PUZZLE', 'TYPING', 'CAPTCHA'].includes(category)) {
       return res.status(400).json({ error: 'Invalid category' });
     }
 
@@ -214,7 +214,7 @@ router.put('/session/:id/end', authMiddleware, async (req, res) => {
 // ============================================
 router.get('/fallback', authMiddleware, async (req, res) => {
   const { category = 'QUIZ', count = 5 } = req.query;
-  if (!['MATH', 'QUIZ', 'PUZZLE', 'TYPING'].includes(category)) {
+  if (!['MATH', 'QUIZ', 'PUZZLE', 'TYPING', 'CAPTCHA'].includes(category)) {
     return res.status(400).json({ error: 'Invalid category' });
   }
 

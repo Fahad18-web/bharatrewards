@@ -365,7 +365,7 @@ router.post('/questions', async (req, res) => {
       return res.status(400).json({ error: 'Type, questionText, and correctAnswer are required' });
     }
 
-    if (!['MATH', 'QUIZ', 'PUZZLE', 'TYPING'].includes(type)) {
+    if (!['MATH', 'QUIZ', 'PUZZLE', 'TYPING', 'CAPTCHA'].includes(type)) {
       return res.status(400).json({ error: 'Invalid question type' });
     }
 

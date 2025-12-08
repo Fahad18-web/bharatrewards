@@ -260,7 +260,7 @@ export const Game: React.FC = () => {
      );
   }
 
-  const progressPercent = ((TIMER_SECONDS - timeLeft) / TIMER_SECONDS) * 100;
+  const progressPercent = ((timerSeconds - timeLeft) / timerSeconds) * 100;
 
   return (
     <>
