@@ -339,7 +339,7 @@ export const Admin: React.FC = () => {
 
       {/* ---------------- DASHBOARD TAB ---------------- */}
       {activeTab === 'DASHBOARD' && (
-        <div className="space-y-10 animate-fade-in-up">
+        <div className="space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="glass-card dark:glass-card p-8 rounded-[2rem] flex items-center justify-between bg-gradient-to-br from-white/80 to-blue-50/50 dark:from-slate-800/80 dark:to-blue-900/20">
               <div>
@@ -427,7 +427,7 @@ export const Admin: React.FC = () => {
 
       {/* ---------------- USERS TAB ---------------- */}
       {activeTab === 'USERS' && (
-        <div className="space-y-6 animate-fade-in-up">
+        <div className="space-y-6">
           <div className="glass-card dark:glass-card rounded-[2.5rem] overflow-hidden border border-white/60 dark:border-white/10">
             <div className="p-8 border-b border-gray-100 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md flex justify-between items-center">
               <div>
@@ -527,7 +527,7 @@ export const Admin: React.FC = () => {
 
       {/* ---------------- SETTINGS TAB ---------------- */}
       {activeTab === 'SETTINGS' && (
-        <div className="glass-card dark:glass-card p-10 rounded-[2.5rem] animate-fade-in-up">
+        <div className="glass-card dark:glass-card p-10 rounded-[2.5rem]">
            <div className="flex items-center mb-8">
              <div className="w-12 h-12 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-2xl mr-4 shadow-sm">⚙️</div>
              <div>
@@ -579,7 +579,7 @@ export const Admin: React.FC = () => {
 
       {/* ---------------- QUESTIONS TAB ---------------- */}
       {activeTab === 'QUESTIONS' && (
-        <div className="space-y-8 animate-fade-in-up">
+        <div className="space-y-8">
            {/* Add Question Form */}
            <div className="glass-card dark:glass-card p-10 rounded-[2.5rem]">
              <div className="flex items-center mb-8">
@@ -691,7 +691,7 @@ export const Admin: React.FC = () => {
 
       {/* ---------------- COMMUNITY HUB TAB ---------------- */}
       {activeTab === 'COMMUNITY' && (
-        <div className="space-y-8 animate-fade-in-up">
+        <div className="space-y-8">
           {/* Create Announcement Form */}
           <div className="glass-card dark:glass-card p-10 rounded-[2.5rem]">
             <div className="flex items-center mb-8">

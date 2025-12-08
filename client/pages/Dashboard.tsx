@@ -27,7 +27,7 @@ export const Dashboard: React.FC = () => {
     { id: 'QUIZ', name: 'General Quiz', color: 'from-yellow-400 to-yellow-600', bg: 'bg-yellow-50', text: 'text-yellow-600', icon: '💡', desc: 'Knowledge Trivia' },
     { id: 'PUZZLE', name: 'Logic Puzzles', color: 'from-purple-400 to-purple-600', bg: 'bg-purple-50', text: 'text-purple-600', icon: '🧩', desc: 'Brain Teasers' },
     { id: 'TYPING', name: 'Typing Test', color: 'from-green-400 to-green-600', bg: 'bg-green-50', text: 'text-green-600', icon: '⌨️', desc: 'Speed & Accuracy' },
-    { id: 'CAPTCHA', name: 'Captcha Solve', color: 'from-red-400 to-pink-600', bg: 'bg-red-50', text: 'text-red-600', icon: '🔐', desc: 'Image Recognition' },
+    { id: 'CAPTCHA', name: 'Short Typing', color: 'from-red-400 to-pink-600', bg: 'bg-red-50', text: 'text-red-600', icon: '🔐', desc: 'Image Recognition' },
   ];
 
   return (
@@ -41,7 +41,7 @@ export const Dashboard: React.FC = () => {
       <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-6">
         <div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-800 dark:text-white mb-2 tracking-tight">
-            Hello, {user.name.split(' ')[0]} <span className="inline-block animate-bounce">👋</span>
+            Hello, {user.name.split(' ')[0]} <span className="inline-block">👋</span>
           </h1>
           <p className="text-gray-500 dark:text-gray-400 font-medium text-lg">Ready to multiply your rewards today?</p>
         </div>

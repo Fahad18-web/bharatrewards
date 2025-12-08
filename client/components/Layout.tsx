@@ -15,9 +15,9 @@ const BackgroundElements = memo(({ showEffects }: { showEffects: boolean }) => {
 
       {/* Ambient Background Elements */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-india-bg dark:bg-slate-900 transition-colors duration-500">
-        <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-gradient-to-br from-india-saffron/20 to-orange-100/30 dark:from-india-saffron/10 dark:to-orange-900/20 rounded-full blur-[80px] animate-float opacity-70 will-change-transform transform-gpu"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60rem] h-[60rem] bg-gradient-to-tl from-india-green/20 to-emerald-100/30 dark:from-india-green/10 dark:to-emerald-900/20 rounded-full blur-[100px] animate-float opacity-70 will-change-transform transform-gpu" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[80px] animate-pulse-slow"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-gradient-to-br from-india-saffron/20 to-orange-100/30 dark:from-india-saffron/10 dark:to-orange-900/20 rounded-full blur-[80px] opacity-70"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60rem] h-[60rem] bg-gradient-to-tl from-india-green/20 to-emerald-100/30 dark:from-india-green/10 dark:to-emerald-900/20 rounded-full blur-[100px] opacity-70"></div>
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[80px]"></div>
       </div>
     </>
   );
@@ -30,7 +30,7 @@ const Logo = memo(() => (
     <div className="relative w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-105">
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-india-saffron via-white to-india-green opacity-80 blur-[4px] group-hover:blur-[8px] transition-all"></div>
       <div className="relative w-full h-full rounded-full bg-white/90 dark:bg-slate-800/90 border-2 border-white dark:border-slate-700 flex items-center justify-center shadow-lg backdrop-blur-sm">
-        <div className="w-3 h-3 rounded-full bg-india-blue dark:bg-blue-400 animate-spin-slow shadow-[0_0_10px_rgba(0,0,128,0.5)]"></div>
+        <div className="w-3 h-3 rounded-full bg-india-blue dark:bg-blue-400 shadow-[0_0_10px_rgba(0,0,128,0.5)]"></div>
       </div>
     </div>
     <div className="flex flex-col">

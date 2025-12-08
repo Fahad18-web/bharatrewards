@@ -176,7 +176,7 @@ export const Community: React.FC = () => {
 
       {/* Announcements Section */}
       {activeSection === 'announcements' && (
-        <div className="space-y-6 animate-fade-in-up">
+        <div className="space-y-6">
           {announcements.length === 0 ? (
             <div className="glass-card dark:glass-card p-16 rounded-[2rem] text-center">
               <div className="text-6xl mb-4">📭</div>
@@ -228,7 +228,7 @@ export const Community: React.FC = () => {
 
       {/* Feedback Section */}
       {activeSection === 'feedback' && (
-        <div className="space-y-8 animate-fade-in-up">
+        <div className="space-y-8">
           {/* Submit Feedback CTA */}
           {!showForm ? (
             <div className="glass-card dark:glass-card p-8 rounded-[2rem] bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-100 dark:border-purple-900/30">

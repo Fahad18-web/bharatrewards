@@ -7,17 +7,22 @@ import { AdUnit } from '../components/AdUnit';
 import { InterstitialAd } from '../components/InterstitialAd';
 import SEO from '../components/SEO';
 
-const TIMER_SECONDS = 15;
 const PREFETCH_THRESHOLD = 3; 
 
 export const Game: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const normalizedCategory = (category || '').toUpperCase();
+
+  const timerSeconds = React.useMemo(() => {
+    if (normalizedCategory === 'QUIZ') return 30;
+    if (normalizedCategory === 'TYPING') return 40;
+    return 15;
+  }, [normalizedCategory]);
   
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
+  const [timeLeft, setTimeLeft] = useState(timerSeconds);
   const [userAnswer, setUserAnswer] = useState('');
   const [score, setScore] = useState(0);
   const [user, setUser] = useState<User | null>(null);
@@ -93,7 +98,7 @@ export const Game: React.FC = () => {
     // 1. Fast load: Fetch only 3 questions initially to show UI ASAP
     await fetchBatch(3); 
     setInitialLoading(false);
-    setTimeLeft(TIMER_SECONDS);
+    setTimeLeft(timerSeconds);
 
     // 2. Background load: Immediately fetch more to build buffer
     fetchBatch(5);
@@ -150,10 +155,10 @@ export const Game: React.FC = () => {
     }
 
     setCurrentIndex(nextIndex);
-    setTimeLeft(TIMER_SECONDS);
+    setTimeLeft(timerSeconds);
     setUserAnswer('');
     setIsPaused(false);
-  }, [fetchBatch]);
+  }, [fetchBatch, timerSeconds]);
 
   const handleAdClose = useCallback(() => {
     setShowInterstitial(false);
@@ -171,14 +176,14 @@ export const Game: React.FC = () => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           handleNext(0, true); // Timeout - still show ad
-          return TIMER_SECONDS;
+          return timerSeconds;
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [initialLoading, isPaused, currentIndex, questions, handleNext]);
+  }, [initialLoading, isPaused, currentIndex, questions, handleNext, timerSeconds]);
 
   const submitAnswer = (e?: React.FormEvent) => {
     e?.preventDefault();

@@ -112,13 +112,13 @@ export const Auth: React.FC = () => {
       <div className="min-h-[70vh] flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto relative">
         {/* Decorative Elements */}
-        <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-india-saffron to-orange-400 rounded-full blur-3xl opacity-40 animate-pulse-slow"></div>
-        <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-r from-india-green to-emerald-400 rounded-full blur-3xl opacity-40 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-india-saffron to-orange-400 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-r from-india-green to-emerald-400 rounded-full blur-3xl opacity-40"></div>
 
         <div className="glass-card dark:glass-card p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative z-10 border border-white/80 dark:border-white/10">
           <div className="text-center mb-6">
              <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-white to-gray-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-4 border border-white/60 dark:border-white/10">
-                <span className="text-3xl animate-bounce">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
+                <span className="text-3xl">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
              </div>
              <h2 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight">
                {isLogin ? 'Welcome Back' : 'Join BharatRewards'}
