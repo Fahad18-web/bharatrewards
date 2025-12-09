@@ -63,19 +63,6 @@ body {
   position: relative;
 }
 
-.no-glass .glass-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808);
-  border-top-left-radius: 0.5rem; /* Match rounded-xl approx */
-  border-top-right-radius: 0.5rem;
-  opacity: 0.8;
-}
-
 .dark .no-glass .glass-card {
   background: #1e293b; /* slate-800 */
   border: 1px solid #334155; /* slate-700 */

@@ -12,7 +12,7 @@ const faqData: FAQItem[] = [
   {
     category: 'Getting Started',
     question: 'What is Solve2Win?',
-    answer: 'Solve2Win is India\'s #1 skill-based gaming platform where you can play fun games like Math Challenges, Speed Typing, Quizzes, Puzzles, and Captcha challenges to earn real cash rewards. It\'s completely free to join and play!'
+    answer: 'Solve2Win is India\'s #1 skill-based gaming platform where you can play fun games like Math Challenges, Speed Typing, Quizzes, Puzzles, and Captcha challenges to earn rewards. It\'s completely free to join and play!'
   },
   {
     category: 'Getting Started',
@@ -22,7 +22,7 @@ const faqData: FAQItem[] = [
   {
     category: 'Getting Started',
     question: 'Is Solve2Win free to use?',
-    answer: 'Yes! Solve2Win is completely free to use. There are no hidden charges or subscription fees. You earn points by playing games and can convert them to real cash.'
+    answer: 'Yes! Solve2Win is completely free to use. There are no hidden charges or subscription fees. You earn points by playing games and can convert them to rewards.'
   },
 
   // Games & Points

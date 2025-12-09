@@ -42,7 +42,7 @@ export const Landing: React.FC = () => {
   ];
 
   const features = [
-    { icon: "💰", title: "Real Cash Rewards", desc: "Convert points to real money" },
+    { icon: "💰", title: "Real Rewards", desc: "Convert points to rewards" },
     { icon: "🎮", title: "5 Game Modes", desc: "Multiple ways to earn" },
     { icon: "⚡", title: "Instant Play", desc: "No downloads required" },
     { icon: "🔒", title: "Secure Platform", desc: "Your data is protected" },
@@ -94,13 +94,13 @@ export const Landing: React.FC = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
             Play Games.{" "}
             <span className="bg-gradient-to-r from-india-saffron via-india-green to-india-blue bg-clip-text text-transparent">
-              Earn Real Cash.
+              Earn Real Rewards.
             </span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            India's #1 skill-based gaming platform. Solve puzzles, play quizzes, 
-            type fast, and convert your skills into real money!
+            India's #1 skill-based gaming platform. Solve puzzles, Solve quizzes,Solve easy Maths questions, 
+            type fast, and convert your skills into real rewards!
           </p>
 
           {/* Stats Bar */}
@@ -204,7 +204,7 @@ export const Landing: React.FC = () => {
               <div className="w-20 h-20 bg-gradient-to-br from-india-green/90 to-green-600/90 rounded-full flex items-center justify-center text-4xl mx-auto mb-5 shadow-xl backdrop-blur-sm">
                 3️⃣
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Withdraw Cash</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Withdraw Rewards</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 Convert 1000 points = ₹1. Instant UPI transfers to your bank!
               </p>

@@ -55,7 +55,7 @@ export const Wallet: React.FC = () => {
     <>
       <SEO 
         title="Wallet" 
-        description="Manage your earnings, redeem points for real cash, and view transaction history."
+        description="Manage your earnings, redeem points for rewards, and view transaction history."
       />
       <div className="max-w-5xl mx-auto space-y-12 pb-10">
       <div className="text-center md:text-left">
@@ -129,7 +129,7 @@ export const Wallet: React.FC = () => {
             <div className="relative">
                <div className="absolute left-1/2 -top-6 -translate-x-1/2 w-8 h-8 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-gray-400 dark:text-gray-500 font-bold z-10 border border-white dark:border-slate-600 text-xs">⬇</div>
                <div className="flex justify-between items-center bg-gradient-to-r from-india-blue/5 via-blue-50/50 to-transparent dark:from-blue-900/20 dark:via-blue-900/10 p-6 rounded-3xl border border-india-blue/10 dark:border-blue-500/20 shadow-sm">
-                  <span className="text-gray-600 dark:text-gray-300 font-bold">You get real cash:</span>
+                  <span className="text-gray-600 dark:text-gray-300 font-bold">You get rewards:</span>
                   <span className="font-black text-4xl text-transparent bg-clip-text bg-gradient-to-r from-india-blue to-blue-600 dark:from-blue-400 dark:to-blue-200">
                     ₹ {((parseInt(calcPoints) || 0) * RATE_PER_POINT).toFixed(2)}
                   </span>
@@ -146,7 +146,7 @@ export const Wallet: React.FC = () => {
           <h3 className="text-3xl font-black mb-4 text-gray-800 dark:text-white">Redeem Your Earnings</h3>
           <p className="text-gray-500 dark:text-gray-400 mb-10 max-w-lg mx-auto leading-relaxed text-lg">
             Reach <strong className="text-gray-900 dark:text-white bg-orange-100 dark:bg-orange-900/30 px-2 rounded">{MIN_REDEEM_POINTS.toLocaleString()} Points</strong> to unlock withdrawals.
-            <br/>Money is sent directly to your registered account.
+            <br/>Money will be sent directly to your provided UPI ID.
           </p>
           
           <div className="max-w-2xl mx-auto mb-10">
