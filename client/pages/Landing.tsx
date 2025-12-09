@@ -110,7 +110,7 @@ export const Landing: React.FC = () => {
               <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">Active Players</div>
             </div>
             <div className="glass-card dark:glass-card rounded-2xl px-6 py-5 shadow-xl border border-white/50 dark:border-white/10 backdrop-blur-xl min-w-[140px]">
-              <div className="text-3xl md:text-4xl font-black text-india-green drop-shadow-sm">₹10L+</div>
+              <div className="text-3xl md:text-4xl font-black text-india-green drop-shadow-sm">₹10k+</div>
               <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">Paid to Users</div>
             </div>
             <div className="glass-card dark:glass-card rounded-2xl px-6 py-5 shadow-xl border border-white/50 dark:border-white/10 backdrop-blur-xl min-w-[140px]">

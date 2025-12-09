@@ -75,12 +75,12 @@ export const Wallet: React.FC = () => {
              <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-india-saffron via-white to-india-green opacity-90 border border-white/20"></div>
                 <div>
-                   <span className="font-bold tracking-[0.2em] text-sm opacity-90 block leading-none">BHARAT</span>
-                   <span className="font-light tracking-[0.2em] text-xs opacity-70 block leading-none">REWARDS</span>
+                   <span className="font-bold tracking-[0.2em] text-sm opacity-90 block leading-none">Solve2win</span>
+                   <span className="font-light tracking-[0.2em] text-xs opacity-70 block leading-none"></span>
                 </div>
              </div>
              <div className="px-3 py-1 bg-white/10 rounded-lg border border-white/10 backdrop-blur-sm">
-                <span className="text-xs font-mono opacity-80">PLATINUM</span>
+                {/* <span className="text-xs font-mono opacity-80">PLATINUM</span> */}
              </div>
           </div>
 
