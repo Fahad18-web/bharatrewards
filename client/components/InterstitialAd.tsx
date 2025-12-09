@@ -1,20 +1,30 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
+type AdMode = 'correct' | 'wrong' | 'skip';
+
 interface InterstitialAdProps {
   onClose: () => void;
   autoCloseSeconds?: number;
-  isCorrect?: boolean;
+  isCorrect?: boolean; // backward compat, will be inferred if mode not provided
   pointsEarned?: number;
+  mode?: AdMode;
 }
 
 export const InterstitialAd: React.FC<InterstitialAdProps> = ({ 
   onClose, 
   autoCloseSeconds = 5,
   isCorrect = false,
-  pointsEarned = 0
+  pointsEarned = 0,
+  mode
 }) => {
   const [countdown, setCountdown] = useState(autoCloseSeconds);
   const [canSkip, setCanSkip] = useState(false);
+
+  const bannerMode: AdMode = mode
+    ? mode
+    : isCorrect
+      ? 'correct'
+      : 'wrong';
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,17 +52,21 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
       <div className="relative w-full max-w-2xl mx-4">
         {/* Result Banner */}
         <div className={`mb-4 p-4 rounded-2xl text-center ${
-          isCorrect 
-            ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white' 
-            : 'bg-gradient-to-r from-red-500 to-rose-600 text-white'
+          bannerMode === 'correct'
+            ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white'
+            : bannerMode === 'skip'
+              ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
+              : 'bg-gradient-to-r from-red-500 to-rose-600 text-white'
         }`}>
           <div className="flex items-center justify-center gap-3">
-            <span className="text-3xl">{isCorrect ? '✅' : '❌'}</span>
+            <span className="text-3xl">
+              {bannerMode === 'correct' ? '✅' : bannerMode === 'skip' ? '⏭️' : '❌'}
+            </span>
             <div>
               <p className="font-bold text-lg">
-                {isCorrect ? 'Correct Answer!' : 'Wrong Answer'}
+                {bannerMode === 'correct' ? 'Correct Answer!' : bannerMode === 'skip' ? 'Skipping' : 'Wrong Answer'}
               </p>
-              {isCorrect && pointsEarned > 0 && (
+              {bannerMode === 'correct' && pointsEarned > 0 && (
                 <p className="text-sm opacity-90">+{pointsEarned} points earned!</p>
               )}
             </div>

@@ -67,12 +67,23 @@ export const Game: React.FC = () => {
   
     try {
       const newQs = await fetchGameQuestions(normalizedCategory, count);
-      if (!Array.isArray(newQs) || newQs.length === 0) {
+      const validQs = Array.isArray(newQs)
+        ? newQs.filter((q) => {
+            if (!q || !q.questionText || !q.questionText.trim()) return false;
+            if (!q.correctAnswer || !String(q.correctAnswer).trim()) return false;
+            if (normalizedCategory === 'QUIZ') {
+              return Array.isArray(q.options) && q.options.length >= 2;
+            }
+            return true;
+          })
+        : [];
+
+      if (validQs.length === 0) {
         if (questionsRef.current.length === 0) {
           setFetchError('No questions available for this category right now. Please try again in a moment.');
         }
       } else {
-        setQuestions(prev => [...prev, ...newQs]);
+        setQuestions(prev => [...prev, ...validQs]);
       }
     } catch (e) {
       console.error('Failed to fetch questions', e);
@@ -111,7 +122,9 @@ export const Game: React.FC = () => {
       }
     }, [normalizedCategory, startGame]);
 
-  const handleNext = useCallback((awardedPoints: number = 0, showAd: boolean = true) => {
+  const [adMode, setAdMode] = useState<'correct' | 'wrong' | 'skip'>('wrong');
+
+  const handleNext = useCallback((awardedPoints: number = 0, showAd: boolean = true, reason?: 'correct' | 'wrong' | 'skip') => {
     if (user) {
       // Update local state immediately for responsive UI
       const updatedUser = { ...user };
@@ -131,9 +144,12 @@ export const Game: React.FC = () => {
       }
     }
 
+    const resolvedReason = reason ?? (awardedPoints > 0 ? 'correct' : 'wrong');
+
     // Store result for interstitial display
-    setLastAnswerCorrect(awardedPoints > 0);
+    setLastAnswerCorrect(resolvedReason === 'correct');
     setLastPointsEarned(awardedPoints);
+    setAdMode(resolvedReason);
 
     // Show interstitial ad after answering (not on timeout from ad screen)
     if (showAd) {
@@ -175,7 +191,7 @@ export const Game: React.FC = () => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          handleNext(0, true); // Timeout - still show ad
+          handleNext(0, true, 'skip'); // Timeout: show skip ad
           return timerSeconds;
         }
         return prev - 1;
@@ -471,6 +487,7 @@ export const Game: React.FC = () => {
           autoCloseSeconds={5}
           isCorrect={lastAnswerCorrect}
           pointsEarned={lastPointsEarned}
+          mode={adMode}
         />
       )}
     </div>
