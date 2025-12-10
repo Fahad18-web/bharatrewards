@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser } from '../services/storageService';
+import { getCurrentUser, markAnnouncementsSeen } from '../services/storageService';
 import {
   getAnnouncements,
   getUserFeedback,
@@ -46,6 +46,15 @@ export const Community: React.FC = () => {
       ]);
       setAnnouncements(announcementsData);
       setMyFeedback(feedbackData);
+      if (announcementsData.length) {
+        const latest = announcementsData.reduce((max, ann) => {
+          const created = new Date(ann.createdAt).getTime();
+          return Number.isFinite(created) && created > max ? created : max;
+        }, 0);
+        if (latest) {
+          markAnnouncementsSeen(latest);
+        }
+      }
     } catch (error) {
       console.error('Failed to load community data:', error);
     } finally {

@@ -1,7 +1,7 @@
 // API Service for Solve2Win Frontend
 // Replaces localStorage with Supabase backend API calls
 
-import { User, UserRole, RedeemRequest, AppSettings, Question, Announcement, Feedback } from '../types';
+import { User, UserRole, RedeemRequest, AppSettings, Question, Announcement, Feedback, LeaderboardEntry } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
@@ -229,6 +229,27 @@ export const updateUserPoints = async (
   // Update cache
   setUserCache(user);
   return user;
+};
+
+export const getLeaderboard = async (limit: number = 50): Promise<LeaderboardEntry[]> => {
+  try {
+    const { leaderboard } = await apiRequest<{ leaderboard: LeaderboardEntry[] }>(
+      `/users/stats/leaderboard?limit=${limit}`,
+      {},
+      `leaderboard-${limit}`,
+      60000
+    );
+
+    return (leaderboard || []).map((entry, idx) => ({
+      ...entry,
+      points: Number(entry.points) || 0,
+      solvedCount: entry.solvedCount ?? entry.solved_count ?? 0,
+      rank: idx + 1
+    }));
+  } catch (error) {
+    console.error('Get leaderboard error:', error);
+    return [];
+  }
 };
 
 // ============================================

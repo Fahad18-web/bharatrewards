@@ -1,7 +1,7 @@
 // Solve2Win Storage Service
 // Compatibility layer that uses API backend when available, falls back to localStorage
 
-import { User, UserRole, RedeemRequest, AppSettings, Question } from '../types';
+import { User, UserRole, RedeemRequest, AppSettings, Question, LeaderboardEntry } from '../types';
 import * as api from './apiService';
 
 // Feature flag to enable/disable API mode
@@ -13,6 +13,7 @@ const SESSION_KEY = 'bharatrewards_session';
 const REDEEM_KEY = 'bharatrewards_redeems';
 const SETTINGS_KEY = 'bharatrewards_settings';
 const CUSTOM_QUESTIONS_KEY = 'bharatrewards_custom_questions';
+const ANNOUNCEMENTS_LAST_SEEN_KEY = 'bharatrewards_announcements_last_seen';
 
 // Defaults
 const DEFAULT_SETTINGS: AppSettings = {
@@ -289,6 +290,40 @@ export const deleteCustomQuestion = (id: string) => {
   const questions = getCustomQuestions();
   const filtered = questions.filter(q => q.id !== id);
   localStorage.setItem(CUSTOM_QUESTIONS_KEY, JSON.stringify(filtered));
+};
+
+// --- Leaderboard ---
+
+export const getLeaderboardEntries = async (limit: number = 50): Promise<LeaderboardEntry[]> => {
+  if (USE_API) {
+    return await api.getLeaderboard(limit);
+  }
+
+  const users = getLocalUsers()
+    .filter(u => u.role === UserRole.USER)
+    .sort((a, b) => b.points - a.points)
+    .slice(0, limit);
+
+  return users.map((user, idx) => ({
+    id: user.id,
+    name: user.name,
+    points: user.points,
+    solvedCount: user.solvedCount,
+    rank: idx + 1
+  }));
+};
+
+// --- Announcements ---
+
+export const getLastSeenAnnouncementAt = (): number => {
+  const stored = localStorage.getItem(ANNOUNCEMENTS_LAST_SEEN_KEY);
+  const parsed = stored ? parseInt(stored, 10) : 0;
+  return Number.isFinite(parsed) ? parsed : 0;
+};
+
+export const markAnnouncementsSeen = (timestamp?: number) => {
+  const toStore = timestamp ?? Date.now();
+  localStorage.setItem(ANNOUNCEMENTS_LAST_SEEN_KEY, String(toStore));
 };
 
 // --- Utility exports for API mode ---

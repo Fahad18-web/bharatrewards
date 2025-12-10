@@ -75,3 +75,11 @@ export interface Feedback {
   createdAt: string;
   updatedAt?: string | null;
 }
+
+export interface LeaderboardEntry {
+  id: string;
+  name: string;
+  points: number;
+  solvedCount?: number;
+  rank?: number;
+}

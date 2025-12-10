@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useCallback, memo } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { getCurrentUser, logoutUser } from '../services/storageService';
+import { getAnnouncements } from '../services/apiService';
+import { getCurrentUser, logoutUser, getLastSeenAnnouncementAt } from '../services/storageService';
 import { User, UserRole } from '../types';
 import { useTheme } from './ThemeContext';
 
@@ -66,6 +67,7 @@ Footer.displayName = 'Footer';
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasNewAnnouncements, setHasNewAnnouncements] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
@@ -89,6 +91,47 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   // Determine if we should show glass effects (only on Landing and Auth pages)
   const showGlassEffects = location.pathname === '/' || location.pathname === '/auth';
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/community')) {
+      setHasNewAnnouncements(false);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const checkAnnouncements = async () => {
+      if (!user) {
+        setHasNewAnnouncements(false);
+        return;
+      }
+      try {
+        const announcements = await getAnnouncements();
+        if (!isActive) return;
+
+        const latest = announcements.reduce((max, ann) => {
+          const created = new Date(ann.createdAt).getTime();
+          return Number.isFinite(created) && created > max ? created : max;
+        }, 0);
+
+        if (!latest) {
+          setHasNewAnnouncements(false);
+          return;
+        }
+
+        const lastSeen = getLastSeenAnnouncementAt();
+        setHasNewAnnouncements(latest > lastSeen);
+      } catch (error) {
+        console.error('Failed to check announcements', error);
+      }
+    };
+
+    checkAnnouncements();
+    return () => {
+      isActive = false;
+    };
+  }, [user]);
 
   const renderNavLinks = () => {
     const themeToggle = (
@@ -133,11 +176,21 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           Dashboard
         </Link>
         <Link
+          to="/leaderboard"
+          className="text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-bold text-sm md:text-base transition-colors duration-200"
+          onClick={closeMenu}
+        >
+          Leaderboard
+        </Link>
+        <Link
           to="/community"
-          className="text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-bold text-sm md:text-base transition-colors duration-200"
+          className="text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-bold text-sm md:text-base transition-colors duration-200 flex items-center gap-2"
           onClick={closeMenu}
         >
           Community
+          {hasNewAnnouncements && (
+            <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-red-500 text-white rounded-full">New</span>
+          )}
         </Link>
         <Link
           to="/profile"
@@ -211,11 +264,21 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                       Dashboard
                     </Link>
                     <Link
-                      to="/community"
+                      to="/leaderboard"
                       className="w-full rounded-2xl px-4 py-3 bg-white/70 dark:bg-slate-800/70 border border-white/80 dark:border-slate-700 text-center hover:bg-white dark:hover:bg-slate-700"
                       onClick={closeMenu}
                     >
+                      🏆 Leaderboard
+                    </Link>
+                    <Link
+                      to="/community"
+                      className="w-full rounded-2xl px-4 py-3 bg-white/70 dark:bg-slate-800/70 border border-white/80 dark:border-slate-700 text-center hover:bg-white dark:hover:bg-slate-700 flex items-center justify-center gap-2"
+                      onClick={closeMenu}
+                    >
                       🌟 Community
+                      {hasNewAnnouncements && (
+                        <span className="px-2 py-1 text-xs font-black uppercase bg-red-500 text-white rounded-full">New</span>
+                      )}
                     </Link>
                     <Link
                       to="/profile"
@@ -246,8 +309,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </div>
       </nav>
 
+      {/* Mobile backdrop */}
+      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm" onClick={closeMenu}></div>}
+
       {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 min-h-[calc(100vh-14rem)]">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 py-8 md:py-12 min-h-[calc(100vh-14rem)]">
         {children}
       </main>
 

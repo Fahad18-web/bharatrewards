@@ -8,6 +8,7 @@ const Auth = lazy(() => import('./pages/Auth').then(m => ({ default: m.Auth })))
 const Dashboard = lazy(() => import('./pages/Dashboard').then(m => ({ default: m.Dashboard })));
 const Game = lazy(() => import('./pages/Game').then(m => ({ default: m.Game })));
 const Wallet = lazy(() => import('./pages/Wallet').then(m => ({ default: m.Wallet })));
+const Leaderboard = lazy(() => import('./pages/Leaderboard').then(m => ({ default: m.Leaderboard })));
 const Admin = lazy(() => import('./pages/Admin').then(m => ({ default: m.Admin })));
 const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
 const Community = lazy(() => import('./pages/Community').then(m => ({ default: m.Community })));
@@ -36,6 +37,7 @@ const App: React.FC = () => {
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/game/:category" element={<Game />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/admin" element={<Admin />} />
