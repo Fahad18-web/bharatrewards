@@ -22,6 +22,7 @@ import {
   deleteFeedback as deleteFeedbackApi
 } from '../services/apiService';
 import { User, RedeemRequest, UserRole, AppSettings, Question, Announcement, Feedback } from '../types';
+import SEO from '../components/SEO';
 
 type Tab = 'DASHBOARD' | 'USERS' | 'QUESTIONS' | 'SETTINGS' | 'COMMUNITY';
 
@@ -300,7 +301,14 @@ export const Admin: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 pb-10">
+    <>
+      <SEO
+        title="Admin"
+        description="Secure Solve2Win admin console for managing users, payouts, questions, and announcements."
+        canonicalPath="/admin"
+        noIndex
+      />
+      <div className="space-y-8 pb-10">
       <div className="flex flex-col md:flex-row justify-between items-center pb-8 border-b border-gray-200/50 dark:border-white/10 gap-4">
          <div>
             <h1 className="text-4xl font-black text-gray-800 dark:text-white">Admin Portal</h1>
@@ -962,6 +970,7 @@ export const Admin: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };

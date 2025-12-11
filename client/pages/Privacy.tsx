@@ -1,11 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export const Privacy: React.FC = () => {
   const lastUpdated = 'December 5, 2025';
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10">
+    <>
+      <SEO
+        title="Privacy Policy"
+        description="Understand how Solve2Win collects, uses, and protects your data, including withdrawals via UPI and gameplay analytics."
+        keywords="Solve2Win privacy policy, data protection gaming app, UPI withdrawal security"
+        canonicalPath="/privacy"
+      />
+      <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
@@ -259,5 +267,6 @@ export const Privacy: React.FC = () => {
         </Link>
       </div>
     </div>
+    </>
   );
 };

@@ -283,6 +283,7 @@ export const Game: React.FC = () => {
       <SEO 
         title={`${normalizedCategory === 'MATH' ? 'Math' : normalizedCategory === 'QUIZ' ? 'Quiz' : normalizedCategory === 'PUZZLE' ? 'Puzzle' : normalizedCategory === 'CAPTCHA' ? 'Captcha' : 'Typing'} Challenge`}
         description={`Play ${normalizedCategory} games on Solve2Win and earn rewards.`}
+        canonicalPath={`/game/${normalizedCategory.toLowerCase()}`}
       />
       <div className="max-w-4xl mx-auto py-6">
       {/* Top Bar */}

@@ -79,6 +79,7 @@ export const Landing: React.FC = () => {
         title="Home" 
         description="Join Solve2Win to play educational games, solve puzzles, and earn real rewards. The best platform to learn and earn simultaneously."
         keywords="play to earn, educational games, math puzzle, typing game, rewards, crypto, wallet"
+        canonicalPath="/"
       />
       <div className="-mt-10 md:-mt-12 -mx-4 sm:-mx-6 lg:-mx-8">
       {/* Hero Section */}

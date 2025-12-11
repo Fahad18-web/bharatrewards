@@ -56,6 +56,7 @@ export const Wallet: React.FC = () => {
       <SEO 
         title="Wallet" 
         description="Manage your earnings, redeem points for rewards, and view transaction history."
+        canonicalPath="/wallet"
       />
       <div className="max-w-5xl mx-auto space-y-8 md:space-y-12 pb-10 px-2 sm:px-0">
       <div className="text-center md:text-left">

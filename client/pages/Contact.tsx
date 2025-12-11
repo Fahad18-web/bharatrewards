@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 interface FormData {
   name: string;
@@ -26,7 +27,14 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10">
+    <>
+      <SEO
+        title="Contact"
+        description="Get in touch with the Solve2Win team for support, partnerships, or general questions. We respond within 24-48 hours."
+        keywords="Solve2Win contact, Solve2Win support, gaming support India, play to earn help"
+        canonicalPath="/contact"
+      />
+      <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
@@ -157,6 +165,7 @@ export const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };

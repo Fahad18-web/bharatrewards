@@ -1,11 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export const Terms: React.FC = () => {
   const lastUpdated = 'December 5, 2025';
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10">
+    <>
+      <SEO
+        title="Terms"
+        description="Review the Solve2Win terms and conditions covering eligibility, fair play, rewards, and withdrawals for Indian players."
+        keywords="Solve2Win terms and conditions, play to earn rules India, gaming withdrawal policy"
+        canonicalPath="/terms"
+      />
+      <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
@@ -215,6 +223,7 @@ export const Terms: React.FC = () => {
           Back to Home
         </Link>
       </div>
-    </div>
+      </div>
+    </>
   );
 };

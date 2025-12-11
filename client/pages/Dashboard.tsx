@@ -35,6 +35,7 @@ export const Dashboard: React.FC = () => {
       <SEO 
         title="Dashboard" 
         description="Choose a game category to start playing and earning rewards."
+           canonicalPath="/dashboard"
       />
       <div className="space-y-12 pb-10">
       {/* Header & Wallet Summary */}

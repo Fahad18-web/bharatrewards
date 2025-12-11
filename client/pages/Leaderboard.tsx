@@ -67,7 +67,7 @@ export const Leaderboard: React.FC = () => {
 
   return (
     <>
-      <SEO title="Leaderboard" description="See who is topping the Solve2Win charts." />
+      <SEO title="Leaderboard" description="See who is topping the Solve2Win charts." canonicalPath="/leaderboard" />
       <div className="space-y-10 pb-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-gray-200/60 dark:border-white/10 pb-6">
           <div>

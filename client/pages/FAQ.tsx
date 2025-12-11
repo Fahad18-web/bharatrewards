@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 interface FAQItem {
   question: string;
@@ -118,6 +119,21 @@ export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
+  const faqStructuredData = useMemo(() => ([
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqData.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer
+        }
+      }))
+    }
+  ]), []);
+
   const categories = ['all', ...Array.from(new Set(faqData.map(item => item.category)))];
 
   const filteredFAQs = activeCategory === 'all' 
@@ -125,7 +141,15 @@ export const FAQ: React.FC = () => {
     : faqData.filter(item => item.category === activeCategory);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10">
+    <>
+      <SEO
+        title="FAQ"
+        description="Answers to common questions about Solve2Win gameplay, earning points, withdrawals, and account security."
+        keywords="Solve2Win FAQ, play to earn help, gaming withdrawals, UPI payouts questions"
+        canonicalPath="/faq"
+        structuredData={faqStructuredData}
+      />
+      <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
@@ -217,6 +241,7 @@ export const FAQ: React.FC = () => {
           Contact Support
         </Link>
       </div>
-    </div>
+      </div>
+    </>
   );
 };

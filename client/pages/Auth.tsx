@@ -108,6 +108,7 @@ export const Auth: React.FC = () => {
       <SEO 
         title={isLogin ? "Login" : "Register"} 
         description="Login or Register to Solve2Win to start earning rewards."
+        canonicalPath="/auth"
       />
       <div className="min-h-[70vh] flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto relative">

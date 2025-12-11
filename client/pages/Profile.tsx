@@ -191,6 +191,7 @@ export const Profile: React.FC = () => {
       <SEO 
         title="Profile" 
         description="View and edit your profile, change password, and manage your account settings."
+        canonicalPath="/profile"
       />
       <div className="space-y-12 pb-12">
       <section className="glass-card p-10 rounded-[3rem] flex flex-col lg:flex-row gap-10 items-center">

@@ -149,6 +149,7 @@ export const Community: React.FC = () => {
       <SEO 
         title="Community" 
         description="Stay updated with latest announcements and share your feedback with the Solve2Win community."
+        canonicalPath="/community"
       />
       <div className="space-y-8 pb-10">
       {/* Header */}
