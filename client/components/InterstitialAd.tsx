@@ -19,6 +19,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
 }) => {
   const [countdown, setCountdown] = useState(autoCloseSeconds);
   const [canSkip, setCanSkip] = useState(false);
+  const [autoClosed, setAutoClosed] = useState(false);
 
   const bannerMode: AdMode = mode
     ? mode
@@ -40,6 +41,14 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
 
     return () => clearInterval(timer);
   }, []);
+
+  // Auto-close when countdown finishes (5s default)
+  useEffect(() => {
+    if (countdown === 0 && !autoClosed) {
+      setAutoClosed(true);
+      onClose();
+    }
+  }, [countdown, autoClosed, onClose]);
 
   const handleSkip = useCallback(() => {
     if (canSkip) {

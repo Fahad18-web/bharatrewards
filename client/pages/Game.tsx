@@ -217,9 +217,11 @@ export const Game: React.FC = () => {
     }
 
     if (isCorrect) {
-      handleNext(pointsPerQ, true);
+      // Correct: go straight to next question without popup
+      handleNext(pointsPerQ, false, 'correct');
     } else {
-      handleNext(0, true);
+      // Wrong: show popup, then advance
+      handleNext(0, true, 'wrong');
     }
   };
 
@@ -410,8 +412,13 @@ export const Game: React.FC = () => {
                     setUserAnswer(opt);
                     // Minimal delay to show selection click effect before moving on
                     setTimeout(() => {
-                        if (opt.toLowerCase() === currentQ.correctAnswer.toLowerCase()) handleNext(pointsPerQ, true);
-                        else handleNext(0, true);
+                        if (opt.toLowerCase() === currentQ.correctAnswer.toLowerCase()) {
+                          // Correct: no popup
+                          handleNext(pointsPerQ, false, 'correct');
+                        } else {
+                          // Wrong: show popup then auto-advance
+                          handleNext(0, true, 'wrong');
+                        }
                     }, 100);
                   }}
                   className="group relative bg-white/80 dark:bg-slate-700/80 hover:bg-white dark:hover:bg-slate-600 border-2 border-white/50 dark:border-slate-600 hover:border-india-saffron dark:hover:border-india-saffron p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
