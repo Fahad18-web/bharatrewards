@@ -27,7 +27,7 @@ import SEO from '../components/SEO';
 type Tab = 'DASHBOARD' | 'USERS' | 'QUESTIONS' | 'SETTINGS' | 'COMMUNITY';
 
 const DEFAULT_SETTINGS: AppSettings = {
-  minRedeemPoints: 14000,
+  minRedeemPoints: 15000,
   pointsPerQuestion: 10,
   currencyRate: 35
 };

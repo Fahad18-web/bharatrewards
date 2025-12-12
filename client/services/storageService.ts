@@ -17,7 +17,7 @@ const ANNOUNCEMENTS_LAST_SEEN_KEY = 'bharatrewards_announcements_last_seen';
 
 // Defaults
 const DEFAULT_SETTINGS: AppSettings = {
-  minRedeemPoints: 14000,
+  minRedeemPoints: 15000,
   pointsPerQuestion: 10,
   currencyRate: 35
 };

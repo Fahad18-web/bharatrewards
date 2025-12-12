@@ -269,7 +269,7 @@ export const getSettings = async (): Promise<AppSettings> => {
     console.error('Get settings error:', error);
     // Return default settings on error
     return {
-      minRedeemPoints: 14000,
+      minRedeemPoints: 15000,
       pointsPerQuestion: 10,
       currencyRate: 35,
     };
