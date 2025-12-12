@@ -244,6 +244,18 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             }`}
           >
             <div className="glass-card dark:glass-dark rounded-3xl px-6 py-6 mt-2 border border-white/60 dark:border-slate-600 shadow-xl space-y-5">
+              {/* Mobile Theme Toggle */}
+              <div className="flex items-center justify-between bg-white/70 dark:bg-slate-800/70 rounded-2xl px-4 py-3 border border-white/80 dark:border-slate-700">
+                <span className="text-sm font-bold text-gray-700 dark:text-gray-200">Theme</span>
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-full bg-white/70 dark:bg-slate-800/70 hover:bg-white dark:hover:bg-slate-700 border border-white/60 dark:border-slate-600 text-xl"
+                  aria-label="Toggle Dark Mode"
+                >
+                  {theme === 'dark' ? '☀️' : '🌙'}
+                </button>
+              </div>
+
               {user && !isAdmin && (
                 <div className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 border border-white/80 dark:border-slate-700">
                   <div>

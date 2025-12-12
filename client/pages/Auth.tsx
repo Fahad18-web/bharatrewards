@@ -5,6 +5,7 @@ import { UserRole } from '../types';
 import SEO from '../components/SEO';
 
 export const Auth: React.FC = () => {
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const [isLogin, setIsLogin] = useState(true);
   const [isAdminMode, setIsAdminMode] = useState(false);
   
@@ -33,6 +34,7 @@ export const Auth: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return setError("Email and Password are required");
+    if (!emailRegex.test(email.trim())) return setError("Use a valid, real email. Fake or disposable emails are declined.");
 
     setIsLoading(true);
     setError('');
@@ -67,6 +69,7 @@ export const Auth: React.FC = () => {
   const handleSignupStart = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name || !password) return setError("All fields are required");
+    if (!emailRegex.test(email.trim())) return setError("Enter a valid, real email address. Fake or disposable emails are declined.");
     
     setError('');
 
@@ -180,6 +183,7 @@ export const Auth: React.FC = () => {
                   placeholder={isAdminMode ? "admin@example.com" : "name@example.com"}
                   required
                 />
+                <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Use your active, real email. Fake/disposable emails and any illegal activity are not allowed.</p>
               </div>
 
               <div>
