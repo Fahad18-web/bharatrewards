@@ -5,7 +5,35 @@ import { UserRole } from '../types';
 import SEO from '../components/SEO';
 
 export const Auth: React.FC = () => {
-  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  const allowedDomains = [
+    'gmail.com',
+    'googlemail.com',
+    'outlook.com',
+    'hotmail.com',
+    'live.com',
+    'msn.com',
+    'yahoo.com',
+    'ymail.com',
+    'rocketmail.com',
+    'icloud.com',
+    'me.com',
+    'mac.com',
+    'protonmail.com',
+    'pm.me',
+    'zoho.com',
+    'aol.com',
+    'gmx.com',
+    'yandex.com'
+  ];
+
+  const isAllowedEmail = (value: string) => {
+    const trimmed = value.trim().toLowerCase();
+    const parts = trimmed.split('@');
+    if (parts.length !== 2) return false;
+    const domain = parts[1];
+    if (domain === 'example.com') return false;
+    return allowedDomains.includes(domain);
+  };
   const [isLogin, setIsLogin] = useState(true);
   const [isAdminMode, setIsAdminMode] = useState(false);
   
@@ -34,7 +62,7 @@ export const Auth: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return setError("Email and Password are required");
-    if (!emailRegex.test(email.trim())) return setError("Use a valid, real email. Fake or disposable emails are declined.");
+    if (!isAllowedEmail(email)) return setError("Use a real email from a trusted provider (e.g., gmail.com, outlook.com).");
 
     setIsLoading(true);
     setError('');
@@ -69,7 +97,7 @@ export const Auth: React.FC = () => {
   const handleSignupStart = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name || !password) return setError("All fields are required");
-    if (!emailRegex.test(email.trim())) return setError("Enter a valid, real email address. Fake or disposable emails are declined.");
+    if (!isAllowedEmail(email)) return setError("Sign up with a trusted provider email (e.g., gmail.com, outlook.com). Fake or disposable emails are declined.");
     
     setError('');
 
@@ -183,7 +211,7 @@ export const Auth: React.FC = () => {
                   placeholder={isAdminMode ? "admin@example.com" : "name@example.com"}
                   required
                 />
-                <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Use your active, real email. Fake/disposable emails and any illegal activity are not allowed.</p>
+                <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Use a real email from trusted providers (gmail.com, outlook.com, yahoo.com, icloud.com, etc.). example.com or disposable emails are declined.</p>
               </div>
 
               <div>
