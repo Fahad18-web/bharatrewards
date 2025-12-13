@@ -15,6 +15,34 @@ const SETTINGS_KEY = 'bharatrewards_settings';
 const CUSTOM_QUESTIONS_KEY = 'bharatrewards_custom_questions';
 const ANNOUNCEMENTS_LAST_SEEN_KEY = 'bharatrewards_announcements_last_seen';
 
+const getSessionStorage = (): Storage | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.sessionStorage;
+  } catch {
+    return null;
+  }
+};
+
+const getLocalStorage = (): Storage | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+};
+
+const AUTH_STORAGE = getSessionStorage();
+const LEGACY_AUTH_STORAGE = getLocalStorage();
+
+const clearLegacyAuthStorage = (): void => {
+  if (!LEGACY_AUTH_STORAGE) return;
+  LEGACY_AUTH_STORAGE.removeItem('bharatrewards_token');
+  LEGACY_AUTH_STORAGE.removeItem('bharatrewards_user');
+  LEGACY_AUTH_STORAGE.removeItem(SESSION_KEY);
+};
+
 // Defaults
 const DEFAULT_SETTINGS: AppSettings = {
   minRedeemPoints: 15000,
@@ -71,7 +99,7 @@ export const saveUser = (user: User) => {
     // Update local cache immediately for responsive UI
     const cached = api.getCurrentUser();
     if (cached && cached.id === user.id) {
-      localStorage.setItem('bharatrewards_user', JSON.stringify(user));
+      AUTH_STORAGE?.setItem('bharatrewards_user', JSON.stringify(user));
     }
     return;
   }
@@ -88,7 +116,7 @@ export const saveUser = (user: User) => {
   // Update session if it's the current user
   const currentUser = getCurrentUser();
   if (currentUser && currentUser.id === user.id) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+    AUTH_STORAGE?.setItem(SESSION_KEY, JSON.stringify(user));
   }
 };
 
@@ -96,7 +124,7 @@ export const getCurrentUser = (): User | null => {
   if (USE_API) {
     return api.getCurrentUser();
   }
-  const data = localStorage.getItem(SESSION_KEY);
+  const data = AUTH_STORAGE?.getItem(SESSION_KEY) ?? null;
   return data ? JSON.parse(data) : null;
 };
 
@@ -115,7 +143,7 @@ export const loginUser = (email: string, password?: string): User | null => {
     if (user.password && user.password !== password) {
       return null;
     }
-    localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+    AUTH_STORAGE?.setItem(SESSION_KEY, JSON.stringify(user));
     return user;
   }
   return null;
@@ -131,14 +159,17 @@ export const loginUserAsync = async (email: string, password: string): Promise<U
 
 export const logoutUser = () => {
   if (USE_API) {
-    // Clear local cache immediately
-    localStorage.removeItem('bharatrewards_token');
-    localStorage.removeItem('bharatrewards_user');
+    // Clear local session cache immediately
+    AUTH_STORAGE?.removeItem('bharatrewards_token');
+    AUTH_STORAGE?.removeItem('bharatrewards_user');
+    AUTH_STORAGE?.removeItem(SESSION_KEY);
+    // Also clear any legacy auth persisted by older builds
+    clearLegacyAuthStorage();
     // Also call API logout (fire and forget)
     api.logoutUser().catch(console.error);
     return;
   }
-  localStorage.removeItem(SESSION_KEY);
+  AUTH_STORAGE?.removeItem(SESSION_KEY);
 };
 
 export const registerUser = (name: string, email: string, password?: string, role: UserRole = UserRole.USER): User => {
@@ -160,7 +191,7 @@ export const registerUser = (name: string, email: string, password?: string, rol
     isBanned: false
   };
   saveUser(newUser);
-  localStorage.setItem(SESSION_KEY, JSON.stringify(newUser));
+  AUTH_STORAGE?.setItem(SESSION_KEY, JSON.stringify(newUser));
   return newUser;
 };
 
@@ -352,3 +383,6 @@ export const submitAnswerAsync = async (
 
 // Run init (only for localStorage mode)
 initStorage();
+
+// Enforce non-persistent sessions even after upgrading from older builds.
+clearLegacyAuthStorage();

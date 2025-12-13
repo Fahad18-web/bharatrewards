@@ -9,6 +9,37 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 const TOKEN_KEY = 'bharatrewards_token';
 const USER_KEY = 'bharatrewards_user';
 
+const getSessionStorage = (): Storage | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.sessionStorage;
+  } catch {
+    return null;
+  }
+};
+
+const getLocalStorage = (): Storage | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+};
+
+const AUTH_STORAGE = getSessionStorage();
+const LEGACY_AUTH_STORAGE = getLocalStorage();
+
+const clearLegacyAuthStorage = (): void => {
+  if (!LEGACY_AUTH_STORAGE) return;
+  // If older builds stored auth in localStorage, remove it to enforce non-persistent sessions.
+  LEGACY_AUTH_STORAGE.removeItem(TOKEN_KEY);
+  LEGACY_AUTH_STORAGE.removeItem(USER_KEY);
+};
+
+// Enforce non-persistent sessions even after upgrading from older builds.
+clearLegacyAuthStorage();
+
 // Simple in-memory cache for API responses
 interface CacheEntry<T> {
   data: T;
@@ -39,21 +70,21 @@ export const clearApiCache = (): void => {
 };
 
 const getToken = (): string | null => {
-  return localStorage.getItem(TOKEN_KEY);
+  return AUTH_STORAGE?.getItem(TOKEN_KEY) ?? null;
 };
 
 const setToken = (token: string): void => {
-  localStorage.setItem(TOKEN_KEY, token);
+  AUTH_STORAGE?.setItem(TOKEN_KEY, token);
 };
 
 const removeToken = (): void => {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
+  AUTH_STORAGE?.removeItem(TOKEN_KEY);
+  AUTH_STORAGE?.removeItem(USER_KEY);
   clearApiCache();
 };
 
 const setUserCache = (user: User): void => {
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
+  AUTH_STORAGE?.setItem(USER_KEY, JSON.stringify(user));
 };
 
 // API helper function with optional caching
@@ -143,7 +174,7 @@ export const logoutUser = async (): Promise<void> => {
 
 export const getCurrentUser = (): User | null => {
   // First check local cache for quick response
-  const cached = localStorage.getItem(USER_KEY);
+  const cached = AUTH_STORAGE?.getItem(USER_KEY) ?? null;
   if (cached) {
     return JSON.parse(cached);
   }
