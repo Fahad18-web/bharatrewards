@@ -36,6 +36,8 @@ export const Auth: React.FC = () => {
   };
   const [isLogin, setIsLogin] = useState(true);
   const [isAdminMode, setIsAdminMode] = useState(false);
+
+  const isEffectiveLogin = isAdminMode ? true : isLogin;
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -96,6 +98,12 @@ export const Auth: React.FC = () => {
 
   const handleSignupStart = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Admin account creation is locked. Only login is allowed for admins.
+    if (isAdminMode) {
+      return setError('Admin account creation is disabled. Please login with an existing admin account.');
+    }
+
     if (!email || !name || !password) return setError("All fields are required");
     if (!isAllowedEmail(email)) return setError("Sign up with a trusted provider email (e.g., gmail.com, outlook.com). Fake or disposable emails are declined.");
     
@@ -110,6 +118,11 @@ export const Auth: React.FC = () => {
 
   const handleVerifyAndSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isAdminMode) {
+      return setError('Admin account creation is disabled. Please login with an existing admin account.');
+    }
+
     if (otpInput !== generatedOtp) {
       return setError("Invalid OTP. Try again.");
     }
@@ -137,7 +150,7 @@ export const Auth: React.FC = () => {
   return (
     <>
       <SEO 
-        title={isLogin ? "Login" : "Register"} 
+        title={isEffectiveLogin ? "Login" : "Register"} 
         description="Login or Register to Solve2Win to start earning rewards."
         canonicalPath="/auth"
       />
@@ -153,7 +166,7 @@ export const Auth: React.FC = () => {
                 <span className="text-3xl">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
              </div>
              <h2 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight">
-               {isLogin ? 'Welcome Back' : 'Join Solve2Win'}
+               {isEffectiveLogin ? 'Welcome Back' : 'Join Solve2Win'}
              </h2>
              <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm font-medium">
                {isAdminMode ? 'Admin Portal Access' : 'Play, Learn & Earn'}
@@ -165,14 +178,21 @@ export const Auth: React.FC = () => {
             <div className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white dark:bg-slate-700 rounded-lg shadow-sm transition-all duration-300 ease-out ${isAdminMode ? 'left-[calc(50%+3px)]' : 'left-1.5'}`}></div>
             <button 
               type="button"
-              onClick={() => setIsAdminMode(false)}
+              onClick={() => {
+                setIsAdminMode(false);
+                resetForm();
+              }}
               className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${!isAdminMode ? 'text-gray-800 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}
             >
               User
             </button>
             <button 
               type="button"
-              onClick={() => setIsAdminMode(true)}
+              onClick={() => {
+                setIsAdminMode(true);
+                setIsLogin(true);
+                resetForm();
+              }}
               className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${isAdminMode ? 'text-india-blue dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
             >
               Admin
@@ -186,8 +206,8 @@ export const Auth: React.FC = () => {
           )}
 
           {!otpSent ? (
-            <form onSubmit={isLogin ? handleLogin : handleSignupStart} className="space-y-4">
-               {!isLogin && (
+            <form onSubmit={isEffectiveLogin ? handleLogin : handleSignupStart} className="space-y-4">
+               {!isEffectiveLogin && (
                 <div>
                   <label className="block text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Full Name</label>
                   <input
@@ -275,17 +295,19 @@ export const Auth: React.FC = () => {
             </form>
           )}
 
-          <div className="mt-8 text-center">
-            <button 
-              onClick={() => {
-                setIsLogin(!isLogin);
-                resetForm();
-              }} 
-              className="text-gray-500 dark:text-gray-400 hover:text-india-blue dark:hover:text-blue-400 text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-india-saffron"
-            >
-              {isLogin ? "New here? Create an account" : "Already have an account? Login"}
-            </button>
-          </div>
+          {!isAdminMode && (
+            <div className="mt-8 text-center">
+              <button 
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  resetForm();
+                }} 
+                className="text-gray-500 dark:text-gray-400 hover:text-india-blue dark:hover:text-blue-400 text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-india-saffron"
+              >
+                {isLogin ? "New here? Create an account" : "Already have an account? Login"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -14,25 +14,14 @@ router.post('/register', async (req, res) => {
     const { name, email, password, role = 'USER' } = req.body;
     const targetRole = role === 'ADMIN' ? 'ADMIN' : 'USER';
 
+    // Admin account creation is locked. Only existing admins can login.
+    if (targetRole === 'ADMIN') {
+      return res.status(403).json({ error: 'Admin registration is disabled.' });
+    }
+
     // Validation
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'Name, email, and password are required' });
-    }
-
-    if (targetRole === 'ADMIN') {
-      const { count: adminCount, error: adminCountError } = await supabase
-        .from('users')
-        .select('id', { count: 'exact', head: true })
-        .eq('role', 'ADMIN');
-
-      if (adminCountError) {
-        console.error('Admin count check error:', adminCountError);
-        return res.status(500).json({ error: 'Unable to create admin right now. Please try again.' });
-      }
-
-      if ((adminCount ?? 0) >= 3) {
-        return res.status(400).json({ error: 'Maximum number of admins reached. Please contact support.' });
-      }
     }
 
     if (password.length < 4) {
