@@ -64,6 +64,7 @@ FRONTEND_URL=http://localhost:5173
 **Client** (`client/.env`):
 ```env
 VITE_API_URL=http://localhost:3001/api
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 Question content is now served entirely from the backend using the static bank defined in `server/src/data/questions.js`, so no Gemini API key is required.

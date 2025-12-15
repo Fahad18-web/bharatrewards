@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './components/ThemeContext';
+import { initGoogleAnalytics } from './services/analyticsService';
 import App from './App';
 import './index.css';
+
+initGoogleAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID);
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
