@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, getSettings } from '../services/storageService';
 import { User, AppSettings } from '../types';
-import { AdUnit } from '../components/AdUnit';
 import SEO from '../components/SEO';
 
 export const Dashboard: React.FC = () => {
@@ -61,8 +60,6 @@ export const Dashboard: React.FC = () => {
            </div>
         </button>
       </div>
-
-      <AdUnit />
 
       {/* Categories Grid */}
       <div>

@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // Load environment variables
 dotenv.config();
@@ -16,6 +19,10 @@ import communityRoutes from './routes/community.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.join(__dirname, '..', '..', 'client', 'dist');
 
 // ============================================
 // MIDDLEWARE
@@ -79,6 +86,21 @@ app.use('/api/redeem', redeemRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/community', communityRoutes);
+
+// ============================================
+// STATIC FRONTEND (OPTIONAL)
+// ============================================
+
+// If the built client exists, serve it and enable SPA history fallback.
+// This helps crawlers/reviewers and allows BrowserRouter routes to load directly.
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    return res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 // ============================================
 // ERROR HANDLING

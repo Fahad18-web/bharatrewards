@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getCurrentUser, saveUser, getSettings } from '../services/storageService';
 import { fetchGameQuestions, updateUserPoints } from '../services/apiService';
 import { Question, User } from '../types';
-import { AdUnit } from '../components/AdUnit';
 import { InterstitialAd } from '../components/InterstitialAd';
 import SEO from '../components/SEO';
 
@@ -482,10 +481,6 @@ export const Game: React.FC = () => {
             </form>
           )}
         </div>
-      </div>
-
-      <div className="mt-12">
-        <AdUnit />
       </div>
 
       {/* Interstitial Ad between questions */}

@@ -82,17 +82,17 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
           </div>
         </div>
 
-        {/* Ad Container */}
+        {/* Result Container */}
         <div className="glass-card dark:glass-card rounded-3xl overflow-hidden border border-white/30 dark:border-white/10 shadow-2xl">
-          {/* Ad Header */}
+          {/* Header */}
           <div className="bg-gray-100 dark:bg-slate-800 px-4 py-2 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Advertisement</span>
+              <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Round Result</span>
             </div>
             <div className="flex items-center gap-3">
               {!canSkip && (
                 <span className="text-sm font-bold text-gray-500 dark:text-gray-400">
-                  Skip in {countdown}s
+                  Continuing in {countdown}s
                 </span>
               )}
               {canSkip && (
@@ -106,48 +106,24 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
             </div>
           </div>
 
-          {/* Ad Content Placeholder */}
-          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 min-h-[300px] flex flex-col items-center justify-center">
-            {/* 
-              ================================================================
-              GOOGLE ADSENSE / ADMOB INTEGRATION POINT
-              ================================================================
-              Replace this placeholder with your actual ad code:
-              
-              For Google AdSense:
-              <ins className="adsbygoogle"
-                   style={{ display: 'block' }}
-                   data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                   data-ad-slot="XXXXXXXXXX"
-                   data-ad-format="auto"
-                   data-full-width-responsive="true">
-              </ins>
-              
-              Then call: (window.adsbygoogle = window.adsbygoogle || []).push({});
-              
-              For React apps, consider using react-adsense or similar packages.
-              ================================================================
-            */}
-            
-            <div className="text-center">
-              <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-india-saffron/20 to-india-green/20 flex items-center justify-center">
-                <span className="text-5xl">📺</span>
+          {/* Body */}
+          <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 min-h-[220px] flex flex-col items-center justify-center">
+            <div className="text-center max-w-md">
+              <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-india-saffron/20 to-india-green/20 flex items-center justify-center">
+                <span className="text-4xl">🎯</span>
               </div>
-              <p className="text-gray-600 dark:text-gray-300 font-bold text-lg mb-2">Ad Space</p>
-              <p className="text-gray-400 dark:text-gray-500 text-sm max-w-xs mx-auto">
-                Your advertisement will appear here. Integrate Google AdSense or AdMob for real ads.
+              <p className="text-gray-700 dark:text-gray-200 font-black text-xl mb-2">
+                {bannerMode === 'correct'
+                  ? 'Nice! Keep the streak going.'
+                  : bannerMode === 'skip'
+                    ? 'Time\'s up — next one is yours.'
+                    : 'No worries — try the next one.'}
               </p>
-              
-              {/* Sample Ad Banner Placeholder */}
-              <div className="mt-6 p-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-slate-700/50">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-16 h-16 bg-gray-200 dark:bg-slate-600 rounded-xl animate-pulse"></div>
-                  <div className="text-left">
-                    <div className="h-4 w-32 bg-gray-200 dark:bg-slate-600 rounded animate-pulse mb-2"></div>
-                    <div className="h-3 w-48 bg-gray-200 dark:bg-slate-600 rounded animate-pulse"></div>
-                  </div>
-                </div>
-              </div>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {bannerMode === 'correct' && pointsEarned > 0
+                  ? `You earned ${pointsEarned} points.`
+                  : 'Get ready for the next question.'}
+              </p>
             </div>
           </div>
 

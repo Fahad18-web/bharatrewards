@@ -1,22 +1,56 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
+
+const CONTENT_ROUTE_ALLOWLIST = ['/', '/faq', '/terms', '/privacy', '/contact'];
+
+const normalizePath = (pathname: string) => {
+  const trimmed = pathname.trim();
+  if (!trimmed) return '/';
+  const withoutTrailing = trimmed.replace(/\/+$/g, '');
+  return withoutTrailing === '' ? '/' : withoutTrailing;
+};
 
 export const AdUnit: React.FC = () => {
   const location = useLocation();
-  const protectedRoutes = ['/wallet', '/admin'];
+  const pushedRef = useRef(false);
 
-  const shouldHideAds = protectedRoutes.some(route => location.pathname.startsWith(route));
+  const isAllowedRoute = useMemo(() => {
+    const normalized = normalizePath(location.pathname);
+    return CONTENT_ROUTE_ALLOWLIST.includes(normalized);
+  }, [location.pathname]);
 
-  if (shouldHideAds) {
-    return null; 
-  }
+  const clientId = (import.meta as any).env?.VITE_ADSENSE_CLIENT || 'ca-pub-6858186841946082';
+  const slot = (import.meta as any).env?.VITE_ADSENSE_SLOT;
+
+  if (!isAllowedRoute || !clientId || !slot) return null;
+
+  useEffect(() => {
+    if (pushedRef.current) return;
+    pushedRef.current = true;
+
+    try {
+      (window.adsbygoogle = (window.adsbygoogle || []) as unknown[]).push({});
+    } catch {
+      // no-op; AdSense script may not be ready yet
+    }
+  }, []);
 
   return (
-    <div className="w-full my-4 p-4 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-slate-800/50 flex items-center justify-center h-32 text-gray-400 dark:text-gray-500 select-none">
-      <div className="text-center">
-        <p className="font-bold">Google Ad Placeholder</p>
-        <p className="text-xs">Ads visible here (Hidden on Wallet/Admin pages)</p>
-      </div>
+    <div className="w-full my-6 flex justify-center">
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block', width: '100%' }}
+        data-ad-client={clientId}
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
     </div>
   );
 };

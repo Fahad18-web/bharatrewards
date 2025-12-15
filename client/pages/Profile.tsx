@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../services/storageService';
 import { changePassword, refreshCurrentUser, saveUser as saveUserApi } from '../services/apiService';
 import { User } from '../types';
-import { AdUnit } from '../components/AdUnit';
 import SEO from '../components/SEO';
 
 interface StatusMessage {
@@ -434,8 +433,6 @@ export const Profile: React.FC = () => {
           </button>
         </form>
       </section>
-
-      <AdUnit />
     </div>
     </>
   );

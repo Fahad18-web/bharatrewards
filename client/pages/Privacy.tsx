@@ -19,8 +19,8 @@ export const Privacy: React.FC = () => {
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
           Privacy <span className="text-india-blue">Policy</span>
         </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">
-          Last Updated: {new Date().toLocaleDateString()}
+        <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">
+          Last Updated: {lastUpdated}
         </p>
       </div>
 

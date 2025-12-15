@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useRef } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { trackPageView } from './services/analyticsService';
 
@@ -33,8 +33,7 @@ const GoogleAnalyticsListener: React.FC = () => {
   const lastPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    // Use the real browser URL so HashRouter paths appear as /#/route in GA.
-    const pagePath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const pagePath = `${window.location.pathname}${window.location.search}`;
     if (lastPathRef.current === pagePath) return;
     lastPathRef.current = pagePath;
 
