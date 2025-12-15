@@ -94,7 +94,7 @@ export const Landing: React.FC = () => {
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
             Play Games.{" "}
-            <span className="bg-gradient-to-r from-india-saffron via-india-green to-india-blue bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-india-saffron via-india-green to-india-green bg-clip-text text-transparent">
               Earn Real Rewards.
             </span>
           </h1>
@@ -115,7 +115,7 @@ export const Landing: React.FC = () => {
               <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">Paid to Users</div>
             </div>
             <div className="glass-card dark:glass-card rounded-2xl px-6 py-5 shadow-xl border border-white/50 dark:border-white/10 backdrop-blur-xl min-w-[140px]">
-              <div className="text-3xl md:text-4xl font-black text-india-blue drop-shadow-sm">5</div>
+              <div className="text-3xl md:text-4xl font-black text-india-white drop-shadow-sm">5</div>
               <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">Game Modes</div>
             </div>
           </div>
