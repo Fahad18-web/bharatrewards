@@ -8,6 +8,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 // Token management
 const TOKEN_KEY = 'bharatrewards_token';
 const USER_KEY = 'bharatrewards_user';
+const DEVICE_ID_KEY = 'bharatrewards_device_id';
 
 const getSessionStorage = (): Storage | null => {
   if (typeof window === 'undefined') return null;
@@ -29,6 +30,24 @@ const getLocalStorage = (): Storage | null => {
 
 const AUTH_STORAGE = getSessionStorage();
 const LEGACY_AUTH_STORAGE = getLocalStorage();
+
+const getDeviceId = (): string | null => {
+  const storage = getLocalStorage();
+  if (!storage) return null;
+
+  const existing = storage.getItem(DEVICE_ID_KEY);
+  if (existing && typeof existing === 'string') return existing;
+
+  try {
+    const generated = typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? (crypto as any).randomUUID()
+      : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    storage.setItem(DEVICE_ID_KEY, generated);
+    return generated;
+  } catch {
+    return null;
+  }
+};
 
 const clearLegacyAuthStorage = (): void => {
   if (!LEGACY_AUTH_STORAGE) return;
@@ -101,12 +120,14 @@ const apiRequest = async <T>(
   }
 
   const token = getToken();
+  const deviceId = getDeviceId();
 
   const config: RequestInit = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(deviceId ? { 'X-Device-Id': deviceId } : {}),
       ...options.headers,
     },
   };
@@ -147,19 +168,14 @@ export const registerUser = async (
 };
 
 export const loginUser = async (email: string, password: string): Promise<User | null> => {
-  try {
-    const { user, token } = await apiRequest<{ user: User; token: string }>('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
+  const { user, token } = await apiRequest<{ user: User; token: string }>('/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
 
-    setToken(token);
-    setUserCache(user);
-    return user;
-  } catch (error) {
-    console.error('Login error:', error);
-    return null;
-  }
+  setToken(token);
+  setUserCache(user);
+  return user;
 };
 
 export const logoutUser = async (): Promise<void> => {

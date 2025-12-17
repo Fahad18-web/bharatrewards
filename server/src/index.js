@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import compression from 'compression';
 
 // Load environment variables
 dotenv.config();
@@ -20,6 +23,17 @@ import communityRoutes from './routes/community.js';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const isProd = process.env.NODE_ENV === 'production';
+
+// Hide Express signature
+app.disable('x-powered-by');
+
+// If running behind a reverse proxy (Render/NGINX), enable this so req.ip / rate limiting work correctly.
+// Set TRUST_PROXY=1 in production if needed.
+if (process.env.TRUST_PROXY) {
+  app.set('trust proxy', process.env.TRUST_PROXY);
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistPath = path.join(__dirname, '..', '..', 'client', 'dist');
@@ -28,40 +42,111 @@ const clientDistPath = path.join(__dirname, '..', '..', 'client', 'dist');
 // MIDDLEWARE
 // ============================================
 
+// Security headers
+app.use(
+  helmet({
+    // CSP is app-specific and can break the SPA if misconfigured; keep it off by default.
+    contentSecurityPolicy: false
+  })
+);
+
+// Compression (helps performance for API + static assets)
+app.use(compression());
+
+// Rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: Number(process.env.RATE_LIMIT_MAX) || 600,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: Number(process.env.AUTH_RATE_LIMIT_MAX) || 60,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
 // CORS configuration
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Allow localhost on any port and the configured frontend URL
-    if (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes('192.168')) {
-      return callback(null, true);
-    }
-    
-    // Check against FRONTEND_URL
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-    if (origin === frontendUrl) {
-      return callback(null, true);
-    }
-    
-    callback(null, true); // Allow all in development
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+const getAllowedOrigins = () => {
+  const allowed = new Set();
+
+  const frontendUrl = process.env.FRONTEND_URL;
+  if (frontendUrl) allowed.add(frontendUrl);
+
+  const extra = process.env.CORS_ALLOWED_ORIGINS;
+  if (extra) {
+    extra
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .forEach((o) => allowed.add(o));
+  }
+
+  // Dev defaults
+  if (!isProd && !frontendUrl) {
+    allowed.add('http://localhost:5173');
+  }
+
+  return allowed;
+};
+
+const allowedOrigins = getAllowedOrigins();
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (server-to-server, curl). In production, you may set STRICT_CORS=1 to deny these.
+      if (!origin) {
+        if (isProd && process.env.STRICT_CORS) return callback(new Error('CORS origin denied'), false);
+        return callback(null, true);
+      }
+
+      // Dev convenience
+      if (!isProd) {
+        if (
+          origin.includes('localhost') ||
+          origin.includes('127.0.0.1') ||
+          origin.includes('192.168')
+        ) {
+          return callback(null, true);
+        }
+        return callback(null, true);
+      }
+
+      // Production: allowlist only
+      if (allowedOrigins.has(origin)) return callback(null, true);
+      return callback(new Error('CORS origin denied'), false);
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Device-Id']
+  })
+);
 
 // Parse JSON bodies
-app.use(express.json());
+app.use(express.json({ limit: process.env.JSON_BODY_LIMIT || '100kb' }));
 
 // Parse URL-encoded bodies
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: process.env.URLENCODED_BODY_LIMIT || '100kb' }));
+
+// Avoid caching API responses (auth tokens, user data) in browsers/proxies.
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
+// Apply global rate limits to API routes
+app.use('/api', apiLimiter);
+app.use('/api/auth', authLimiter);
 
 // Request logging middleware
 app.use((req, res, next) => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] ${req.method} ${req.path}`);
+  if (!isProd) {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.path}`);
+  }
   next();
 });
 
@@ -94,7 +179,13 @@ app.use('/api/community', communityRoutes);
 // If the built client exists, serve it and enable SPA history fallback.
 // This helps crawlers/reviewers and allows BrowserRouter routes to load directly.
 if (fs.existsSync(clientDistPath)) {
-  app.use(express.static(clientDistPath));
+  app.use(
+    express.static(clientDistPath, {
+      etag: true,
+      maxAge: isProd ? '1h' : 0,
+      index: false
+    })
+  );
 
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api')) return next();
@@ -118,12 +209,20 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error('Server Error:', err);
 
-  // Don't expose internal errors in production
-  const isDev = process.env.NODE_ENV !== 'production';
+  if (err?.message === 'CORS origin denied') {
+    return res.status(403).json({ error: 'CORS origin denied' });
+  }
 
-  res.status(err.status || 500).json({
-    error: err.message || 'Internal Server Error',
-    ...(isDev && { stack: err.stack })
+  const status = Number(err.status) || 500;
+  const isClientError = status >= 400 && status < 500;
+
+  res.status(status).json({
+    error: isProd
+      ? isClientError
+        ? err.message || 'Bad Request'
+        : 'Internal Server Error'
+      : err.message || 'Internal Server Error',
+    ...(!isProd && { stack: err.stack })
   });
 });
 

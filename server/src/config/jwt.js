@@ -1,7 +1,14 @@
 import jwt from 'jsonwebtoken';
 import { supabase } from './supabase.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-change-in-production';
+const isProd = process.env.NODE_ENV === 'production';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (isProd && (!JWT_SECRET || JWT_SECRET === 'fallback-secret-change-in-production')) {
+  throw new Error('JWT_SECRET must be set to a strong value in production');
+}
+
+const effectiveJwtSecret = JWT_SECRET || 'fallback-secret-change-in-production';
 const JWT_EXPIRES_IN = '7d';
 
 // Generate JWT token for a user
@@ -13,7 +20,7 @@ export const generateToken = (user) => {
       role: user.role,
       name: user.name
     },
-    JWT_SECRET,
+    effectiveJwtSecret,
     { expiresIn: JWT_EXPIRES_IN }
   );
 };
@@ -21,7 +28,7 @@ export const generateToken = (user) => {
 // Verify and decode JWT token
 export const verifyToken = (token) => {
   try {
-    return jwt.verify(token, JWT_SECRET);
+    return jwt.verify(token, effectiveJwtSecret);
   } catch (error) {
     return null;
   }

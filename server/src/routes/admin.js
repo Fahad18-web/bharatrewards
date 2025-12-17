@@ -3,6 +3,7 @@ import { supabase } from '../config/supabase.js';
 import { authMiddleware, adminMiddleware } from '../config/jwt.js';
 
 const router = express.Router();
+const ADMIN_DEBUG_LOGS = process.env.ADMIN_DEBUG_LOGS === '1';
 // Only query columns that exist - ban columns are optional
 const USER_COLUMNS = 'id, email, name, role, points, wallet_balance, solved_count, created_at';
 
@@ -29,17 +30,20 @@ router.use(authMiddleware, adminMiddleware);
 // ============================================
 router.get('/users', async (req, res) => {
   try {
-    console.log('=== Admin Users Request ===');
-    console.log('Requesting user:', req.user?.email);
+    if (ADMIN_DEBUG_LOGS) {
+      console.log('=== Admin Users Request ===');
+      console.log('Requesting user:', req.user?.email);
+    }
     
     const { data: users, error } = await supabase
       .from('users')
       .select(USER_COLUMNS)
       .order('created_at', { ascending: false });
 
-    console.log('Supabase response - error:', error);
-    console.log('Supabase response - users count:', users?.length ?? 0);
-    console.log('Supabase response - users:', JSON.stringify(users, null, 2));
+    if (ADMIN_DEBUG_LOGS) {
+      console.log('Supabase response - error:', error);
+      console.log('Supabase response - users count:', users?.length ?? 0);
+    }
 
     if (error) {
       console.error('Admin fetch users error:', error);
@@ -47,7 +51,9 @@ router.get('/users', async (req, res) => {
     }
 
     const mappedUsers = users?.map((user) => mapUser(user)) ?? [];
-    console.log('Mapped users count:', mappedUsers.length);
+    if (ADMIN_DEBUG_LOGS) {
+      console.log('Mapped users count:', mappedUsers.length);
+    }
     res.json({ users: mappedUsers });
   } catch (err) {
     console.error('Admin users route error:', err);

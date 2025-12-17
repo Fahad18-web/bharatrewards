@@ -4,7 +4,6 @@ import { getAnnouncements } from '../services/apiService';
 import { getCurrentUser, logoutUser, getLastSeenAnnouncementAt } from '../services/storageService';
 import { User, UserRole } from '../types';
 import { useTheme } from './ThemeContext';
-import { AdSenseScript } from './AdSenseScript';
 
 // Memoized background component to prevent re-renders
 const BackgroundElements = memo(({ showEffects }: { showEffects: boolean }) => {
@@ -212,7 +211,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   return (
     <div className={`min-h-screen bg-india-bg dark:bg-slate-900 font-sans text-gray-800 dark:text-gray-100 relative selection:bg-india-saffron selection:text-white overflow-hidden transition-colors duration-500 ${!showGlassEffects ? 'no-glass' : ''}`}>
-      <AdSenseScript />
       <BackgroundElements showEffects={showGlassEffects} />
 
       {/* Glass Navbar */}

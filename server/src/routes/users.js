@@ -217,7 +217,9 @@ router.put('/:id/points', authMiddleware, async (req, res) => {
 // ============================================
 router.get('/stats/leaderboard', async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 10;
+    const rawLimit = typeof req.query.limit === 'string' ? req.query.limit : '';
+    const parsed = Number.parseInt(rawLimit, 10);
+    const limit = Number.isFinite(parsed) ? Math.min(Math.max(parsed, 1), 100) : 10;
 
     const { data: users, error } = await supabase
       .from('users')

@@ -32,6 +32,16 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 JWT_SECRET=your_super_secret_jwt_key
 PORT=3001
 FRONTEND_URL=http://localhost:5173
+
+# Optional hardening
+# CORS_ALLOWED_ORIGINS=https://solve2win.com,https://www.solve2win.com
+# STRICT_CORS=1
+# TRUST_PROXY=1
+# RATE_LIMIT_MAX=600
+# AUTH_RATE_LIMIT_MAX=60
+# JSON_BODY_LIMIT=100kb
+# URLENCODED_BODY_LIMIT=100kb
+# ADMIN_DEBUG_LOGS=1
 ```
 
 ### 3. Install Dependencies
@@ -190,6 +200,14 @@ The project uses ES Modules. Make sure to use `.js` extensions in imports.
 | JWT_SECRET | Secret for JWT signing | Yes |
 | PORT | Server port (default: 3001) | No |
 | FRONTEND_URL | Frontend URL for CORS | No |
+| CORS_ALLOWED_ORIGINS | Extra allowed origins (comma-separated) | No |
+| STRICT_CORS | Set to `1` to deny requests without Origin in prod | No |
+| TRUST_PROXY | Set when behind a reverse proxy | No |
+| RATE_LIMIT_MAX | Requests per 15 minutes for `/api` | No |
+| AUTH_RATE_LIMIT_MAX | Requests per 15 minutes for `/api/auth` | No |
+| JSON_BODY_LIMIT | Max JSON body size (e.g. `100kb`) | No |
+| URLENCODED_BODY_LIMIT | Max urlencoded body size (e.g. `100kb`) | No |
+| ADMIN_DEBUG_LOGS | Enable verbose admin logs (avoid in prod) | No |
 | NODE_ENV | Environment (development/production) | No |
 
 ## 🚀 Deployment
@@ -198,6 +216,32 @@ The project uses ES Modules. Make sure to use `.js` extensions in imports.
 
 1. Set all required environment variables
 2. Run database migrations in Supabase
+
+## ✅ Security & Performance Checklist (Production)
+
+- **Secrets**: never commit `server/.env`; rotate `SUPABASE_SERVICE_ROLE_KEY` and `JWT_SECRET` if leaked.
+- **JWT**: set `NODE_ENV=production` and a strong `JWT_SECRET` (the server will refuse to start without it).
+- **CORS**: set `FRONTEND_URL` and optionally `CORS_ALLOWED_ORIGINS` to your exact production origins; consider `STRICT_CORS=1`.
+- **Proxy**: if behind NGINX/Render/etc, set `TRUST_PROXY=1` so `req.ip` and rate limiting work correctly.
+- **Rate limits**: tune `RATE_LIMIT_MAX` and `AUTH_RATE_LIMIT_MAX` based on traffic.
+- **HTTPS**: terminate TLS at your load balancer/proxy; serve the API only over HTTPS.
+- **Admin safety**: keep `ADMIN_DEBUG_LOGS` off in production; change the default admin password.
+
+## 🚫 Duplicate / Multi-Account Prevention
+
+The server can block (and optionally auto-ban) suspicious registrations using **device id + IP + similar-name** heuristics.
+
+- Apply the Supabase migration: [server/supabase/duplicate_prevention.sql](supabase/duplicate_prevention.sql)
+- Optional docs: [server/supabase/README-duplicate-prevention.md](supabase/README-duplicate-prevention.md)
+
+Environment variables (see [server/.env.example](.env.example)):
+- `DUPLICATE_PREVENTION` (default enabled)
+- `AUTO_BAN_DUPLICATES=1` to auto-ban instead of just blocking
+- `MAX_ACCOUNTS_PER_DEVICE` (default 1)
+- `MAX_ACCOUNTS_PER_IP` + `IP_WINDOW_HOURS` (defaults 3 per 24h)
+- `DUPLICATE_NAME_SIMILARITY` (default 0.88)
+
+Note: IP-based rules can false-positive on shared networks; device-based rules are usually safer.
 3. Change default admin password
 4. Set `NODE_ENV=production`
 
