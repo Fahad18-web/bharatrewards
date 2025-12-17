@@ -72,6 +72,11 @@ const authLimiter = rateLimit({
 const getAllowedOrigins = () => {
   const allowed = new Set();
 
+  // Production domains - always allowed
+  allowed.add('https://solve2win.com');
+  allowed.add('https://www.solve2win.com');
+  allowed.add('https://api.solve2win.com');
+
   const frontendUrl = process.env.FRONTEND_URL;
   if (frontendUrl) allowed.add(frontendUrl);
 
@@ -94,14 +99,32 @@ const getAllowedOrigins = () => {
 
 const allowedOrigins = getAllowedOrigins();
 
+// Handle preflight OPTIONS requests explicitly
+app.options('*', cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+    // In dev, allow all
+    if (!isProd) return callback(null, true);
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Device-Id']
+}));
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (server-to-server, curl). In production, you may set STRICT_CORS=1 to deny these.
+      // Allow requests with no origin (server-to-server, curl)
       if (!origin) {
         if (isProd && process.env.STRICT_CORS) return callback(new Error('CORS origin denied'), false);
         return callback(null, true);
       }
+
+      // Production: check allowlist (includes hardcoded production domains)
+      if (allowedOrigins.has(origin)) return callback(null, true);
 
       // Dev convenience
       if (!isProd) {
@@ -115,8 +138,8 @@ app.use(
         return callback(null, true);
       }
 
-      // Production: allowlist only
-      if (allowedOrigins.has(origin)) return callback(null, true);
+      // Deny if not in allowlist
+      console.log(`CORS blocked origin: ${origin}`);
       return callback(new Error('CORS origin denied'), false);
     },
     credentials: true,
