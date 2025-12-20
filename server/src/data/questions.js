@@ -20,276 +20,272 @@ const shuffle = (arr, seed = 1) => {
   return copy;
 };
 
-const stateCapitals = [
-  { state: 'Andhra Pradesh', capital: 'Amaravati', formation: 1953, speciality: 'Kuchipudi dance' },
-  { state: 'Arunachal Pradesh', capital: 'Itanagar', formation: 1987, speciality: 'Dawn-lit mountains' },
-  { state: 'Assam', capital: 'Dispur', formation: 1912, speciality: 'Bihu celebrations' },
-  { state: 'Bihar', capital: 'Patna', formation: 1912, speciality: 'Nalanda ruins' },
-  { state: 'Chhattisgarh', capital: 'Raipur', formation: 2000, speciality: 'Steel production' },
-  { state: 'Goa', capital: 'Panaji', formation: 1961, speciality: 'Coastal heritage' },
-  { state: 'Gujarat', capital: 'Gandhinagar', formation: 1960, speciality: 'Garba festival' },
-  { state: 'Haryana', capital: 'Chandigarh', formation: 1966, speciality: 'Dairy excellence' },
-  { state: 'Himachal Pradesh', capital: 'Shimla', formation: 1971, speciality: 'Apple orchards' },
-  { state: 'Jharkhand', capital: 'Ranchi', formation: 2000, speciality: 'Mineral wealth' },
-  { state: 'Karnataka', capital: 'Bengaluru', formation: 1956, speciality: 'Tech innovation' },
-  { state: 'Kerala', capital: 'Thiruvananthapuram', formation: 1956, speciality: 'Backwater tourism' },
-  { state: 'Madhya Pradesh', capital: 'Bhopal', formation: 1956, speciality: 'Khajuraho temples' },
-  { state: 'Maharashtra', capital: 'Mumbai', formation: 1960, speciality: 'Financial hub' },
-  { state: 'Manipur', capital: 'Imphal', formation: 1972, speciality: 'Pung cholom drums' },
-  { state: 'Meghalaya', capital: 'Shillong', formation: 1972, speciality: 'Living root bridges' },
-  { state: 'Mizoram', capital: 'Aizawl', formation: 1987, speciality: 'Bamboo dance' },
-  { state: 'Nagaland', capital: 'Kohima', formation: 1963, speciality: 'Hornbill festival' },
-  { state: 'Odisha', capital: 'Bhubaneswar', formation: 1936, speciality: 'Sand art' },
-  { state: 'Punjab', capital: 'Chandigarh', formation: 1966, speciality: 'Gurbani music' },
-  { state: 'Rajasthan', capital: 'Jaipur', formation: 1956, speciality: 'Desert forts' },
-  { state: 'Sikkim', capital: 'Gangtok', formation: 1975, speciality: 'Organic farming' },
-  { state: 'Tamil Nadu', capital: 'Chennai', formation: 1956, speciality: 'Classical music' },
-  { state: 'Telangana', capital: 'Hyderabad', formation: 2014, speciality: 'Pearl trade' },
-  { state: 'Tripura', capital: 'Agartala', formation: 1972, speciality: 'Handloom craft' },
-  { state: 'Uttar Pradesh', capital: 'Lucknow', formation: 1937, speciality: 'Awadhi cuisine' },
-  { state: 'Uttarakhand', capital: 'Dehradun', formation: 2000, speciality: 'Char Dham routes' },
-  { state: 'West Bengal', capital: 'Kolkata', formation: 1947, speciality: 'Literary heritage' },
-  { state: 'Delhi', capital: 'New Delhi', formation: 1911, speciality: 'Seat of governance' },
-  { state: 'Puducherry', capital: 'Puducherry', formation: 1963, speciality: 'French avenues' },
-  { state: 'Jammu and Kashmir', capital: 'Srinagar', formation: 2019, speciality: 'Saffron fields' },
-  { state: 'Ladakh', capital: 'Leh', formation: 2019, speciality: 'High-altitude culture' },
-  { state: 'Andaman and Nicobar Islands', capital: 'Port Blair', formation: 1956, speciality: 'Coral diversity' },
-  { state: 'Chandigarh', capital: 'Chandigarh', formation: 1966, speciality: 'Modernist architecture' },
-  { state: 'Lakshadweep', capital: 'Kavaratti', formation: 1956, speciality: 'Atoll ecology' },
-  { state: 'Dadra and Nagar Haveli and Daman and Diu', capital: 'Daman', formation: 2020, speciality: 'Coastal forts' }
+// Pakistani Provinces, Regions and Administrative Units
+const provinceCapitals = [
+  { province: 'Punjab', capital: 'Lahore', formation: 1970, speciality: 'Cultural heartland' },
+  { province: 'Sindh', capital: 'Karachi', formation: 1970, speciality: 'Economic hub' },
+  { province: 'Khyber Pakhtunkhwa', capital: 'Peshawar', formation: 1970, speciality: 'Gateway to Central Asia' },
+  { province: 'Balochistan', capital: 'Quetta', formation: 1970, speciality: 'Largest province by area' },
+  { province: 'Gilgit-Baltistan', capital: 'Gilgit', formation: 2009, speciality: 'Mountain paradise' },
+  { province: 'Azad Kashmir', capital: 'Muzaffarabad', formation: 1947, speciality: 'Scenic valleys' },
+  { province: 'Islamabad Capital Territory', capital: 'Islamabad', formation: 1960, speciality: 'Planned capital city' },
+  { province: 'Faisalabad Division', capital: 'Faisalabad', formation: 1977, speciality: 'Textile capital' },
+  { province: 'Multan Division', capital: 'Multan', formation: 1970, speciality: 'City of Saints' },
+  { province: 'Rawalpindi Division', capital: 'Rawalpindi', formation: 1970, speciality: 'Twin city of Islamabad' },
+  { province: 'Gujranwala Division', capital: 'Gujranwala', formation: 1970, speciality: 'Industrial center' },
+  { province: 'Bahawalpur Division', capital: 'Bahawalpur', formation: 1970, speciality: 'Former princely state' },
+  { province: 'Sukkur Division', capital: 'Sukkur', formation: 1970, speciality: 'Indus River gateway' },
+  { province: 'Hyderabad Division', capital: 'Hyderabad', formation: 1970, speciality: 'Second largest in Sindh' },
+  { province: 'Sargodha Division', capital: 'Sargodha', formation: 1970, speciality: 'Citrus capital' },
+  { province: 'Dera Ghazi Khan Division', capital: 'Dera Ghazi Khan', formation: 1970, speciality: 'Gateway to Balochistan' },
+  { province: 'Larkana Division', capital: 'Larkana', formation: 1970, speciality: 'Mohenjo-daro heritage' },
+  { province: 'Mirpur Division', capital: 'Mirpur', formation: 1947, speciality: 'British Pakistani hub' },
+  { province: 'Chitral District', capital: 'Chitral', formation: 1969, speciality: 'Kalash Valley' },
+  { province: 'Swat District', capital: 'Mingora', formation: 1969, speciality: 'Switzerland of Pakistan' }
 ];
 
+// Pakistani Folk and Cultural Dances
 const danceForms = [
-  { dance: 'Bharatanatyam', state: 'Tamil Nadu' },
-  { dance: 'Kathak', state: 'Uttar Pradesh' },
-  { dance: 'Kathakali', state: 'Kerala' },
-  { dance: 'Kuchipudi', state: 'Andhra Pradesh' },
-  { dance: 'Odissi', state: 'Odisha' },
-  { dance: 'Manipuri', state: 'Manipur' },
-  { dance: 'Mohiniyattam', state: 'Kerala' },
-  { dance: 'Sattriya', state: 'Assam' },
-  { dance: 'Bhangra', state: 'Punjab' },
-  { dance: 'Ghoomar', state: 'Rajasthan' },
-  { dance: 'Garba', state: 'Gujarat' },
-  { dance: 'Lavani', state: 'Maharashtra' },
-  { dance: 'Yakshagana', state: 'Karnataka' },
-  { dance: 'Thang-Ta', state: 'Manipur' },
-  { dance: 'Rouff', state: 'Jammu and Kashmir' },
-  { dance: 'Chhau', state: 'West Bengal' },
-  { dance: 'Kalbelia', state: 'Rajasthan' },
-  { dance: 'Bihu', state: 'Assam' },
-  { dance: 'Karakattam', state: 'Tamil Nadu' },
-  { dance: 'Dollu Kunitha', state: 'Karnataka' }
+  { dance: 'Bhangra', region: 'Punjab' },
+  { dance: 'Luddi', region: 'Punjab' },
+  { dance: 'Jhumar', region: 'Punjab' },
+  { dance: 'Sammi', region: 'Punjab' },
+  { dance: 'Khattak Dance', region: 'Khyber Pakhtunkhwa' },
+  { dance: 'Attan', region: 'Khyber Pakhtunkhwa' },
+  { dance: 'Chitrali Dance', region: 'Chitral' },
+  { dance: 'Lewa', region: 'Balochistan' },
+  { dance: 'Chap', region: 'Balochistan' },
+  { dance: 'Ho Jamalo', region: 'Sindh' },
+  { dance: 'Dhamal', region: 'Punjab' },
+  { dance: 'Malakhro', region: 'Sindh' },
+  { dance: 'Rass', region: 'Gilgit-Baltistan' },
+  { dance: 'Dumhal', region: 'Gilgit-Baltistan' },
+  { dance: 'Kathak', region: 'Punjab' },
+  { dance: 'Gatka', region: 'Punjab' },
+  { dance: 'Kikli', region: 'Punjab' },
+  { dance: 'Giddha', region: 'Punjab' },
+  { dance: 'Rouff', region: 'Azad Kashmir' },
+  { dance: 'Sheedi Dance', region: 'Sindh' }
 ];
 
+// Pakistani Festivals and Celebrations
 const festivals = [
-  { name: 'Pongal', month: 'January', focus: 'Harvest' },
-  { name: 'Baisakhi', month: 'April', focus: 'Harvest' },
-  { name: 'Onam', month: 'September', focus: 'Harvest' },
-  { name: 'Durga Puja', month: 'October', focus: 'Goddess worship' },
-  { name: 'Diwali', month: 'November', focus: 'Light over darkness' },
-  { name: 'Holi', month: 'March', focus: 'Spring colors' },
-  { name: 'Makar Sankranti', month: 'January', focus: 'Sun transition' },
-  { name: 'Lohri', month: 'January', focus: 'Winter bonfire' },
-  { name: 'Eid al-Fitr', month: 'Varies', focus: 'Ramadan completion' },
-  { name: 'Eid al-Adha', month: 'Varies', focus: 'Sacrifice' },
-  { name: 'Guru Nanak Jayanti', month: 'November', focus: 'Sikh teachings' },
-  { name: 'Christmas', month: 'December', focus: 'Nativity' },
-  { name: 'Ganesh Chaturthi', month: 'September', focus: 'Ganesha' },
-  { name: 'Janmashtami', month: 'August', focus: 'Krishna birth' },
-  { name: 'Bihu', month: 'April', focus: 'Assamese new year' },
-  { name: 'Navroz', month: 'March', focus: 'Parsi new year' },
-  { name: 'Hornbill Festival', month: 'December', focus: 'Naga heritage' },
-  { name: 'Losar', month: 'February', focus: 'Tibetan new year' },
-  { name: 'Thrissur Pooram', month: 'May', focus: 'Temple procession' },
-  { name: 'Desert Festival', month: 'February', focus: 'Marwar culture' }
+  { name: 'Eid ul-Fitr', month: 'Varies', focus: 'End of Ramadan' },
+  { name: 'Eid ul-Adha', month: 'Varies', focus: 'Sacrifice and devotion' },
+  { name: 'Pakistan Day', month: 'March', focus: 'Lahore Resolution' },
+  { name: 'Independence Day', month: 'August', focus: 'Freedom celebration' },
+  { name: 'Quaid-e-Azam Day', month: 'December', focus: 'Founder birth anniversary' },
+  { name: 'Iqbal Day', month: 'November', focus: 'National poet tribute' },
+  { name: 'Kashmir Day', month: 'February', focus: 'Solidarity' },
+  { name: 'Shab-e-Barat', month: 'Varies', focus: 'Night of forgiveness' },
+  { name: 'Shab-e-Meraj', month: 'Varies', focus: 'Prophets journey' },
+  { name: 'Milad un-Nabi', month: 'Varies', focus: 'Prophet birthday' },
+  { name: 'Basant', month: 'February', focus: 'Kite flying festival' },
+  { name: 'Urs of Data Ganj Bakhsh', month: 'Varies', focus: 'Sufi shrine' },
+  { name: 'Chilam Joshi', month: 'May', focus: 'Kalash spring festival' },
+  { name: 'Shandur Polo Festival', month: 'July', focus: 'Highest polo ground' },
+  { name: 'Lok Mela', month: 'October', focus: 'Folk heritage fair' },
+  { name: 'Jashn-e-Baharan', month: 'March', focus: 'Spring celebration' },
+  { name: 'Sibi Mela', month: 'February', focus: 'Cultural fair' },
+  { name: 'Urs of Shah Abdul Latif Bhittai', month: 'Varies', focus: 'Sufi poetry' },
+  { name: 'Holi', month: 'March', focus: 'Hindu festival of colors' },
+  { name: 'Diwali', month: 'November', focus: 'Hindu festival of lights' }
 ];
 
+// Pakistani Historical Monuments
 const monuments = [
-  { name: 'Taj Mahal', location: 'Agra', era: '17th century' },
-  { name: 'Red Fort', location: 'Delhi', era: '17th century' },
-  { name: 'Qutub Minar', location: 'Delhi', era: '12th century' },
-  { name: 'Hawa Mahal', location: 'Jaipur', era: '18th century' },
-  { name: 'Charminar', location: 'Hyderabad', era: '16th century' },
-  { name: 'Konark Sun Temple', location: 'Puri', era: '13th century' },
-  { name: 'Gateway of India', location: 'Mumbai', era: '20th century' },
-  { name: 'Sanchi Stupa', location: 'Sanchi', era: '3rd century BCE' },
-  { name: 'Victoria Memorial', location: 'Kolkata', era: '20th century' },
-  { name: 'Golconda Fort', location: 'Hyderabad', era: '16th century' },
-  { name: 'India Gate', location: 'Delhi', era: '20th century' },
-  { name: 'Amber Fort', location: 'Jaipur', era: '16th century' },
-  { name: 'Sanchi Toranas', location: 'Sanchi', era: '1st century BCE' },
-  { name: 'Fatehpur Sikri', location: 'Agra', era: '16th century' },
-  { name: 'Meenakshi Temple', location: 'Madurai', era: '17th century' },
-  { name: 'Brihadeeswarar Temple', location: 'Thanjavur', era: '11th century' },
-  { name: 'Humayun Tomb', location: 'Delhi', era: '16th century' },
-  { name: 'Lotus Temple', location: 'Delhi', era: '20th century' },
-  { name: 'Jantar Mantar', location: 'Jaipur', era: '18th century' },
-  { name: 'Gol Gumbaz', location: 'Bijapur', era: '17th century' }
+  { name: 'Badshahi Mosque', location: 'Lahore', era: '17th century' },
+  { name: 'Minar-e-Pakistan', location: 'Lahore', era: '20th century' },
+  { name: 'Faisal Mosque', location: 'Islamabad', era: '20th century' },
+  { name: 'Lahore Fort', location: 'Lahore', era: '16th century' },
+  { name: 'Shalimar Gardens', location: 'Lahore', era: '17th century' },
+  { name: 'Mohenjo-daro', location: 'Larkana', era: '2500 BCE' },
+  { name: 'Taxila', location: 'Rawalpindi', era: '6th century BCE' },
+  { name: 'Rohtas Fort', location: 'Jhelum', era: '16th century' },
+  { name: 'Makli Necropolis', location: 'Thatta', era: '14th century' },
+  { name: 'Shah Jahan Mosque', location: 'Thatta', era: '17th century' },
+  { name: 'Hiran Minar', location: 'Sheikhupura', era: '17th century' },
+  { name: 'Tomb of Jahangir', location: 'Lahore', era: '17th century' },
+  { name: 'Wazir Khan Mosque', location: 'Lahore', era: '17th century' },
+  { name: 'Derawar Fort', location: 'Bahawalpur', era: '9th century' },
+  { name: 'Pakistan Monument', location: 'Islamabad', era: '21st century' },
+  { name: 'Quaid-e-Azam Mausoleum', location: 'Karachi', era: '20th century' },
+  { name: 'Baltit Fort', location: 'Hunza', era: '8th century' },
+  { name: 'Altit Fort', location: 'Hunza', era: '11th century' },
+  { name: 'Ranikot Fort', location: 'Jamshoro', era: '17th century' },
+  { name: 'Tomb of Shah Rukn-e-Alam', location: 'Multan', era: '14th century' }
 ];
 
+// Pakistani Rivers
 const rivers = [
-  { name: 'Ganga', origin: 'Gangotri Glacier', meets: 'Bay of Bengal' },
-  { name: 'Yamuna', origin: 'Yamunotri Glacier', meets: 'Ganga at Prayagraj' },
-  { name: 'Brahmaputra', origin: 'Angsi Glacier', meets: 'Bay of Bengal' },
-  { name: 'Godavari', origin: 'Trimbakeshwar', meets: 'Bay of Bengal' },
-  { name: 'Krishna', origin: 'Mahabaleshwar', meets: 'Bay of Bengal' },
-  { name: 'Cauvery', origin: 'Talakaveri', meets: 'Bay of Bengal' },
-  { name: 'Narmada', origin: 'Amarkantak', meets: 'Arabian Sea' },
-  { name: 'Tapti', origin: 'Satpura ranges', meets: 'Arabian Sea' },
-  { name: 'Mahanadi', origin: 'Sihawa hills', meets: 'Bay of Bengal' },
-  { name: 'Sutlej', origin: 'Lake Rakshastal', meets: 'Indus River' },
-  { name: 'Beas', origin: 'Rohtang Pass', meets: 'Sutlej River' },
-  { name: 'Chenab', origin: 'Baralacha Pass', meets: 'Indus River' },
-  { name: 'Jhelum', origin: 'Verinag', meets: 'Indus River' },
-  { name: 'Sabarmati', origin: 'Aravalli hills', meets: 'Arabian Sea' },
-  { name: 'Periyar', origin: 'Western Ghats', meets: 'Arabian Sea' }
+  { name: 'Indus', origin: 'Tibetan Plateau', meets: 'Arabian Sea' },
+  { name: 'Jhelum', origin: 'Kashmir Valley', meets: 'Chenab River' },
+  { name: 'Chenab', origin: 'Himachal Pradesh', meets: 'Sutlej River' },
+  { name: 'Ravi', origin: 'Himachal Pradesh', meets: 'Chenab River' },
+  { name: 'Sutlej', origin: 'Tibet', meets: 'Chenab River' },
+  { name: 'Beas', origin: 'Himalayas', meets: 'Sutlej River' },
+  { name: 'Kabul River', origin: 'Afghanistan', meets: 'Indus River' },
+  { name: 'Swat River', origin: 'Swat Valley', meets: 'Kabul River' },
+  { name: 'Chitral River', origin: 'Chitral', meets: 'Kabul River' },
+  { name: 'Kunar River', origin: 'Afghanistan', meets: 'Kabul River' },
+  { name: 'Zhob River', origin: 'Balochistan', meets: 'Gomal River' },
+  { name: 'Gomal River', origin: 'Afghanistan', meets: 'Indus River' },
+  { name: 'Kurram River', origin: 'Afghanistan', meets: 'Indus River' },
+  { name: 'Hunza River', origin: 'Hunza Valley', meets: 'Gilgit River' },
+  { name: 'Gilgit River', origin: 'Gilgit-Baltistan', meets: 'Indus River' }
 ];
 
-const freedomEvents = [
-  { event: 'Non-Cooperation Movement', year: 1920, leader: 'Mahatma Gandhi' },
-  { event: 'Civil Disobedience', year: 1930, leader: 'Mahatma Gandhi' },
-  { event: 'Quit India Movement', year: 1942, leader: 'Mahatma Gandhi' },
-  { event: 'Swadeshi Movement', year: 1905, leader: 'Bal Gangadhar Tilak' },
-  { event: 'Khilafat Movement', year: 1919, leader: 'Maulana Azad' },
-  { event: 'Ghadar Movement', year: 1913, leader: 'Lala Hardayal' },
-  { event: 'Dandi March', year: 1930, leader: 'Mahatma Gandhi' },
-  { event: 'Azad Hind Fauj', year: 1943, leader: 'Subhas Chandra Bose' },
-  { event: 'Jallianwala Bagh Protest', year: 1919, leader: 'Local leaders' },
-  { event: 'Chauri Chaura Incident', year: 1922, leader: 'Local protesters' },
-  { event: 'Kakori Train Action', year: 1925, leader: 'Ram Prasad Bismil' },
-  { event: 'Simon Commission Protest', year: 1928, leader: 'Lala Lajpat Rai' },
-  { event: 'Poona Pact', year: 1932, leader: 'B. R. Ambedkar' },
-  { event: 'Lucknow Pact', year: 1916, leader: 'All India Congress' },
-  { event: 'Champaran Satyagraha', year: 1917, leader: 'Mahatma Gandhi' },
-  { event: 'Kheda Satyagraha', year: 1918, leader: 'Mahatma Gandhi' },
-  { event: 'Bardoli Satyagraha', year: 1928, leader: 'Vallabhbhai Patel' },
-  { event: 'HSRA formation', year: 1928, leader: 'Chandrasekhar Azad' },
-  { event: 'Royal Indian Navy Mutiny', year: 1946, leader: 'Naval ratings' },
-  { event: 'Telangana Rebellion', year: 1946, leader: 'Communist cadres' }
+// Pakistan Movement and Historical Events
+const historicalEvents = [
+  { event: 'Lahore Resolution', year: 1940, leader: 'Muhammad Ali Jinnah' },
+  { event: 'Two-Nation Theory Formalization', year: 1940, leader: 'Allama Iqbal' },
+  { event: 'Pakistan Independence', year: 1947, leader: 'Muhammad Ali Jinnah' },
+  { event: 'Objective Resolution', year: 1949, leader: 'Liaquat Ali Khan' },
+  { event: 'First Constitution', year: 1956, leader: 'Iskander Mirza' },
+  { event: 'Ayub Khan Era Begins', year: 1958, leader: 'Ayub Khan' },
+  { event: '1965 War', year: 1965, leader: 'Ayub Khan' },
+  { event: 'Tashkent Declaration', year: 1966, leader: 'Ayub Khan' },
+  { event: 'East Pakistan Crisis', year: 1971, leader: 'Yahya Khan' },
+  { event: 'Constitution of 1973', year: 1973, leader: 'Zulfikar Ali Bhutto' },
+  { event: 'Nuclear Capability Declaration', year: 1998, leader: 'Nawaz Sharif' },
+  { event: 'Khilafat Movement Support', year: 1919, leader: 'Maulana Muhammad Ali Johar' },
+  { event: 'Simon Commission Boycott', year: 1928, leader: 'Muslim League' },
+  { event: 'All India Muslim League Founded', year: 1906, leader: 'Nawab Salimullah' },
+  { event: 'Allahabad Address', year: 1930, leader: 'Allama Iqbal' },
+  { event: 'Direct Action Day', year: 1946, leader: 'Muhammad Ali Jinnah' },
+  { event: 'Radcliffe Line Announcement', year: 1947, leader: 'Lord Mountbatten' },
+  { event: 'First Governor General Oath', year: 1947, leader: 'Muhammad Ali Jinnah' },
+  { event: 'Jinnah Death', year: 1948, leader: 'Nation mourning' },
+  { event: 'Liaquat Ali Khan Assassination', year: 1951, leader: 'Nation mourning' }
 ];
 
-const scienceMissions = [
-  { mission: 'Chandrayaan-1', year: 2008, focus: 'Lunar water discovery' },
-  { mission: 'Chandrayaan-2', year: 2019, focus: 'Lunar orbiter' },
-  { mission: 'Chandrayaan-3', year: 2023, focus: 'Lunar south pole landing' },
-  { mission: 'Mangalyaan', year: 2013, focus: 'Mars orbiter' },
-  { mission: 'PSLV-C37', year: 2017, focus: '104 satellites launch' },
-  { mission: 'RISAT-2B', year: 2019, focus: 'Radar imaging' },
-  { mission: 'GSAT-11', year: 2018, focus: 'High throughput communication' },
-  { mission: 'INSAT-3DR', year: 2016, focus: 'Meteorology' },
-  { mission: 'NavIC', year: 2018, focus: 'Regional navigation' },
-  { mission: 'Aditya-L1', year: 2023, focus: 'Solar observatory' },
-  { mission: 'Gaganyaan', year: 2025, focus: 'Crewed test prep' },
-  { mission: 'Cartosat-3', year: 2019, focus: 'High resolution imaging' },
-  { mission: 'Oceansat-3', year: 2022, focus: 'Ocean monitoring' },
-  { mission: 'SSLV-D2', year: 2023, focus: 'Small satellite launch' },
-  { mission: 'Pragyan Rover', year: 2023, focus: 'Lunar rover science' }
+// Pakistani Space and Science Achievements
+const scienceAchievements = [
+  { achievement: 'SUPARCO Established', year: 1961, focus: 'Space agency formation' },
+  { achievement: 'First Rocket Launch', year: 1962, focus: 'Rehbar-I rocket' },
+  { achievement: 'Badr-1 Satellite', year: 1990, focus: 'First Pakistani satellite' },
+  { achievement: 'Badr-B Satellite', year: 2001, focus: 'Earth observation' },
+  { achievement: 'PakSat-1 Launch', year: 2011, focus: 'Communication satellite' },
+  { achievement: 'PakSat-1R Launch', year: 2011, focus: 'Geostationary satellite' },
+  { achievement: 'PRSS-1 Launch', year: 2018, focus: 'Remote sensing satellite' },
+  { achievement: 'PakTES-1A Launch', year: 2018, focus: 'Technology evaluation' },
+  { achievement: 'iCube Qamar Launch', year: 2024, focus: 'Lunar mission' },
+  { achievement: 'Nuclear Capability', year: 1998, focus: 'Chagai tests' },
+  { achievement: 'Kahuta Research Labs', year: 1976, focus: 'Nuclear program' },
+  { achievement: 'PAEC Established', year: 1956, focus: 'Atomic energy commission' },
+  { achievement: 'Karachi Nuclear Plant', year: 1971, focus: 'KANUPP reactor' },
+  { achievement: 'Chashma Nuclear Plant', year: 2000, focus: 'Power generation' },
+  { achievement: 'Dr. Abdul Qadeer Khan Award', year: 1998, focus: 'National hero recognition' }
 ];
 
+// Pakistani Sports Legends
 const sportsLegends = [
-  { athlete: 'Sachin Tendulkar', sport: 'Cricket', highlight: '100 international centuries' },
-  { athlete: 'Mary Kom', sport: 'Boxing', highlight: 'Six world titles' },
-  { athlete: 'PV Sindhu', sport: 'Badminton', highlight: 'Olympic silver' },
-  { athlete: 'Neeraj Chopra', sport: 'Javelin Throw', highlight: 'Tokyo 2020 gold' },
-  { athlete: 'Abhinav Bindra', sport: 'Shooting', highlight: 'Olympic gold 2008' },
-  { athlete: 'Viswanathan Anand', sport: 'Chess', highlight: 'Five-time world champion' },
-  { athlete: 'Saina Nehwal', sport: 'Badminton', highlight: 'Olympic bronze 2012' },
-  { athlete: 'Mithali Raj', sport: 'Cricket', highlight: 'Highest ODI runs' },
-  { athlete: 'Sunil Chhetri', sport: 'Football', highlight: 'Indian top scorer' },
-  { athlete: 'Leander Paes', sport: 'Tennis', highlight: 'Olympic bronze 1996' },
-  { athlete: 'Bajrang Punia', sport: 'Wrestling', highlight: 'Olympic bronze 2020' },
-  { athlete: 'Hima Das', sport: 'Athletics', highlight: 'World U20 gold' },
-  { athlete: 'Anju Bobby George', sport: 'Athletics', highlight: 'World bronze 2003' },
-  { athlete: 'Balbir Singh Sr.', sport: 'Hockey', highlight: 'Triple Olympic gold' },
-  { athlete: 'Pankaj Advani', sport: 'Billiards', highlight: 'Multiple IBSF titles' },
-  { athlete: 'Dipa Karmakar', sport: 'Gymnastics', highlight: 'Produnova vault' },
-  { athlete: 'Lovlina Borgohain', sport: 'Boxing', highlight: 'Olympic bronze 2020' },
-  { athlete: 'Sardar Singh', sport: 'Hockey', highlight: 'Captaincy excellence' },
-  { athlete: 'Kidambi Srikanth', sport: 'Badminton', highlight: 'World No.1 ranking' },
-  { athlete: 'Vinesh Phogat', sport: 'Wrestling', highlight: 'Commonwealth gold' }
+  { athlete: 'Imran Khan', sport: 'Cricket', highlight: '1992 World Cup victory' },
+  { athlete: 'Wasim Akram', sport: 'Cricket', highlight: 'Sultan of Swing' },
+  { athlete: 'Jahangir Khan', sport: 'Squash', highlight: '555 consecutive wins' },
+  { athlete: 'Jansher Khan', sport: 'Squash', highlight: 'Eight World Open titles' },
+  { athlete: 'Shahid Afridi', sport: 'Cricket', highlight: 'Boom Boom all-rounder' },
+  { athlete: 'Shoaib Akhtar', sport: 'Cricket', highlight: 'Fastest bowler in history' },
+  { athlete: 'Hasan Sardar', sport: 'Hockey', highlight: '1984 Olympic gold' },
+  { athlete: 'Islahuddin Siddiqui', sport: 'Hockey', highlight: 'Three-time Olympic gold' },
+  { athlete: 'Aisamul Haq Qureshi', sport: 'Tennis', highlight: 'Grand Slam doubles finalist' },
+  { athlete: 'Maria Toorpakai', sport: 'Squash', highlight: 'Womens squash pioneer' },
+  { athlete: 'Samiullah Khan', sport: 'Hockey', highlight: 'Flying Horse' },
+  { athlete: 'Inzamam-ul-Haq', sport: 'Cricket', highlight: 'Match-winning batsman' },
+  { athlete: 'Waqar Younis', sport: 'Cricket', highlight: 'Toe-crushing yorkers' },
+  { athlete: 'Babar Azam', sport: 'Cricket', highlight: 'Modern era captain' },
+  { athlete: 'Mohammad Rizwan', sport: 'Cricket', highlight: 'T20 run machine' },
+  { athlete: 'Naseem Shah', sport: 'Cricket', highlight: 'Young pace sensation' },
+  { athlete: 'Sohail Abbas', sport: 'Hockey', highlight: 'Highest international goals' },
+  { athlete: 'Arfa Karim', sport: 'Technology', highlight: 'Youngest Microsoft certified' },
+  { athlete: 'Talha Talib', sport: 'Weightlifting', highlight: 'Olympic hopeful' },
+  { athlete: 'Haider Ali', sport: 'Paralympics', highlight: 'Paralympic gold medalist' }
 ];
 
-const unescoSites = [
-  { site: 'Kaziranga National Park', state: 'Assam', feature: 'One-horned rhinos' },
-  { site: 'Keoladeo National Park', state: 'Rajasthan', feature: 'Avian diversity' },
-  { site: 'Manas Wildlife Sanctuary', state: 'Assam', feature: 'Tiger reserve' },
-  { site: 'Western Ghats', state: 'Multiple States', feature: 'Biodiversity hotspot' },
-  { site: 'Sundarbans', state: 'West Bengal', feature: 'Mangrove forest' },
-  { site: 'Great Himalayan National Park', state: 'Himachal Pradesh', feature: 'Alpine ecosystems' },
-  { site: 'Nanda Devi & Valley of Flowers', state: 'Uttarakhand', feature: 'Highland flora' },
-  { site: 'Rani Ki Vav', state: 'Gujarat', feature: 'Stepwell art' },
-  { site: 'Hill Forts of Rajasthan', state: 'Rajasthan', feature: 'Rajput military hill forts' },
-  { site: 'Qutub Minar Complex', state: 'Delhi', feature: 'Early Indo-Islamic architecture' },
-  { site: 'Elephanta Caves', state: 'Maharashtra', feature: 'Rock-cut sculptures' },
-  { site: 'Ajanta Caves', state: 'Maharashtra', feature: 'Buddhist murals' },
-  { site: 'Ellora Caves', state: 'Maharashtra', feature: 'Rock-cut temples' },
-  { site: 'Mahabodhi Temple', state: 'Bihar', feature: 'Buddha enlightenment site' },
-  { site: 'Chola Temples', state: 'Tamil Nadu', feature: 'Dravidian architecture' },
-  { site: 'Khajuraho Group of Monuments', state: 'Madhya Pradesh', feature: 'Sculptural art' },
-  { site: 'Capitol Complex Chandigarh', state: 'Chandigarh', feature: 'Modernist civic design' },
-  { site: 'Victorian Gothic & Art Deco Ensemble', state: 'Maharashtra', feature: 'Colonial-era skyline' },
-  { site: 'Kumbhalgarh Fort', state: 'Rajasthan', feature: 'Second longest wall' },
-  { site: 'Shanti Stupa Leh', state: 'Ladakh', feature: 'Peace pagoda' }
+// Pakistani UNESCO and Heritage Sites
+const heritageSites = [
+  { site: 'Mohenjo-daro', region: 'Sindh', feature: 'Indus Valley Civilization' },
+  { site: 'Taxila', region: 'Punjab', feature: 'Buddhist learning center' },
+  { site: 'Lahore Fort and Shalimar Gardens', region: 'Punjab', feature: 'Mughal architecture' },
+  { site: 'Makli Necropolis', region: 'Sindh', feature: 'Largest funerary site' },
+  { site: 'Rohtas Fort', region: 'Punjab', feature: 'Suri dynasty fortification' },
+  { site: 'Badshahi Mosque', region: 'Punjab', feature: 'Mughal mosque masterpiece' },
+  { site: 'Faisal Mosque', region: 'Islamabad', feature: 'Modern Islamic architecture' },
+  { site: 'Deosai National Park', region: 'Gilgit-Baltistan', feature: 'Himalayan brown bears' },
+  { site: 'Hingol National Park', region: 'Balochistan', feature: 'Mud volcanoes' },
+  { site: 'K2 Base Camp', region: 'Gilgit-Baltistan', feature: 'Second highest peak' },
+  { site: 'Fairy Meadows', region: 'Gilgit-Baltistan', feature: 'Nanga Parbat views' },
+  { site: 'Hunza Valley', region: 'Gilgit-Baltistan', feature: 'Mountain paradise' },
+  { site: 'Kalash Valley', region: 'Khyber Pakhtunkhwa', feature: 'Unique culture' },
+  { site: 'Swat Valley', region: 'Khyber Pakhtunkhwa', feature: 'Buddhist heritage' },
+  { site: 'Chitral', region: 'Khyber Pakhtunkhwa', feature: 'Ancient traditions' },
+  { site: 'Skardu', region: 'Gilgit-Baltistan', feature: 'Gateway to K2' },
+  { site: 'Neelum Valley', region: 'Azad Kashmir', feature: 'Blue river valley' },
+  { site: 'Shangrila Resort', region: 'Gilgit-Baltistan', feature: 'Heaven on Earth' },
+  { site: 'Attabad Lake', region: 'Gilgit-Baltistan', feature: 'Turquoise waters' },
+  { site: 'Khunjerab Pass', region: 'Gilgit-Baltistan', feature: 'Highest border crossing' }
 ];
 
+// Pakistani Mountain Peaks
 const mountainPeaks = [
-  { peak: 'Kangchenjunga', state: 'Sikkim', height: '8586 m' },
-  { peak: 'Nanda Devi', state: 'Uttarakhand', height: '7816 m' },
-  { peak: 'Kamet', state: 'Uttarakhand', height: '7756 m' },
-  { peak: 'Saltoro Kangri', state: 'Ladakh', height: '7742 m' },
-  { peak: 'Saser Kangri', state: 'Ladakh', height: '7672 m' },
-  { peak: 'Trisul', state: 'Uttarakhand', height: '7120 m' },
-  { peak: 'Anamudi', state: 'Kerala', height: '2695 m' },
-  { peak: 'Dodabetta', state: 'Tamil Nadu', height: '2637 m' },
-  { peak: 'Guru Shikhar', state: 'Rajasthan', height: '1722 m' },
-  { peak: 'Kalsubai', state: 'Maharashtra', height: '1646 m' },
-  { peak: 'Arma Konda', state: 'Andhra Pradesh', height: '1680 m' },
-  { peak: 'Mahendragiri', state: 'Odisha', height: '1501 m' },
-  { peak: 'Doddabetta', state: 'Tamil Nadu', height: '2637 m' },
-  { peak: 'Mount Abu', state: 'Rajasthan', height: '1722 m' },
-  { peak: 'Phawngpui', state: 'Mizoram', height: '2157 m' }
+  { peak: 'K2', region: 'Gilgit-Baltistan', height: '8611 m' },
+  { peak: 'Nanga Parbat', region: 'Gilgit-Baltistan', height: '8126 m' },
+  { peak: 'Gasherbrum I', region: 'Gilgit-Baltistan', height: '8080 m' },
+  { peak: 'Broad Peak', region: 'Gilgit-Baltistan', height: '8051 m' },
+  { peak: 'Gasherbrum II', region: 'Gilgit-Baltistan', height: '8035 m' },
+  { peak: 'Gasherbrum III', region: 'Gilgit-Baltistan', height: '7946 m' },
+  { peak: 'Gasherbrum IV', region: 'Gilgit-Baltistan', height: '7932 m' },
+  { peak: 'Distaghil Sar', region: 'Gilgit-Baltistan', height: '7885 m' },
+  { peak: 'Kunyang Chhish', region: 'Gilgit-Baltistan', height: '7852 m' },
+  { peak: 'Masherbrum', region: 'Gilgit-Baltistan', height: '7821 m' },
+  { peak: 'Rakaposhi', region: 'Gilgit-Baltistan', height: '7788 m' },
+  { peak: 'Batura Sar', region: 'Gilgit-Baltistan', height: '7795 m' },
+  { peak: 'Saltoro Kangri', region: 'Gilgit-Baltistan', height: '7742 m' },
+  { peak: 'Tirich Mir', region: 'Khyber Pakhtunkhwa', height: '7708 m' },
+  { peak: 'Spantik', region: 'Gilgit-Baltistan', height: '7027 m' }
 ];
 
+// Pakistani Literature and Authors
 const literatureAwards = [
-  { author: 'Rabindranath Tagore', work: 'Gitanjali', year: 1913 },
-  { author: 'R. K. Narayan', work: 'Malgudi Days', year: 1958 },
-  { author: 'Amrita Pritam', work: 'Pinjar', year: 1964 },
-  { author: 'Shivani', work: 'Krishnakali', year: 1964 },
-  { author: 'Mahadevi Varma', work: 'Yama', year: 1934 },
-  { author: 'U. R. Ananthamurthy', work: 'Samskara', year: 1960 },
-  { author: 'Salman Rushdie', work: 'Midnight Children', year: 1980 },
-  { author: 'Arundhati Roy', work: 'The God of Small Things', year: 1997 },
-  { author: 'Jhumpa Lahiri', work: 'Interpreter of Maladies', year: 1999 },
-  { author: 'Kiran Desai', work: 'The Inheritance of Loss', year: 2006 },
-  { author: 'Vikram Seth', work: 'A Suitable Boy', year: 1993 },
-  { author: 'Ruskin Bond', work: 'The Blue Umbrella', year: 1974 },
-  { author: 'Anita Desai', work: 'Clear Light of Day', year: 1980 },
-  { author: 'Devdutt Pattanaik', work: 'Jaya', year: 2010 },
-  { author: 'Chitra Banerjee Divakaruni', work: 'Palace of Illusions', year: 2008 }
+  { author: 'Allama Iqbal', work: 'Bang-e-Dra', year: 1924 },
+  { author: 'Faiz Ahmed Faiz', work: 'Nuskha Haye Wafa', year: 1985 },
+  { author: 'Saadat Hasan Manto', work: 'Toba Tek Singh', year: 1955 },
+  { author: 'Intizar Hussain', work: 'Basti', year: 1979 },
+  { author: 'Qurratulain Hyder', work: 'Aag Ka Darya', year: 1959 },
+  { author: 'Ahmad Faraz', work: 'Mere Khwab Reza Reza', year: 1995 },
+  { author: 'Ishfaq Ahmed', work: 'Zavia', year: 1990 },
+  { author: 'Bano Qudsia', work: 'Raja Gidh', year: 1981 },
+  { author: 'Ashfaq Ahmed', work: 'Talqeen Shah', year: 1983 },
+  { author: 'Mustansar Hussain Tarar', work: 'Raakh', year: 1981 },
+  { author: 'Mohsin Hamid', work: 'The Reluctant Fundamentalist', year: 2007 },
+  { author: 'Kamila Shamsie', work: 'Home Fire', year: 2017 },
+  { author: 'Bapsi Sidhwa', work: 'Ice-Candy-Man', year: 1988 },
+  { author: 'Hanif Kureishi', work: 'The Buddha of Suburbia', year: 1990 },
+  { author: 'Mohammed Hanif', work: 'A Case of Exploding Mangoes', year: 2008 }
 ];
 
+// Pakistani Economic Hubs
 const economicFacts = [
-  { sector: 'Information Technology', hub: 'Bengaluru', share: '8% GDP impact' },
-  { sector: 'Automobile Manufacturing', hub: 'Chennai', share: '35% commercial vehicles' },
-  { sector: 'Diamond Cutting', hub: 'Surat', share: '90% global supply' },
-  { sector: 'Pharmaceuticals', hub: 'Hyderabad', share: 'India Pharma capital' },
-  { sector: 'Textiles', hub: 'Tiruppur', share: 'Cotton knitwear hub' },
-  { sector: 'Tea Production', hub: 'Assam', share: 'Largest tea gardens' },
-  { sector: 'Spice Trade', hub: 'Kochi', share: 'Major spice export' },
-  { sector: 'Leather Goods', hub: 'Kanpur', share: 'Traditional tanneries' },
-  { sector: 'Handicrafts', hub: 'Jaipur', share: 'Gemstone polishing' },
-  { sector: 'Cinema', hub: 'Mumbai', share: 'Bollywood base' },
-  { sector: 'Start-up Ecosystem', hub: 'Gurugram', share: 'Enterprise tech' },
-  { sector: 'Renewable Energy', hub: 'Jaisalmer', share: 'Wind farms' },
-  { sector: 'Ship Building', hub: 'Kochi', share: 'Cochin Shipyard' },
-  { sector: 'Petrochemicals', hub: 'Jamnagar', share: 'Largest refinery' },
-  { sector: 'Financial Services', hub: 'Mumbai', share: 'NSE & BSE' },
-  { sector: 'Jewellery', hub: 'Jaipur', share: 'Kundan craft' },
-  { sector: 'Coffee Plantations', hub: 'Coorg', share: 'Arabica beans' },
-  { sector: 'Tourism', hub: 'Goa', share: 'Coastal tourism' },
-  { sector: 'Aerospace', hub: 'Bengaluru', share: 'HAL facilities' },
-  { sector: 'Agritech', hub: 'Indore', share: 'Soybean processing' }
+  { sector: 'Textiles', hub: 'Faisalabad', share: 'Textile capital of Pakistan' },
+  { sector: 'Finance', hub: 'Karachi', share: 'Stock exchange hub' },
+  { sector: 'IT Services', hub: 'Lahore', share: 'Tech startup ecosystem' },
+  { sector: 'Pharmaceuticals', hub: 'Karachi', share: 'Pharma manufacturing' },
+  { sector: 'Surgical Instruments', hub: 'Sialkot', share: '20% global supply' },
+  { sector: 'Sports Goods', hub: 'Sialkot', share: 'FIFA football supplier' },
+  { sector: 'Leather Goods', hub: 'Sialkot', share: 'Gloves and apparel' },
+  { sector: 'Ceramics', hub: 'Gujranwala', share: 'Tile manufacturing' },
+  { sector: 'Agriculture', hub: 'Multan', share: 'Cotton and mangoes' },
+  { sector: 'Citrus Farming', hub: 'Sargodha', share: 'Kinnow oranges' },
+  { sector: 'Rice Export', hub: 'Gujranwala', share: 'Basmati rice hub' },
+  { sector: 'Mining', hub: 'Quetta', share: 'Mineral resources' },
+  { sector: 'Fishing', hub: 'Gwadar', share: 'Deep sea port' },
+  { sector: 'Energy', hub: 'Thar', share: 'Coal reserves' },
+  { sector: 'Automobile', hub: 'Karachi', share: 'Vehicle assembly' },
+  { sector: 'Cement', hub: 'Daudkhel', share: 'Construction materials' },
+  { sector: 'Sugar', hub: 'Rahim Yar Khan', share: 'Sugar mills cluster' },
+  { sector: 'Handicrafts', hub: 'Peshawar', share: 'Traditional crafts' },
+  { sector: 'Carpets', hub: 'Lahore', share: 'Hand-woven exports' },
+  { sector: 'Jewelry', hub: 'Hyderabad', share: 'Bangles and ornaments' }
 ];
 
 const createOptionsFromDataset = (dataset, key, correctValue, seed = 1) => {
@@ -414,27 +410,27 @@ const generateMathQuestions = () => {
   return questions.slice(0, 500);
 };
 
-const buildStateQuestion = (seed) => {
-  const entry = stateCapitals[seed % stateCapitals.length];
-  const variant = Math.floor(seed / stateCapitals.length) % 3;
+const buildProvinceQuestion = (seed) => {
+  const entry = provinceCapitals[seed % provinceCapitals.length];
+  const variant = Math.floor(seed / provinceCapitals.length) % 3;
   if (variant === 0) {
     return {
-      questionText: `What is the capital of ${entry.state}?`,
+      questionText: `What is the capital of ${entry.province}?`,
       correctAnswer: entry.capital,
-      options: createOptionsFromDataset(stateCapitals, 'capital', entry.capital, seed + 3)
+      options: createOptionsFromDataset(provinceCapitals, 'capital', entry.capital, seed + 3)
     };
   }
   if (variant === 1) {
     return {
       questionText: `${entry.capital} serves as the capital of which region?`,
-      correctAnswer: entry.state,
-      options: createOptionsFromDataset(stateCapitals, 'state', entry.state, seed + 11)
+      correctAnswer: entry.province,
+      options: createOptionsFromDataset(provinceCapitals, 'province', entry.province, seed + 11)
     };
   }
   return {
-    questionText: `In which year was ${entry.state} reorganized as a state/UT?`,
-    correctAnswer: String(entry.formation),
-    options: createYearOptions(entry.formation, seed + 5)
+    questionText: `What is ${entry.province} known for?`,
+    correctAnswer: entry.speciality,
+    options: createOptionsFromDataset(provinceCapitals, 'speciality', entry.speciality, seed + 5)
   };
 };
 
@@ -443,13 +439,13 @@ const buildDanceQuestion = (seed) => {
   const variant = Math.floor(seed / danceForms.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `${entry.dance} belongs to which Indian state?`,
-      correctAnswer: entry.state,
-      options: createOptionsFromDataset(stateCapitals, 'state', entry.state, seed + 7)
+      questionText: `${entry.dance} belongs to which Pakistani region?`,
+      correctAnswer: entry.region,
+      options: createOptionsFromDataset(danceForms, 'region', entry.region, seed + 7)
     };
   }
   return {
-    questionText: `Which classical or folk dance is associated with ${entry.state}?`,
+    questionText: `Which traditional dance is associated with ${entry.region}?`,
     correctAnswer: entry.dance,
     options: createOptionsFromDataset(danceForms, 'dance', entry.dance, seed + 13)
   };
@@ -483,13 +479,13 @@ const buildMonumentQuestion = (seed) => {
   const variant = Math.floor(seed / monuments.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `Where is the ${entry.name} located?`,
+      questionText: `Where is ${entry.name} located?`,
       correctAnswer: entry.location,
       options: createOptionsFromDataset(monuments, 'location', entry.location, seed + 17)
     };
   }
   return {
-    questionText: `The ${entry.name} was built in which era?`,
+    questionText: `${entry.name} was built in which era?`,
     correctAnswer: entry.era,
     options: createOptionsFromDataset(monuments, 'era', entry.era, seed + 19)
   };
@@ -518,37 +514,37 @@ const buildRiverQuestion = (seed) => {
   return { questionText, correctAnswer: correctKey, options };
 };
 
-const buildFreedomQuestion = (seed) => {
-  const entry = freedomEvents[seed % freedomEvents.length];
-  const variant = Math.floor(seed / freedomEvents.length) % 2;
+const buildHistoryQuestion = (seed) => {
+  const entry = historicalEvents[seed % historicalEvents.length];
+  const variant = Math.floor(seed / historicalEvents.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `Who led the ${entry.event}?`,
+      questionText: `Who was associated with the ${entry.event}?`,
       correctAnswer: entry.leader,
-      options: createOptionsFromDataset(freedomEvents.map((e) => ({ leader: e.leader })), 'leader', entry.leader, seed + 29)
+      options: createOptionsFromDataset(historicalEvents.map((e) => ({ leader: e.leader })), 'leader', entry.leader, seed + 29)
     };
   }
   return {
-    questionText: `In which year did the ${entry.event} begin?`,
+    questionText: `In which year did the ${entry.event} occur?`,
     correctAnswer: String(entry.year),
     options: createYearOptions(entry.year, seed + 31)
   };
 };
 
 const buildScienceQuestion = (seed) => {
-  const entry = scienceMissions[seed % scienceMissions.length];
-  const variant = Math.floor(seed / scienceMissions.length) % 2;
+  const entry = scienceAchievements[seed % scienceAchievements.length];
+  const variant = Math.floor(seed / scienceAchievements.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `${entry.mission} launched in which year?`,
+      questionText: `${entry.achievement} occurred in which year?`,
       correctAnswer: String(entry.year),
       options: createYearOptions(entry.year, seed + 37)
     };
   }
   return {
-    questionText: `What was the primary focus of ${entry.mission}?`,
+    questionText: `What was the focus of ${entry.achievement}?`,
     correctAnswer: entry.focus,
-    options: createOptionsFromDataset(scienceMissions.map((m) => ({ focus: m.focus })), 'focus', entry.focus, seed + 41)
+    options: createOptionsFromDataset(scienceAchievements.map((m) => ({ focus: m.focus })), 'focus', entry.focus, seed + 41)
   };
 };
 
@@ -570,19 +566,19 @@ const buildSportsQuestion = (seed) => {
 };
 
 const buildHeritageQuestion = (seed) => {
-  const entry = unescoSites[seed % unescoSites.length];
-  const variant = Math.floor(seed / unescoSites.length) % 2;
+  const entry = heritageSites[seed % heritageSites.length];
+  const variant = Math.floor(seed / heritageSites.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `${entry.site} is located in which state/region?`,
-      correctAnswer: entry.state,
-      options: createOptionsFromDataset(stateCapitals, 'state', entry.state, seed + 53)
+      questionText: `${entry.site} is located in which region?`,
+      correctAnswer: entry.region,
+      options: createOptionsFromDataset(heritageSites, 'region', entry.region, seed + 53)
     };
   }
   return {
     questionText: `What makes ${entry.site} special?`,
     correctAnswer: entry.feature,
-    options: createOptionsFromDataset(unescoSites.map((s) => ({ feature: s.feature })), 'feature', entry.feature, seed + 59)
+    options: createOptionsFromDataset(heritageSites.map((s) => ({ feature: s.feature })), 'feature', entry.feature, seed + 59)
   };
 };
 
@@ -591,9 +587,9 @@ const buildMountainQuestion = (seed) => {
   const variant = Math.floor(seed / mountainPeaks.length) % 2;
   if (variant === 0) {
     return {
-      questionText: `${entry.peak} lies in which state/region?`,
-      correctAnswer: entry.state,
-      options: createOptionsFromDataset(stateCapitals, 'state', entry.state, seed + 61)
+      questionText: `${entry.peak} lies in which region?`,
+      correctAnswer: entry.region,
+      options: createOptionsFromDataset(mountainPeaks, 'region', entry.region, seed + 61)
     };
   }
   return {
@@ -631,19 +627,19 @@ const buildEconomyQuestion = (seed) => {
     };
   }
   return {
-    questionText: `What share or highlight is linked to ${entry.sector}?`,
+    questionText: `What is ${entry.sector} known for in Pakistan?`,
     correctAnswer: entry.share,
     options: createOptionsFromDataset(economicFacts.map((e) => ({ share: e.share })), 'share', entry.share, seed + 83)
   };
 };
 
 const quizBuilders = [
-  buildStateQuestion,
+  buildProvinceQuestion,
   buildDanceQuestion,
   buildFestivalQuestion,
   buildMonumentQuestion,
   buildRiverQuestion,
-  buildFreedomQuestion,
+  buildHistoryQuestion,
   buildScienceQuestion,
   buildSportsQuestion,
   buildHeritageQuestion,
@@ -720,7 +716,8 @@ const generatePuzzleQuestions = () => {
     id += 1;
   }
 
-  const codeWords = ['DELHI', 'MUMBAI', 'CHENNAI', 'KOLKATA', 'JAIPUR', 'PATNA', 'RANCHI', 'KOCHI', 'SURAT', 'LUCKNOW'];
+  // Pakistani cities for code puzzles
+  const codeWords = ['LAHORE', 'KARACHI', 'ISLAMABAD', 'PESHAWAR', 'QUETTA', 'MULTAN', 'FAISALABAD', 'RAWALPINDI', 'SIALKOT', 'GWADAR'];
   const letterValue = (word) => word.split('').reduce((sum, char) => sum + (char.charCodeAt(0) - 64), 0);
   for (let idx = 0; idx < 150 && questions.length < 500; idx += 1) {
     const word = codeWords[idx % codeWords.length];
@@ -739,7 +736,7 @@ const generatePuzzleQuestions = () => {
   return questions.slice(0, 500);
 };
 
-const typingStates = stateCapitals.map((entry) => entry.state);
+const typingProvinces = provinceCapitals.map((entry) => entry.province);
 const typingFestivals = festivals.map((entry) => entry.name);
 const typingAdjectives = ['vibrant', 'radiant', 'historic', 'serene', 'majestic', 'spirited', 'lively', 'ancient', 'youthful', 'artistic'];
 const typingVerbs = ['celebrates', 'honors', 'embraces', 'remembers', 'narrates', 'safeguards', 'uplifts', 'nurtures', 'inspires', 'showcases'];
@@ -748,12 +745,12 @@ const typingExtras = ['every season', 'with timeless grace', 'through community 
 const generateTypingQuestions = () => {
   const questions = [];
   for (let i = 0; i < 500; i += 1) {
-    const state = typingStates[i % typingStates.length];
+    const province = typingProvinces[i % typingProvinces.length];
     const festival = typingFestivals[(i * 3) % typingFestivals.length];
     const adjective = typingAdjectives[(i * 5) % typingAdjectives.length];
     const verb = typingVerbs[(i * 7) % typingVerbs.length];
     const extra = typingExtras[(i * 11) % typingExtras.length];
-    const sentence = `The ${adjective} land of ${state} ${verb} ${festival} ${extra}.`;
+    const sentence = `The ${adjective} land of ${province} ${verb} ${festival} ${extra}.`;
     questions.push({
       id: `typing-${i + 1}`,
       type: 'TYPING',
@@ -764,12 +761,12 @@ const generateTypingQuestions = () => {
   return questions;
 };
 
-// CAPTCHA words - mix of common words and alphanumeric codes
+// CAPTCHA words - mix of Pakistani words and alphanumeric codes
 const captchaWords = [
-  'BHARAT', 'INDIA', 'DELHI', 'MUMBAI', 'KOLKATA', 'CHENNAI', 'JAIPUR', 'KERALA',
-  'GANGA', 'YAMUNA', 'LOTUS', 'TIGER', 'PEACOCK', 'MANGO', 'CRICKET', 'DIWALI',
-  'HOLI', 'NAMASTE', 'YOGA', 'KARMA', 'DHARMA', 'GURU', 'MANTRA', 'CHAI',
-  'RUPEE', 'SAFFRON', 'SPICE', 'CURRY', 'BIRYANI', 'SAMOSA', 'LASSI', 'NAAN'
+  'PAKISTAN', 'LAHORE', 'KARACHI', 'ISLAMABAD', 'PESHAWAR', 'QUETTA', 'MULTAN', 'PUNJAB',
+  'SINDH', 'INDUS', 'JINNAH', 'IQBAL', 'CRICKET', 'JASMINE', 'MARKHOR', 'MOSQUE',
+  'KASHMIRI', 'HUNZA', 'SHALWAR', 'KAMEEZ', 'BIRYANI', 'CHAI', 'ROTI', 'LASSI',
+  'RUPEE', 'CRESCENT', 'MINARET', 'BAZAAR', 'KEBAB', 'NAAN', 'HALWA', 'MANGO'
 ];
 
 const captchaStyles = ['distorted', 'noisy', 'strikethrough', 'rotated', 'mixed'];
