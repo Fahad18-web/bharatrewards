@@ -98,7 +98,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
               {canSkip && (
                 <button
                   onClick={handleSkip}
-                  className="px-4 py-1.5 bg-india-blue text-white text-sm font-bold rounded-full hover:bg-blue-800 transition-colors shadow-md"
+                  className="px-4 py-1.5 bg-pakistan-green text-white text-sm font-bold rounded-full hover:bg-green-800 transition-colors shadow-md"
                 >
                   Continue →
                 </button>
@@ -109,7 +109,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
           {/* Body */}
           <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 min-h-[220px] flex flex-col items-center justify-center">
             <div className="text-center max-w-md">
-              <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-india-saffron/20 to-india-green/20 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-pakistan-green/20 to-pakistan-accent/20 flex items-center justify-center">
                 <span className="text-4xl">🎯</span>
               </div>
               <p className="text-gray-700 dark:text-gray-200 font-black text-xl mb-2">
@@ -130,7 +130,7 @@ export const InterstitialAd: React.FC<InterstitialAdProps> = ({
           {/* Progress Bar */}
           <div className="h-1 bg-gray-200 dark:bg-slate-700">
             <div 
-              className="h-full bg-gradient-to-r from-india-saffron to-india-green transition-all duration-1000"
+              className="h-full bg-gradient-to-r from-pakistan-green to-pakistan-accent transition-all duration-1000"
               style={{ width: `${((autoCloseSeconds - countdown) / autoCloseSeconds) * 100}%` }}
             />
           </div>

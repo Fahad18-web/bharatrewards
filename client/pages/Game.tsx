@@ -231,7 +231,7 @@ export const Game: React.FC = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in-up">
         <div className="relative w-28 h-28 mb-8">
            <div className="absolute inset-0 border-8 border-gray-100 rounded-full"></div>
-           <div className="absolute inset-0 border-8 border-t-india-saffron border-r-transparent border-b-india-green border-l-transparent rounded-full animate-spin"></div>
+           <div className="absolute inset-0 border-8 border-t-pakistan-green border-r-transparent border-b-pakistan-accent border-l-transparent rounded-full animate-spin"></div>
            <div className="absolute inset-0 flex items-center justify-center text-4xl">🚀</div>
         </div>
         <h2 className="text-3xl font-black text-gray-800 mb-3 tracking-tight">Starting Engine</h2>
@@ -258,7 +258,7 @@ export const Game: React.FC = () => {
           </button>
           <button
             onClick={startGame}
-            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-india-blue to-blue-800 text-white font-bold shadow-lg"
+            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen text-white font-bold shadow-lg"
           >
             Retry
           </button>
@@ -271,7 +271,7 @@ export const Game: React.FC = () => {
   if (!currentQ) {
      return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] animate-pulse">
-        <div className="w-16 h-16 border-4 border-india-blue border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="w-16 h-16 border-4 border-pakistan-green border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="text-gray-500 font-bold uppercase tracking-widest text-sm">Loading more questions...</p>
       </div>
      );
@@ -290,7 +290,7 @@ export const Game: React.FC = () => {
       {/* Top Bar */}
       <div className="flex justify-between items-center mb-10 glass dark:glass-dark px-8 py-5 rounded-[2rem]">
         <div className="flex items-center">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-india-saffron to-orange-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg mr-5 border border-white/20">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pakistan-green to-pakistan-lightgreen flex items-center justify-center text-white font-bold text-2xl shadow-lg mr-5 border border-white/20">
             {normalizedCategory === 'MATH' ? '➗' : normalizedCategory === 'QUIZ' ? '💡' : normalizedCategory === 'PUZZLE' ? '🧩' : normalizedCategory === 'CAPTCHA' ? '🔐' : '⌨️'}
           </div>
           <div>
@@ -302,13 +302,13 @@ export const Game: React.FC = () => {
         <div className="flex items-center space-x-8">
            <div className="text-right hidden sm:block">
              <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest block mb-1">Session Score</span>
-             <span className="font-black text-3xl text-india-green dark:text-green-400">+{score}</span>
+             <span className="font-black text-3xl text-pakistan-green dark:text-green-400">+{score}</span>
            </div>
            
            <div className="relative w-16 h-16 flex items-center justify-center">
              <svg className="absolute w-full h-full transform -rotate-90">
                 <circle cx="32" cy="32" r="28" stroke="#f3f4f6" className="dark:stroke-slate-700" strokeWidth="6" fill="transparent" />
-                <circle cx="32" cy="32" r="28" stroke={timeLeft < 5 ? '#ef4444' : '#000080'} strokeWidth="6" fill="transparent" strokeDasharray="175.93" strokeDashoffset={175.93 * (progressPercent / 100)} className="transition-all duration-1000 linear" strokeLinecap="round" />
+                <circle cx="32" cy="32" r="28" stroke={timeLeft < 5 ? '#ef4444' : '#01411C'} strokeWidth="6" fill="transparent" strokeDasharray="175.93" strokeDashoffset={175.93 * (progressPercent / 100)} className="transition-all duration-1000 linear" strokeLinecap="round" />
              </svg>
              <span className={`font-black text-xl ${timeLeft < 5 ? 'text-red-500' : 'text-gray-800 dark:text-white'}`}>{timeLeft}</span>
            </div>
@@ -420,10 +420,10 @@ export const Game: React.FC = () => {
                         }
                     }, 100);
                   }}
-                  className="group relative bg-white/80 dark:bg-slate-700/80 hover:bg-white dark:hover:bg-slate-600 border-2 border-white/50 dark:border-slate-600 hover:border-india-saffron dark:hover:border-india-saffron p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
+                  className="group relative bg-white/80 dark:bg-slate-700/80 hover:bg-white dark:hover:bg-slate-600 border-2 border-white/50 dark:border-slate-600 hover:border-pakistan-green dark:hover:border-pakistan-accent p-6 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
                 >
                   <div className="flex items-center">
-                     <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 group-hover:bg-india-saffron group-hover:text-white flex items-center justify-center font-bold text-base text-gray-500 dark:text-gray-400 transition-colors mr-4 shadow-inner">
+                     <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 group-hover:bg-pakistan-green group-hover:text-white flex items-center justify-center font-bold text-base text-gray-500 dark:text-gray-400 transition-colors mr-4 shadow-inner">
                        {String.fromCharCode(65 + idx)}
                      </div>
                      <span className="font-bold text-gray-700 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white text-lg md:text-xl">{opt}</span>
@@ -440,7 +440,7 @@ export const Game: React.FC = () => {
                       rows={4}
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
-                      className="w-full p-6 text-xl border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all resize-none shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
+                      className="w-full p-6 text-xl border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 outline-none transition-all resize-none shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
                       placeholder="Start typing here..."
                       onPaste={(e) => { e.preventDefault(); alert("Cheating not allowed! Type it out."); }}
                       autoFocus
@@ -453,7 +453,7 @@ export const Game: React.FC = () => {
                       type="text"
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value.toUpperCase())}
-                      className="w-full p-6 text-3xl font-mono font-bold tracking-[0.2em] text-center border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 uppercase text-gray-800 dark:text-white"
+                      className="w-full p-6 text-3xl font-mono font-bold tracking-[0.2em] text-center border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 uppercase text-gray-800 dark:text-white"
                       placeholder="TYPE HERE..."
                       onPaste={(e) => { e.preventDefault(); alert("No pasting allowed!"); }}
                       autoComplete="off"
@@ -466,7 +466,7 @@ export const Game: React.FC = () => {
                     type="text"
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
-                    className="w-full p-6 text-2xl font-bold border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
+                    className="w-full p-6 text-2xl font-bold border-2 border-gray-200 dark:border-slate-600 rounded-3xl focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 outline-none transition-all shadow-inner bg-gray-50/50 dark:bg-slate-700/50 focus:bg-white dark:focus:bg-slate-800 text-gray-800 dark:text-white"
                     placeholder="Type your answer..."
                     autoFocus
                 />
@@ -474,7 +474,7 @@ export const Game: React.FC = () => {
               
               <button 
                 type="submit" 
-                className="mt-8 w-full bg-gradient-to-r from-india-blue to-blue-800 hover:to-blue-900 text-white font-bold py-5 rounded-2xl shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 transition-all transform hover:-translate-y-1 active:scale-[0.99] text-xl"
+                className="mt-8 w-full bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen hover:to-emerald-800 text-white font-bold py-5 rounded-2xl shadow-xl shadow-green-500/20 hover:shadow-green-500/40 transition-all transform hover:-translate-y-1 active:scale-[0.99] text-xl"
               >
                 Submit Answer
               </button>

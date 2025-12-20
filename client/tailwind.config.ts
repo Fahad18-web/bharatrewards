@@ -14,12 +14,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        india: {
-          saffron: '#FF9933',
+        pakistan: {
+          green: '#01411C',
+          lightgreen: '#115740',
           white: '#FFFFFF',
-          green: '#138808',
-          blue: '#000080',
-          bg: '#FDFBF7'
+          accent: '#00A651',
+          bg: '#F5FAF7'
         }
       },
       animation: {

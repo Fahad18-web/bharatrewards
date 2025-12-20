@@ -13,7 +13,7 @@ const faqData: FAQItem[] = [
   {
     category: 'Getting Started',
     question: 'What is Solve2Win?',
-    answer: 'Solve2Win is India\'s #1 skill-based gaming platform where you can play fun games like Math Challenges, Speed Typing, Quizzes, Puzzles, and Captcha challenges to earn rewards. It\'s completely free to join and play!'
+    answer: 'Solve2Win is Pakistan\'s #1 skill-based gaming platform where you can play fun games like Math Challenges, Speed Typing, Quizzes, Puzzles, and Captcha challenges to earn rewards. It\'s completely free to join and play!'
   },
   {
     category: 'Getting Started',
@@ -52,27 +52,27 @@ const faqData: FAQItem[] = [
   {
     category: 'Withdrawals & Payments',
     question: 'How do I withdraw my earnings?',
-    answer: 'Go to the Wallet section, enter the amount you want to withdraw, and provide your UPI ID. Once your request is approved by our team, the amount will be transferred to your account.'
+    answer: 'Go to the Wallet section, enter the amount you want to withdraw, and provide your JazzCash/EasyPaisa number. Once your request is approved by our team, the amount will be transferred to your account.'
   },
   {
     category: 'Withdrawals & Payments',
     question: 'What is the minimum withdrawal amount?',
-    answer: 'The minimum withdrawal amount is based on the platform settings. You can check the current minimum in the Wallet section. Typically, you need at least 14,000 points (equivalent to ₹10) to make a withdrawal.'
+    answer: 'The minimum withdrawal amount is based on the platform settings. You can check the current minimum in the Wallet section. Typically, you need at least 14,000 points (equivalent to Rs. 10) to make a withdrawal.'
   },
   {
     category: 'Withdrawals & Payments',
     question: 'How long does withdrawal take?',
-    answer: 'Withdrawal requests are typically processed within 24-48 hours on business days. Once approved, the amount is transferred instantly to your UPI account.'
+    answer: 'Withdrawal requests are typically processed within 24-48 hours on business days. Once approved, the amount is transferred instantly to your JazzCash/EasyPaisa account.'
   },
   {
     category: 'Withdrawals & Payments',
     question: 'What payment methods are supported?',
-    answer: 'Currently, we support UPI for all withdrawals. This ensures fast and secure transfers directly to your bank account linked with UPI.'
+    answer: 'Currently, we support JazzCash and EasyPaisa for all withdrawals. This ensures fast and secure transfers directly to your mobile wallet account.'
   },
   {
     category: 'Withdrawals & Payments',
     question: 'What is the points to rupees conversion rate?',
-    answer: 'The conversion rate is displayed in your Wallet section. Typically, 1000 points = ₹1, but this may vary based on platform settings.'
+    answer: 'The conversion rate is displayed in your Wallet section. Typically, 1000 points = Rs. 1, but this may vary based on platform settings.'
   },
 
   // Account & Security
@@ -145,7 +145,7 @@ export const FAQ: React.FC = () => {
       <SEO
         title="FAQ"
         description="Answers to common questions about Solve2Win gameplay, earning points, withdrawals, and account security."
-        keywords="Solve2Win FAQ, play to earn help, gaming withdrawals, UPI payouts questions"
+        keywords="Solve2Win FAQ, play to earn help, gaming withdrawals, JazzCash payouts questions"
         canonicalPath="/faq"
         structuredData={faqStructuredData}
       />
@@ -153,11 +153,11 @@ export const FAQ: React.FC = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-          Frequently Asked <span className="text-india-saffron dark:text-orange-400">Questions</span>
+          Frequently Asked <span className="text-pakistan-green dark:text-green-400">Questions</span>
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
           Find answers to common questions about Solve2Win. Can't find what you're looking for? 
-          <Link to="/contact" className="text-india-blue dark:text-blue-400 font-medium hover:underline ml-1">Contact us</Link>
+          <Link to="/contact" className="text-pakistan-green dark:text-green-400 font-medium hover:underline ml-1">Contact us</Link>
         </p>
       </div>
 
@@ -169,7 +169,7 @@ export const FAQ: React.FC = () => {
             onClick={() => setActiveCategory(category)}
             className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
               activeCategory === category
-                ? 'bg-india-blue text-white shadow-lg dark:bg-blue-600'
+                ? 'bg-pakistan-green text-white shadow-lg dark:bg-green-600'
                 : 'bg-white/70 dark:bg-slate-800/70 text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-slate-700 border border-gray-100 dark:border-slate-700'
             }`}
           >
@@ -227,7 +227,7 @@ export const FAQ: React.FC = () => {
 
       {/* Still Have Questions */}
       <div className="glass-card dark:glass-card rounded-3xl p-8 text-center border border-white/50 dark:border-white/10">
-        <div className="w-16 h-16 bg-india-blue/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-pakistan-green/10 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
           <span className="text-3xl">💬</span>
         </div>
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Still have questions?</h3>
@@ -236,7 +236,7 @@ export const FAQ: React.FC = () => {
         </p>
         <Link
           to="/contact"
-          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-india-blue to-blue-800 dark:from-blue-600 dark:to-blue-800 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen dark:from-green-600 dark:to-green-800 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
         >
           Contact Support
         </Link>

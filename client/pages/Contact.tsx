@@ -31,14 +31,14 @@ export const Contact: React.FC = () => {
       <SEO
         title="Contact"
         description="Get in touch with the Solve2Win team for support, partnerships, or general questions. We respond within 24-48 hours."
-        keywords="Solve2Win contact, Solve2Win support, gaming support India, play to earn help"
+        keywords="Solve2Win contact, Solve2Win support, gaming support Pakistan, play to earn help"
         canonicalPath="/contact"
       />
       <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-          Contact <span className="text-india-blue dark:text-blue-400">Us</span>
+          Contact <span className="text-pakistan-green dark:text-green-400">Us</span>
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
           Have questions, feedback, or need help? We're here for you. Reach out and we'll respond as soon as possible.
@@ -49,29 +49,29 @@ export const Contact: React.FC = () => {
         {/* Contact Info Cards */}
         <div className="space-y-6">
           <div className="glass-card dark:glass-card p-6 rounded-2xl border border-white/50 dark:border-white/10">
-            <div className="w-12 h-12 bg-india-saffron/20 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-pakistan-green/20 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
               <span className="text-2xl">📧</span>
             </div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Email Us</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">For general inquiries and support</p>
-            <a href="mailto:support@solve2win.com" className="text-india-blue dark:text-blue-400 font-medium hover:underline">
+            <a href="mailto:support@solve2win.com" className="text-pakistan-green dark:text-green-400 font-medium hover:underline">
               support@solve2win.com
             </a>
           </div>
 
           <div className="glass-card dark:glass-card p-6 rounded-2xl border border-white/50 dark:border-white/10">
-            <div className="w-12 h-12 bg-india-green/20 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-pakistan-accent/20 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
               <span className="text-2xl">💬</span>
             </div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Community</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">Join our community for updates</p>
-            <Link to="/community" className="text-india-green dark:text-green-400 font-medium hover:underline">
+            <Link to="/community" className="text-pakistan-accent dark:text-green-400 font-medium hover:underline">
               Visit Community →
             </Link>
           </div>
 
           <div className="glass-card dark:glass-card p-6 rounded-2xl border border-white/50 dark:border-white/10">
-            <div className="w-12 h-12 bg-india-blue/20 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-pakistan-lightgreen/20 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
               <span className="text-2xl">⏰</span>
             </div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Response Time</h3>
@@ -91,7 +91,7 @@ export const Contact: React.FC = () => {
                 <p className="text-gray-600 dark:text-gray-300 mb-6">Thank you for reaching out. We'll get back to you soon.</p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="text-india-blue dark:text-blue-400 font-medium hover:underline"
+                  className="text-pakistan-green dark:text-green-400 font-medium hover:underline"
                 >
                   Send another message
                 </button>
@@ -105,7 +105,7 @@ export const Contact: React.FC = () => {
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-india-blue dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/20 transition-all"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-pakistan-green dark:focus:border-green-500 focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/20 transition-all"
                       placeholder="John Doe"
                       required
                     />
@@ -116,7 +116,7 @@ export const Contact: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-india-blue dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/20 transition-all"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-pakistan-green dark:focus:border-green-500 focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/20 transition-all"
                       placeholder="you@email.com"
                       required
                     />
@@ -128,7 +128,7 @@ export const Contact: React.FC = () => {
                   <select
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-india-blue dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/20 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-pakistan-green dark:focus:border-green-500 focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/20 transition-all"
                     required
                   >
                     <option value="">Select a topic</option>
@@ -147,7 +147,7 @@ export const Contact: React.FC = () => {
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-india-blue dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/20 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:border-pakistan-green dark:focus:border-green-500 focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/20 transition-all resize-none"
                     rows={5}
                     placeholder="Describe your question or issue in detail..."
                     required
@@ -156,7 +156,7 @@ export const Contact: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-india-blue to-blue-800 dark:from-blue-600 dark:to-blue-800 text-white font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen dark:from-green-600 dark:to-green-800 text-white font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
                 >
                   Send Message
                 </button>

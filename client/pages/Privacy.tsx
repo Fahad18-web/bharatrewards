@@ -9,15 +9,15 @@ export const Privacy: React.FC = () => {
     <>
       <SEO
         title="Privacy Policy"
-        description="Understand how Solve2Win collects, uses, and protects your data, including withdrawals via UPI and gameplay analytics."
-        keywords="Solve2Win privacy policy, data protection gaming app, UPI withdrawal security"
+        description="Understand how Solve2Win collects, uses, and protects your data, including withdrawals via JazzCash/EasyPaisa and gameplay analytics."
+        keywords="Solve2Win privacy policy, data protection gaming app, JazzCash EasyPaisa withdrawal security"
         canonicalPath="/privacy"
       />
       <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-          Privacy <span className="text-india-blue">Policy</span>
+          Privacy <span className="text-pakistan-green">Policy</span>
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">
           Last Updated: {lastUpdated}
@@ -25,7 +25,7 @@ export const Privacy: React.FC = () => {
       </div>
 
       {/* Quick Summary */}
-      <div className="glass-card dark:glass-card rounded-2xl p-6 border border-india-blue/20 bg-india-blue/5 dark:bg-india-blue/10 dark:border-india-blue/30">
+      <div className="glass-card dark:glass-card rounded-2xl p-6 border border-pakistan-green/20 bg-pakistan-green/5 dark:bg-pakistan-green/10 dark:border-pakistan-green/30">
         <div className="flex items-start gap-4">
           <span className="text-3xl">🛡️</span>
           <div>
@@ -51,7 +51,7 @@ export const Privacy: React.FC = () => {
               <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Personal Information</h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Name and email address (during registration)</li>
-                <li>UPI ID (for withdrawal processing)</li>
+                <li>JazzCash/EasyPaisa number (for withdrawal processing)</li>
                 <li>Profile avatar selection</li>
               </ul>
             </div>
@@ -122,7 +122,7 @@ export const Privacy: React.FC = () => {
             <p><strong>We do NOT sell your personal information.</strong></p>
             <p>We may share information only in the following circumstances:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Payment Processing:</strong> UPI details are shared with payment processors to complete withdrawals</li>
+              <li><strong>Payment Processing:</strong> JazzCash/EasyPaisa details are shared with payment processors to complete withdrawals</li>
               <li><strong>Legal Requirements:</strong> When required by law, court order, or government request</li>
               <li><strong>Protection:</strong> To protect the rights, property, or safety of Solve2Win and its users</li>
               <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets</li>
@@ -227,8 +227,8 @@ export const Privacy: React.FC = () => {
           <div className="p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl">
             <p className="text-gray-700 dark:text-gray-300">
               <strong>Email:</strong> support@solve2win.com<br />
-              <strong>Website:</strong> <Link to="/" className="text-india-blue hover:underline">www.solve2win.com</Link><br />
-              <strong>Contact Form:</strong> <Link to="/contact" className="text-india-blue hover:underline">Contact Page</Link>
+              <strong>Website:</strong> <Link to="/" className="text-pakistan-green hover:underline">www.solve2win.com</Link><br />
+              <strong>Contact Form:</strong> <Link to="/contact" className="text-pakistan-green hover:underline">Contact Page</Link>
             </p>
           </div>
         </section>
@@ -261,7 +261,7 @@ export const Privacy: React.FC = () => {
       <div className="text-center">
         <Link
           to="/"
-          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-india-saffron to-india-green text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-pakistan-green to-pakistan-accent text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
         >
           Back to Home
         </Link>

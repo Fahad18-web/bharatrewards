@@ -50,10 +50,10 @@ export const Dashboard: React.FC = () => {
           onClick={() => navigate('/wallet')}
           className="group relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 dark:from-slate-800 dark:to-slate-900 text-white px-8 py-5 rounded-[2rem] shadow-2xl hover:shadow-gray-900/40 dark:hover:shadow-slate-900/40 transition-all transform hover:-translate-y-1 w-full md:w-auto text-left flex items-center justify-between border border-gray-700 dark:border-slate-700"
         >
-           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-india-saffron via-white to-india-green"></div>
+           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-pakistan-green via-white to-pakistan-accent"></div>
            <div className="mr-8">
               <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-1">Total Balance</p>
-              <p className="text-3xl font-mono font-bold text-white group-hover:text-india-saffron transition-colors">{user.points.toLocaleString()} <span className="text-sm text-gray-500 font-sans">PTS</span></p>
+              <p className="text-3xl font-mono font-bold text-white group-hover:text-pakistan-accent transition-colors">{user.points.toLocaleString()} <span className="text-sm text-gray-500 font-sans">PTS</span></p>
            </div>
            <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white/20 transition-colors shadow-inner border border-white/5">
             💰
@@ -64,7 +64,7 @@ export const Dashboard: React.FC = () => {
       {/* Categories Grid */}
       <div>
         <h2 className="text-2xl font-black text-gray-800 dark:text-white mb-8 flex items-center">
-          <span className="w-3 h-8 bg-india-saffron rounded-full mr-4 shadow-sm"></span>
+          <span className="w-3 h-8 bg-pakistan-green rounded-full mr-4 shadow-sm"></span>
           Choose Your Challenge
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -83,10 +83,10 @@ export const Dashboard: React.FC = () => {
               
               <div className="p-8">
                 <div className="flex justify-between items-start mb-2">
-                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-india-blue dark:group-hover:text-blue-400 transition-colors">{cat.name}</h3>
+                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-pakistan-green dark:group-hover:text-green-400 transition-colors">{cat.name}</h3>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-6">{cat.desc}</p>
-                <div className="flex items-center text-sm font-black uppercase tracking-wide text-gray-800 dark:text-gray-200 group-hover:text-india-saffron dark:group-hover:text-india-saffron transition-colors">
+                <div className="flex items-center text-sm font-black uppercase tracking-wide text-gray-800 dark:text-gray-200 group-hover:text-pakistan-green dark:group-hover:text-pakistan-accent transition-colors">
                   Play Now <span className="ml-2 transform group-hover:translate-x-2 transition-transform">→</span>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export const Dashboard: React.FC = () => {
              <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Questions Solved</p>
           </div>
            <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all">
-             <div className="text-4xl font-black text-green-600 dark:text-green-400 mb-2">₹ {Math.floor(user.points / 10000 * settings.currencyRate)}</div>
+             <div className="text-4xl font-black text-green-600 dark:text-green-400 mb-2">Rs. {Math.floor(user.points / 10000 * settings.currencyRate)}</div>
              <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Estimated Value</p>
           </div>
            <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all">

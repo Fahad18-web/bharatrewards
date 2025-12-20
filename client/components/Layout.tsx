@@ -15,10 +15,10 @@ const BackgroundElements = memo(({ showEffects }: { showEffects: boolean }) => {
       <div className="bg-noise opacity-50 dark:opacity-20"></div>
 
       {/* Ambient Background Elements */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-india-bg dark:bg-slate-900 transition-colors duration-500">
-        <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-gradient-to-br from-india-saffron/20 to-orange-100/30 dark:from-india-saffron/10 dark:to-orange-900/20 rounded-full blur-[80px] opacity-70"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60rem] h-[60rem] bg-gradient-to-tl from-india-green/20 to-emerald-100/30 dark:from-india-green/10 dark:to-emerald-900/20 rounded-full blur-[100px] opacity-70"></div>
-        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-[80px]"></div>
+      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-pakistan-bg dark:bg-slate-900 transition-colors duration-500">
+        <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-gradient-to-br from-pakistan-green/20 to-emerald-100/30 dark:from-pakistan-green/10 dark:to-emerald-900/20 rounded-full blur-[80px] opacity-70"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60rem] h-[60rem] bg-gradient-to-tl from-pakistan-accent/20 to-green-100/30 dark:from-pakistan-accent/10 dark:to-green-900/20 rounded-full blur-[100px] opacity-70"></div>
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-green-100/20 dark:bg-green-900/10 rounded-full blur-[80px]"></div>
       </div>
     </>
   );
@@ -29,16 +29,16 @@ BackgroundElements.displayName = 'BackgroundElements';
 const Logo = memo(() => (
   <Link to="/" className="flex items-center space-x-3 group relative z-10">
     <div className="relative w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-105">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-india-saffron via-white to-india-green opacity-80 blur-[4px] group-hover:blur-[8px] transition-all"></div>
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-pakistan-green via-white to-pakistan-accent opacity-80 blur-[4px] group-hover:blur-[8px] transition-all"></div>
       <div className="relative w-full h-full rounded-full bg-white/90 dark:bg-slate-800/90 border-2 border-white dark:border-slate-700 flex items-center justify-center shadow-lg backdrop-blur-sm">
-        <div className="w-3 h-3 rounded-full bg-india-blue dark:bg-blue-400 shadow-[0_0_10px_rgba(0,0,128,0.5)]"></div>
+        <div className="w-3 h-3 rounded-full bg-pakistan-green dark:bg-green-400 shadow-[0_0_10px_rgba(1,65,28,0.5)]"></div>
       </div>
     </div>
     <div className="flex flex-col">
       <span className="font-extrabold text-2xl tracking-tight leading-none text-gray-900 dark:text-white drop-shadow-sm">
-        Solve2<span className="text-india-saffron">Win</span>
+        Solve2<span className="text-pakistan-green">Win</span>
       </span>
-      <span className="text-[0.6rem] tracking-[0.2em] uppercase font-bold text-india-green dark:text-green-400 leading-none ml-0.5 mt-0.5">Play • Earn • Grow</span>
+      <span className="text-[0.6rem] tracking-[0.2em] uppercase font-bold text-pakistan-accent dark:text-green-400 leading-none ml-0.5 mt-0.5">Play • Earn • Grow</span>
     </div>
   </Link>
 ));
@@ -51,13 +51,13 @@ const Footer = memo(() => (
       <div className="flex flex-col md:flex-row items-center md:items-start">
         <span className="font-black text-gray-800 dark:text-gray-200 text-lg mr-2">Solve2Win</span> 
         <span className="text-gray-400">|</span> 
-        <span className="ml-2">&copy; {new Date().getFullYear()} Made with 🧡🤍💚 for India.</span>
+        <span className="ml-2">&copy; {new Date().getFullYear()} Made with 💚🤍☪️ for Pakistan.</span>
       </div>
       <div className="flex flex-wrap justify-center gap-4 font-medium">
-        <Link to="/contact" className="hover:text-india-blue transition-colors hover:underline">Contact</Link>
-        <Link to="/faq" className="hover:text-india-blue transition-colors hover:underline">FAQ</Link>
-        <Link to="/terms" className="hover:text-india-blue transition-colors hover:underline">Terms</Link>
-        <Link to="/privacy" className="hover:text-india-blue transition-colors hover:underline">Privacy</Link>
+        <Link to="/contact" className="hover:text-pakistan-green transition-colors hover:underline">Contact</Link>
+        <Link to="/faq" className="hover:text-pakistan-green transition-colors hover:underline">FAQ</Link>
+        <Link to="/terms" className="hover:text-pakistan-green transition-colors hover:underline">Terms</Link>
+        <Link to="/privacy" className="hover:text-pakistan-green transition-colors hover:underline">Privacy</Link>
       </div>
     </div>
   </footer>
@@ -150,7 +150,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           {themeToggle}
           <Link
             to="/auth"
-            className="text-sm bg-gradient-to-r from-india-blue to-blue-800 hover:to-blue-900 text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 border border-blue-400/50"
+            className="text-sm bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen hover:to-emerald-800 text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/40 transition-all transform hover:-translate-y-0.5 border border-green-400/50"
             onClick={closeMenu}
           >
             Login / Signup
@@ -164,13 +164,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         {themeToggle}
         {!isAdmin && (
           <div className="hidden md:flex items-center px-5 py-2 bg-white/40 dark:bg-slate-800/40 rounded-full border border-white/60 dark:border-slate-600 shadow-inner backdrop-blur-md">
-            <span className="text-india-green dark:text-green-400 font-black mr-2 text-xl drop-shadow-sm">{userPoints}</span>
+            <span className="text-pakistan-green dark:text-green-400 font-black mr-2 text-xl drop-shadow-sm">{userPoints}</span>
             <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 tracking-widest uppercase">PTS</span>
           </div>
         )}
         <Link
           to={isAdmin ? '/admin' : '/dashboard'}
-          className="text-gray-700 dark:text-gray-200 hover:text-india-saffron dark:hover:text-india-saffron font-bold text-sm md:text-base transition-colors duration-200"
+          className="text-gray-700 dark:text-gray-200 hover:text-pakistan-green dark:hover:text-pakistan-accent font-bold text-sm md:text-base transition-colors duration-200"
           onClick={closeMenu}
         >
           Dashboard
@@ -194,7 +194,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </Link>
         <Link
           to="/profile"
-          className="text-gray-700 dark:text-gray-200 hover:text-india-blue dark:hover:text-blue-400 font-bold text-sm md:text-base transition-colors duration-200"
+          className="text-gray-700 dark:text-gray-200 hover:text-pakistan-green dark:hover:text-green-400 font-bold text-sm md:text-base transition-colors duration-200"
           onClick={closeMenu}
         >
           Profile
@@ -210,7 +210,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   };
 
   return (
-    <div className={`min-h-screen bg-india-bg dark:bg-slate-900 font-sans text-gray-800 dark:text-gray-100 relative selection:bg-india-saffron selection:text-white overflow-hidden transition-colors duration-500 ${!showGlassEffects ? 'no-glass' : ''}`}>
+    <div className={`min-h-screen bg-pakistan-bg dark:bg-slate-900 font-sans text-gray-800 dark:text-gray-100 relative selection:bg-pakistan-green selection:text-white overflow-hidden transition-colors duration-500 ${!showGlassEffects ? 'no-glass' : ''}`}>
       <BackgroundElements showEffects={showGlassEffects} />
 
       {/* Glass Navbar */}
@@ -260,7 +260,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <div className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 border border-white/80 dark:border-slate-700">
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-widest">Points</p>
-                    <p className="text-2xl font-black text-india-green dark:text-green-400">{userPoints}</p>
+                    <p className="text-2xl font-black text-pakistan-green dark:text-green-400">{userPoints}</p>
                   </div>
                   <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">{user.email}</span>
                 </div>
@@ -309,7 +309,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 ) : (
                   <Link
                     to="/auth"
-                    className="w-full rounded-2xl px-4 py-3 bg-gradient-to-r from-india-blue to-blue-800 text-white border border-blue-500 text-center"
+                    className="w-full rounded-2xl px-4 py-3 bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen text-white border border-green-500 text-center"
                     onClick={closeMenu}
                   >
                     Login / Signup

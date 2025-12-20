@@ -294,7 +294,7 @@ export const Admin: React.FC = () => {
   if (!admin || initializing) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4">
-        <div className="w-16 h-16 border-4 border-gray-200 dark:border-white/10 border-t-india-blue rounded-full animate-spin"></div>
+        <div className="w-16 h-16 border-4 border-gray-200 dark:border-white/10 border-t-pakistan-green rounded-full animate-spin"></div>
         <p className="text-gray-500 dark:text-gray-400 font-medium">Loading admin controls...</p>
       </div>
     );
@@ -322,7 +322,7 @@ export const Admin: React.FC = () => {
                onClick={() => setActiveTab(tab)}
                className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide transition-all ${
                  activeTab === tab 
-                 ? 'bg-india-blue text-white shadow-lg' 
+                 ? 'bg-pakistan-green text-white shadow-lg' 
                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10'
                }`}
              >
@@ -340,7 +340,7 @@ export const Admin: React.FC = () => {
 
       {isWorking && (
         <div className="flex items-center space-x-3 text-sm text-gray-500 bg-white/70 border border-gray-100 px-4 py-2 rounded-full w-fit">
-          <div className="w-3 h-3 rounded-full bg-india-blue animate-pulse"></div>
+          <div className="w-3 h-3 rounded-full bg-pakistan-green animate-pulse"></div>
           <span>Syncing latest data...</span>
         </div>
       )}
@@ -352,7 +352,7 @@ export const Admin: React.FC = () => {
             <div className="glass-card dark:glass-card p-8 rounded-[2rem] flex items-center justify-between bg-gradient-to-br from-white/80 to-blue-50/50 dark:from-slate-800/80 dark:to-blue-900/20">
               <div>
                   <h3 className="text-gray-400 dark:text-gray-500 text-xs font-black uppercase tracking-widest mb-2">Total Users</h3>
-                  <p className="text-5xl font-black text-india-blue dark:text-blue-400">{users.length}</p>
+                  <p className="text-5xl font-black text-pakistan-green dark:text-green-400">{users.length}</p>
               </div>
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 text-3xl shadow-inner">👥</div>
             </div>
@@ -367,7 +367,7 @@ export const Admin: React.FC = () => {
               <div>
                 <h3 className="text-gray-400 dark:text-gray-500 text-xs font-black uppercase tracking-widest mb-2">Total Paid</h3>
                 <p className="text-5xl font-black text-green-600 dark:text-green-400">
-                  ₹ {redeems.filter(r => r.status === 'APPROVED').reduce((acc, curr) => acc + curr.amountRupees, 0)}
+                  Rs. {redeems.filter(r => r.status === 'APPROVED').reduce((acc, curr) => acc + curr.amountRupees, 0)}
                 </p>
               </div>
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center text-green-600 dark:text-green-400 text-3xl shadow-inner">💸</div>
@@ -405,7 +405,7 @@ export const Admin: React.FC = () => {
                         </td>
                         <td className="p-6 font-mono font-bold text-gray-600 dark:text-gray-300">{req.amountPoints.toLocaleString()}</td>
                         <td className="p-6">
-                            <span className="font-black text-green-600 dark:text-green-400 text-lg">₹ {req.amountRupees}</span>
+                            <span className="font-black text-green-600 dark:text-green-400 text-lg">Rs. {req.amountRupees}</span>
                         </td>
                         <td className="p-6">
                           <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wide border shadow-sm ${
@@ -479,10 +479,10 @@ export const Admin: React.FC = () => {
                           </span>
                         </td>
                         <td className="p-5 text-right">
-                          <span className="font-bold text-india-green dark:text-green-400">{(user.points || 0).toLocaleString()}</span>
+                          <span className="font-bold text-pakistan-green dark:text-green-400">{(user.points || 0).toLocaleString()}</span>
                         </td>
                         <td className="p-5 text-right">
-                          <span className="font-bold text-india-orange dark:text-orange-400">₹{(user.walletBalance || 0).toFixed(2)}</span>
+                          <span className="font-bold text-pakistan-accent dark:text-green-400">Rs.{(user.walletBalance || 0).toFixed(2)}</span>
                         </td>
                         <td className="p-5 text-right">
                           <span className="font-mono text-gray-600 dark:text-gray-400">{(user.solvedCount || 0).toLocaleString()}</span>
@@ -568,14 +568,14 @@ export const Admin: React.FC = () => {
              </div>
 
              <div className="space-y-2">
-               <label className="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">Exchange Rate (INR per 10k Pts)</label>
+               <label className="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">Exchange Rate (PKR per 10k Pts)</label>
                <input 
                  type="number" 
                  className="glass-input dark:glass-input w-full p-4 rounded-xl text-lg font-bold dark:text-white dark:bg-slate-800/50"
                  value={settings.currencyRate}
                  onChange={e => setSettings({...settings, currencyRate: Number(e.target.value)})}
                />
-               <p className="text-xs text-gray-400 dark:text-gray-500">Value of 10,000 points in Indian Rupees.</p>
+               <p className="text-xs text-gray-400 dark:text-gray-500">Value of 10,000 points in Pakistani Rupees.</p>
              </div>
 
              <div className="md:col-span-2 pt-4">
@@ -591,7 +591,7 @@ export const Admin: React.FC = () => {
            {/* Add Question Form */}
            <div className="glass-card dark:glass-card p-10 rounded-[2.5rem]">
              <div className="flex items-center mb-8">
-               <div className="w-12 h-12 bg-india-saffron/10 dark:bg-orange-900/30 text-india-saffron dark:text-orange-400 rounded-full flex items-center justify-center text-2xl mr-4 border border-india-saffron/20 dark:border-orange-500/20">📝</div>
+               <div className="w-12 h-12 bg-pakistan-green/10 dark:bg-green-900/30 text-pakistan-green dark:text-green-400 rounded-full flex items-center justify-center text-2xl mr-4 border border-pakistan-green/20 dark:border-green-500/20">📝</div>
                <div>
                  <h3 className="text-2xl font-black text-gray-800 dark:text-white">Add Custom Question</h3>
                  <p className="text-gray-500 dark:text-gray-400 text-sm">Manually insert questions into the game pool.</p>
@@ -653,7 +653,7 @@ export const Admin: React.FC = () => {
                   </div>
                 )}
 
-                <button type="submit" className="w-full bg-gradient-to-r from-india-saffron to-orange-600 dark:from-orange-600 dark:to-orange-800 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all">
+                <button type="submit" className="w-full bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen dark:from-green-700 dark:to-green-900 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-green-500/30 transition-all">
                   Add to Question Bank
                 </button>
              </form>

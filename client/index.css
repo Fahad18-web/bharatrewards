@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-india-bg dark:bg-slate-900 transition-colors duration-500;
+  @apply bg-pakistan-bg dark:bg-slate-900 transition-colors duration-500;
   overflow-x: hidden;
 }
 
@@ -120,8 +120,8 @@ body {
   box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.4);
 }
 
-.text-gradient-india {
-  background: linear-gradient(90deg, #FF9933, #000080, #138808);
+.text-gradient-pakistan {
+  background: linear-gradient(90deg, #01411C, #00A651, #FFFFFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

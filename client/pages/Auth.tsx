@@ -157,13 +157,13 @@ export const Auth: React.FC = () => {
       <div className="min-h-[70vh] flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto relative">
         {/* Decorative Elements */}
-        <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-india-saffron to-orange-400 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-r from-india-green to-emerald-400 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute -top-16 -left-16 w-48 h-48 bg-gradient-to-r from-pakistan-green to-emerald-400 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-r from-pakistan-accent to-green-400 rounded-full blur-3xl opacity-40"></div>
 
         <div className="glass-card dark:glass-card p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative z-10 border border-white/80 dark:border-white/10">
           <div className="text-center mb-6">
              <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-white to-gray-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-4 border border-white/60 dark:border-white/10">
-                <span className="text-3xl">{isAdminMode ? '🛡️' : '🇮🇳'}</span>
+                <span className="text-3xl">{isAdminMode ? '🛡️' : '�🇰'}</span>
              </div>
              <h2 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight">
                {isEffectiveLogin ? 'Welcome Back' : 'Join Solve2Win'}
@@ -193,7 +193,7 @@ export const Auth: React.FC = () => {
                 setIsLogin(true);
                 resetForm();
               }}
-              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${isAdminMode ? 'text-india-blue dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`flex-1 relative z-10 py-2 text-sm font-bold text-center transition-colors ${isAdminMode ? 'text-pakistan-green dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}
             >
               Admin
             </button>
@@ -215,7 +215,7 @@ export const Auth: React.FC = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="glass-input dark:glass-input w-full px-5 py-4 rounded-2xl text-gray-700 dark:text-white font-medium placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-all"
-                    placeholder="e.g. Rahul Kumar"
+                    placeholder="e.g. Ahmed Khan"
                     required
                   />
                 </div>
@@ -262,7 +262,7 @@ export const Auth: React.FC = () => {
                 className={`w-full text-white font-bold py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
                 isAdminMode 
                   ? 'bg-gradient-to-r from-gray-800 to-gray-900 shadow-gray-500/20 hover:shadow-gray-500/40' 
-                  : 'bg-gradient-to-r from-india-saffron to-orange-600 shadow-orange-500/20 hover:shadow-orange-500/40'
+                  : 'bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen shadow-green-500/20 hover:shadow-green-500/40'
               }`}>
                 {isLoading ? 'Please wait...' : (isLogin ? (isAdminMode ? 'Login as Admin' : 'Login Securely') : 'Create Account')}
               </button>
@@ -289,7 +289,7 @@ export const Auth: React.FC = () => {
                   required
                 />
               </div>
-               <button type="submit" className="w-full bg-gradient-to-r from-india-green to-emerald-600 hover:to-emerald-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-green-500/20 hover:shadow-green-500/40 transition-all transform hover:-translate-y-1 active:scale-95 text-lg">
+               <button type="submit" className="w-full bg-gradient-to-r from-pakistan-green to-emerald-600 hover:to-emerald-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-green-500/20 hover:shadow-green-500/40 transition-all transform hover:-translate-y-1 active:scale-95 text-lg">
                 Verify & Register
               </button>
             </form>
@@ -302,7 +302,7 @@ export const Auth: React.FC = () => {
                   setIsLogin(!isLogin);
                   resetForm();
                 }} 
-                className="text-gray-500 dark:text-gray-400 hover:text-india-blue dark:hover:text-blue-400 text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-india-saffron"
+                className="text-gray-500 dark:text-gray-400 hover:text-pakistan-green dark:hover:text-green-400 text-sm font-semibold transition-colors hover:underline underline-offset-4 decoration-pakistan-accent"
               >
                 {isLogin ? "New here? Create an account" : "Already have an account? Login"}
               </button>

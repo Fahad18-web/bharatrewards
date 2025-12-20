@@ -9,15 +9,15 @@ export const Terms: React.FC = () => {
     <>
       <SEO
         title="Terms"
-        description="Review the Solve2Win terms and conditions covering eligibility, fair play, rewards, and withdrawals for Indian players."
-        keywords="Solve2Win terms and conditions, play to earn rules India, gaming withdrawal policy"
+        description="Review the Solve2Win terms and conditions covering eligibility, fair play, rewards, and withdrawals for Pakistani players."
+        keywords="Solve2Win terms and conditions, play to earn rules Pakistan, gaming withdrawal policy"
         canonicalPath="/terms"
       />
       <div className="max-w-4xl mx-auto space-y-10">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-          Terms & <span className="text-india-green dark:text-green-400">Conditions</span>
+          Terms & <span className="text-pakistan-green dark:text-green-400">Conditions</span>
         </h1>
         <p className="text-gray-500 dark:text-gray-400">Last updated: {lastUpdated}</p>
       </div>
@@ -44,7 +44,7 @@ export const Terms: React.FC = () => {
             <p>To use Solve2Win, you must:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Be at least 18 years of age</li>
-              <li>Be a resident of India</li>
+              <li>Be a resident of Pakistan</li>
               <li>Have the legal capacity to enter into a binding agreement</li>
               <li>Not be prohibited from using the service under applicable laws</li>
             </ul>
@@ -111,10 +111,10 @@ export const Terms: React.FC = () => {
           <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Minimum withdrawal amount is determined by platform settings</li>
-              <li>Withdrawals are processed via UPI to the account holder's verified UPI ID</li>
+              <li>Withdrawals are processed via JazzCash/EasyPaisa to the account holder's verified mobile number</li>
               <li>Processing time is typically 24-48 hours on business days</li>
               <li>Solve2Win reserves the right to verify user identity before processing withdrawals</li>
-              <li>Users are responsible for providing correct UPI details</li>
+              <li>Users are responsible for providing correct JazzCash/EasyPaisa details</li>
               <li>Solve2Win is not liable for failed transactions due to incorrect user-provided information</li>
             </ul>
           </div>
@@ -191,9 +191,9 @@ export const Terms: React.FC = () => {
             <span className="text-2xl">🏛️</span> 12. Governing Law
           </h2>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            These terms are governed by and construed in accordance with the laws of India. 
+            These terms are governed by and construed in accordance with the laws of Pakistan. 
             Any disputes arising from these terms shall be subject to the exclusive jurisdiction 
-            of the courts in India.
+            of the courts in Pakistan.
           </p>
         </section>
 
@@ -207,7 +207,7 @@ export const Terms: React.FC = () => {
           <div className="mt-4 p-4 bg-gray-50 dark:bg-slate-800 rounded-xl">
             <p className="text-gray-700 dark:text-gray-300">
               <strong>Email:</strong> support@solve2win.com<br />
-              <strong>Website:</strong> <Link to="/" className="text-india-blue dark:text-blue-400 hover:underline">www.solve2win.com</Link>
+              <strong>Website:</strong> <Link to="/" className="text-pakistan-green dark:text-green-400 hover:underline">www.solve2win.com</Link>
             </p>
           </div>
         </section>
@@ -218,7 +218,7 @@ export const Terms: React.FC = () => {
       <div className="text-center">
         <Link
           to="/"
-          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-india-saffron to-india-green dark:from-orange-600 dark:to-green-600 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+          className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-pakistan-green to-pakistan-accent dark:from-green-600 dark:to-emerald-600 text-white font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
         >
           Back to Home
         </Link>

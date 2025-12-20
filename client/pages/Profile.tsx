@@ -178,7 +178,7 @@ export const Profile: React.FC = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in-up">
         <div className="relative w-24 h-24 mb-6">
           <div className="absolute inset-0 border-8 border-gray-100 dark:border-white/10 rounded-full"></div>
-          <div className="absolute inset-0 border-8 border-t-india-saffron border-b-india-green border-l-transparent border-r-transparent rounded-full animate-spin"></div>
+          <div className="absolute inset-0 border-8 border-t-pakistan-green border-b-pakistan-accent border-l-transparent border-r-transparent rounded-full animate-spin"></div>
         </div>
         <p className="text-gray-500 dark:text-gray-400 font-medium">Loading your profile...</p>
       </div>
@@ -198,7 +198,7 @@ export const Profile: React.FC = () => {
         <div className="relative">
           <div 
             onClick={() => setShowAvatarPicker(true)}
-            className="relative w-36 h-36 rounded-[2rem] bg-gradient-to-br from-india-blue to-blue-900 text-white flex items-center justify-center text-5xl font-black shadow-2xl border-4 border-white/30 cursor-pointer hover:scale-105 transition-transform group"
+            className="relative w-36 h-36 rounded-[2rem] bg-gradient-to-br from-pakistan-green to-pakistan-lightgreen text-white flex items-center justify-center text-5xl font-black shadow-2xl border-4 border-white/30 cursor-pointer hover:scale-105 transition-transform group"
           >
             {currentAvatar ? (
               <span className="text-6xl">{currentAvatar.emoji}</span>
@@ -214,7 +214,7 @@ export const Profile: React.FC = () => {
           </div>
           <button
             onClick={() => setShowAvatarPicker(true)}
-            className="absolute -bottom-3 -left-2 bg-india-saffron text-white rounded-full p-2 shadow-lg hover:bg-orange-600 transition-colors"
+            className="absolute -bottom-3 -left-2 bg-pakistan-green text-white rounded-full p-2 shadow-lg hover:bg-green-800 transition-colors"
             title="Change Avatar"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,7 +231,7 @@ export const Profile: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
                 <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Points</p>
-                <p className="text-3xl font-black text-india-green dark:text-green-400">{user.points.toLocaleString()}</p>
+                <p className="text-3xl font-black text-pakistan-green dark:text-green-400">{user.points.toLocaleString()}</p>
               </div>
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
                 <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Questions Solved</p>
@@ -239,7 +239,7 @@ export const Profile: React.FC = () => {
               </div>
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-inner">
                 <p className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Wallet Balance</p>
-                <p className="text-3xl font-black text-gray-800 dark:text-white">₹ {(user.walletBalance ?? 0).toLocaleString()}</p>
+                <p className="text-3xl font-black text-gray-800 dark:text-white">Rs. {(user.walletBalance ?? 0).toLocaleString()}</p>
               </div>
             </div>
           )}
@@ -272,14 +272,14 @@ export const Profile: React.FC = () => {
                   onClick={() => handleAvatarSelect(avatar.id)}
                   className={`relative aspect-square rounded-2xl flex items-center justify-center text-3xl sm:text-4xl transition-all hover:scale-110 ${
                     profileForm.avatar === avatar.id
-                      ? 'bg-india-blue/20 dark:bg-india-blue/40 ring-4 ring-india-blue shadow-lg'
+                      ? 'bg-pakistan-green/20 dark:bg-pakistan-green/40 ring-4 ring-pakistan-green shadow-lg'
                       : 'bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border border-gray-100 dark:border-white/10'
                   }`}
                   title={avatar.label}
                 >
                   {avatar.emoji}
                   {profileForm.avatar === avatar.id && (
-                    <div className="absolute -top-1 -right-1 bg-india-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    <div className="absolute -top-1 -right-1 bg-pakistan-green text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                       ✓
                     </div>
                   )}
@@ -299,7 +299,7 @@ export const Profile: React.FC = () => {
               </button>
               <button
                 onClick={() => setShowAvatarPicker(false)}
-                className="px-6 py-3 rounded-xl bg-india-blue text-white font-bold hover:bg-blue-800 transition-colors"
+                className="px-6 py-3 rounded-xl bg-pakistan-green text-white font-bold hover:bg-green-800 transition-colors"
               >
                 Done
               </button>
@@ -333,7 +333,7 @@ export const Profile: React.FC = () => {
                 type="text"
                 value={profileForm.name}
                 onChange={(event) => setProfileForm((prev) => ({ ...prev, name: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 transition-all font-medium"
                 placeholder="Your name"
                 required
               />
@@ -345,7 +345,7 @@ export const Profile: React.FC = () => {
                 type="email"
                 value={profileForm.email}
                 onChange={(event) => setProfileForm((prev) => ({ ...prev, email: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 transition-all font-medium"
                 placeholder="name@email.com"
                 required
               />
@@ -358,7 +358,7 @@ export const Profile: React.FC = () => {
             className={`w-full py-4 rounded-2xl text-white font-bold text-lg transition-all shadow-lg border ${
               savingProfile || !hasProfileChanges
                 ? 'bg-gray-300 dark:bg-slate-700 border-gray-200 dark:border-slate-600 cursor-not-allowed text-gray-500 dark:text-gray-400'
-                : 'bg-gradient-to-r from-india-blue to-blue-900 border-blue-800 hover:shadow-blue-500/40 hover:-translate-y-0.5'
+                : 'bg-gradient-to-r from-pakistan-green to-pakistan-lightgreen border-green-800 hover:shadow-green-500/40 hover:-translate-y-0.5'
             }`}
           >
             {savingProfile ? 'Saving...' : 'Save Changes'}
@@ -389,7 +389,7 @@ export const Profile: React.FC = () => {
                 type="password"
                 value={passwordForm.currentPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, currentPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 transition-all font-medium"
                 placeholder="••••••"
                 required
               />
@@ -401,7 +401,7 @@ export const Profile: React.FC = () => {
                 type="password"
                 value={passwordForm.newPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, newPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 transition-all font-medium"
                 placeholder="At least 4 characters"
                 required
               />
@@ -413,7 +413,7 @@ export const Profile: React.FC = () => {
                 type="password"
                 value={passwordForm.confirmPassword}
                 onChange={(event) => setPasswordForm((prev) => ({ ...prev, confirmPassword: event.target.value }))}
-                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-india-blue focus:ring-4 focus:ring-blue-50 dark:focus:ring-blue-900/30 transition-all font-medium"
+                className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 text-gray-900 dark:text-white focus:border-pakistan-green focus:ring-4 focus:ring-green-50 dark:focus:ring-green-900/30 transition-all font-medium"
                 placeholder="Repeat new password"
                 required
               />

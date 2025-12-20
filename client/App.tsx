@@ -20,9 +20,9 @@ const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Pri
 
 // Loading spinner component
 const PageLoader: React.FC = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-india-saffron/10 via-white to-india-green/10 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pakistan-green/10 via-white to-pakistan-accent/10 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
     <div className="text-center">
-      <div className="w-16 h-16 border-4 border-india-saffron border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <div className="w-16 h-16 border-4 border-pakistan-green border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
       <p className="text-gray-600 dark:text-gray-300 font-medium">Loading...</p>
     </div>
   </div>
