@@ -127,6 +127,14 @@ Generate hashes with `node -e "console.log(require('bcryptjs').hashSync('MyStron
 
 See [server/README.md](./server/README.md) for complete API documentation.
 
-## 📝 License
+## � Deployment
+
+This app is designed to be deployed with:
+- **Frontend (Vercel)** - React/Vite app
+- **Backend (Railway)** - Express.js API server
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for the complete deployment guide.
+
+## �📝 License
 
 All rights reserved.

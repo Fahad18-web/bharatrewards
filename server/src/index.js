@@ -8,8 +8,12 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import compression from 'compression';
 
-// Load environment variables
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables from server/.env regardless of the working dir
+const envPath = path.resolve(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
 
 // Import routes
 import authRoutes from './routes/auth.js';
@@ -34,8 +38,6 @@ if (process.env.TRUST_PROXY) {
   app.set('trust proxy', process.env.TRUST_PROXY);
 }
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const clientDistPath = path.join(__dirname, '..', '..', 'client', 'dist');
 
 // ============================================
@@ -72,10 +74,8 @@ const authLimiter = rateLimit({
 const getAllowedOrigins = () => {
   const allowed = new Set();
 
-  // Production domains - always allowed
-  allowed.add('https://solve2win.com');
-  allowed.add('https://www.solve2win.com');
-  allowed.add('https://api.solve2win.com');
+  // Vercel preview URLs (for PR previews and branch deployments)
+  // These use pattern matching in the CORS callback below
 
   const frontendUrl = process.env.FRONTEND_URL;
   if (frontendUrl) allowed.add(frontendUrl);
@@ -125,6 +125,11 @@ app.use(
 
       // Production: check allowlist (includes hardcoded production domains)
       if (allowedOrigins.has(origin)) return callback(null, true);
+
+      // Allow Vercel preview deployments (pattern: *.vercel.app)
+      if (isProd && origin.endsWith('.vercel.app')) {
+        return callback(null, true);
+      }
 
       // Dev convenience
       if (!isProd) {
